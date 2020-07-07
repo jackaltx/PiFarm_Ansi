@@ -1,0 +1,30 @@
+---
+- hosts: raspifarm-workers
+  connection: ssh
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  serial: 8
+  tasks:
+
+    - name: Install sysbench
+      apt: 
+        name: sysbench
+        state: present
+
+    - name: Sysbench stresstest (10m / CPU)
+      command: sysbench --max-time=600 --test=cpu --cpu-max-prime=200000 --num-threads=8 run 
+      register: sysbench
+
+    - debug: msg="{{ sysbench.stdout }}"
+
+    - debug: msg="{{ sysbench.stderr }}"
+
+    - debug: msg="Duration = {{ sysbench.delta }}"
+    
+    - name: Remove sysbench
+      apt: 
+        name: sysbench
+        state: absent
+        purge: yes
+

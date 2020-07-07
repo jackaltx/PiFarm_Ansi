@@ -1,0 +1,28 @@
+---
+- hosts: all
+  connection: ssh
+  gather_facts: yes
+  vars:
+    verbose: yes
+  become: yes
+  tasks:
+
+    - name: Update and upgrade apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #One day
+      when: ansible_distribution == "Debian"
+      register: output
+
+    - name: Check changes
+      set_fact:
+        updated: true
+      when: not output.stdout | search("0 upgraded, 0 newly installed")
+
+    - name: Display changes
+      debug:
+        msg: "{{ output.stdout_lines }}"
+      when: verbose or updated is defined
+
+

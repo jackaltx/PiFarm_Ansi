@@ -1,0 +1,6 @@
+---
+- name: Install dnsutils
+  apt: 
+    name: dnsutils
+    state: present
+    force: yes

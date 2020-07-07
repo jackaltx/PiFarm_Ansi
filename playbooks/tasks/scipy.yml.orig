@@ -1,0 +1,10 @@
+---
+- name: scipy
+  apt: 
+    name: "{{ item }}"
+    state: present
+    force: yes
+  with_items: 
+    - "python-numpy"
+    - "python-scipy"
+    - "python-matplotlib"

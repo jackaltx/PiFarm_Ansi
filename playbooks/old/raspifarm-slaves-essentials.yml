@@ -1,0 +1,12 @@
+---
+- hosts: raspifarm-slaves
+  remote_user: farmer
+  become: yes
+  tasks: 
+
+    - include: tasks/snmpd.yml
+    - include: tasks/sysbench.yml
+    - include: tasks/rsync.yml
+    - include: tasks/java.yml
+    - include: tasks/pip.yml
+    - include: tasks/scipy.yml

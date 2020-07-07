@@ -1,0 +1,27 @@
+---
+- hosts: raspifarm-master
+  connection: local
+  vars:
+    home_dir: /rhome/farmer
+    raspi_farm_dir: /rhome/farmer/raspifarm
+  become: yes
+  tasks:
+
+    - include: tasks/bash_profile.yml
+          #    - include: tasks/dnsmasq.yml
+          #    - include: tasks/apache.yml
+          #    - include: tasks/node_and_npm.yml
+    - include: tasks/rsync.yml
+    - include: tasks/htop.yml
+    - include: tasks/tree.yml
+    - include: tasks/wget.yml
+    - include: tasks/vim.yml
+    - include: tasks/ruby.yml
+    - include: tasks/git.yml
+      #    - include: tasks/java.yml
+      #    - include: tasks/pip.yml
+    - include: tasks/scipy.yml
+      # - include: tasks/prometheus.yml
+    - include: tasks/nfs-server.yml
+    - include: tasks/dnstools.yml
+    - include: tasks/tmux.yml

@@ -1,0 +1,10 @@
+- hosts: raspifarm-workers
+  connection: ssh
+  become: yes
+  gather_facts: no
+  tasks:
+
+    - name:  power off cluster
+      command:  /sbin/poweroff
+
+
