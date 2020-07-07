@@ -1,0 +1,8 @@
+---
+- name: Install tree
+  apt: 
+    name: tree
+    state: present
+  tags: 
+    - tree
+    - basic

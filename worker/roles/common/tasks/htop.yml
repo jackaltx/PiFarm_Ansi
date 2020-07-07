@@ -1,0 +1,8 @@
+---
+- name: Install htop
+  apt: 
+    name: htop
+    state: present
+  tags:
+    - htop
+    - basic

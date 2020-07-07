@@ -1,0 +1,14 @@
+---
+
+    - include: tasks/htop.yml
+    - include: tasks/tree.yml
+    - include: tasks/wget.yml
+    - include: tasks/vim.yml
+    - include: tasks/ruby.yml
+    - include: tasks/git.yml
+      #- include: tasks/java.yml
+      #- include: tasks/pip.yml
+    - include: tasks/scipy.yml
+    - include: tasks/dnstools.yml
+    - include: tasks/mpi4py.yml
+    - include: tasks/node-exporter.yml
