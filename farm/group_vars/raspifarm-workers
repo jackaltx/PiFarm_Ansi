@@ -1,0 +1,7 @@
+home_dir: /rhome/farmer
+raspi_farm_dir: "{{home_dir}}/raspifarm"
+remote_user_ssh: "{{home_dir}}/.ssh/id_rsa.pub"
+remote_user: farmer
+remote_uid: 1001
+remote_group: admin
+remote_gid: 1001

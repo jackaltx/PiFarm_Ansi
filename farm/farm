@@ -5,3 +5,7 @@
 192.168.2.105 host_name=pi-105
 192.168.2.106 host_name=pi-106
 192.168.2.107 host_name=pi-107
+
+
+[raspifarm-master]
+localhost host_name=pi-farmer

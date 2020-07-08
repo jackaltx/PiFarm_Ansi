@@ -16,7 +16,7 @@
   tags: apache
 
 - copy: 
-    src: configs/raspifarm.conf
+    src: raspifarm.conf
     dest: /etc/apache2/sites-available/raspifarm.conf
     owner: root
     group: root

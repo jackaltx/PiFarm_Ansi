@@ -8,13 +8,25 @@
     - "python-pip"
     - "python-dev"
     - "build-essential"
+  tags:
+    - basic
+    - developer
 
 - name: Upgrade pip
   pip:
     name: pip
     state: present
+  tags:
+    - basic
+    - developer
 
 - name: Install virtualenv
   pip:
     name: virtualenv
     state: present
+  tags:
+    - basic
+    - developer
+
+
+

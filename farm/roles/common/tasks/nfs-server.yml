@@ -11,7 +11,7 @@
     state: present
 
 - copy: 
-    src: configs/exports
+    src: exports
     dest: /etc/exports
     owner: root
     group: root

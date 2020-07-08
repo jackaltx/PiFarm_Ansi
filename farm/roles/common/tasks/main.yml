@@ -1,5 +1,7 @@
 ---
 
+    - include: tasks/user.yml
+    - include: tasks/bash_profile.yml
     - include: tasks/htop.yml
     - include: tasks/tree.yml
     - include: tasks/wget.yml

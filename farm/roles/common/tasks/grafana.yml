@@ -5,3 +5,6 @@
       - grafana
     state: present
     force: yes
+  tags:
+    - server
+    - perfmon

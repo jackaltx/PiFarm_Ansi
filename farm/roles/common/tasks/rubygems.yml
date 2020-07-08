@@ -3,3 +3,6 @@
   apt: 
     name: rubygems
     state: present
+  tags:
+    - basic
+    - developer

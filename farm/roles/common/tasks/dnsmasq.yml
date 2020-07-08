@@ -11,7 +11,7 @@
     state: stopped
 
 - copy: 
-    src: configs/dnsmasq.conf
+    src: dnsmasq.conf
     dest: /etc/dnsmasq.conf
     owner: root
     group: root

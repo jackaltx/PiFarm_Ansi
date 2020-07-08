@@ -3,21 +3,33 @@
   apt: 
     name: snmpd
     state: present
+  tags:
+    - perfmon
+    - server
 
 - name: Stop SNMPD
   service:
     name: snmpd
     state: stopped
+  tags:
+    - perfmon
+    - server
 
 - copy: 
-    src: configs/snmpd.conf
+    src: snmpd.conf
     dest: /etc/snmp/snmpd.conf
     owner: root
     group: root
     mode: 0600
     backup: yes
+  tags:
+    - perfmon
+    - server
 
 - name: Start SNMPD
   service:
     name: snmpd
     state: started
+  tags:
+    - perfmon
+    - server

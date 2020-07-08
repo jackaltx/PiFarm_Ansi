@@ -4,3 +4,6 @@
     name: ruby
     state: present
     force: yes
+  tags:
+    - basic
+    - developer

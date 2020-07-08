@@ -3,3 +3,6 @@
   apt: 
     name: sysbench
     state: present
+  tags:
+    - smoke
+    - sysbench

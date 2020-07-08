@@ -3,4 +3,5 @@
   apt: 
     name: tmux
     state: present
-
+  tags:
+    - developer

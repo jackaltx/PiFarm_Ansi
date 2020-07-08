@@ -3,3 +3,5 @@
   apt: 
     name: vim
     state: present
+  tags:
+    - developer
