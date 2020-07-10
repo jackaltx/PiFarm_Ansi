@@ -1,0 +1,11 @@
+---
+
+- include: nfs-server.yml
+
+
+#- include: apache.yml
+#- include: dnsmasq.yml
+#- include: grafana.yml
+#- include: node_and_npm.yml
+#- include: node-exporter.yml
+#- include: rabbitmq-server.yml

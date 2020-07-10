@@ -1,0 +1,26 @@
+---
+
+- name: Install  nfs-server
+  apt:
+    name:
+      - nfs-kernel-server
+      - rpcbind
+    state: present
+    update_cache: true
+  become: true
+
+- name: Configure nfs-server
+  copy: 
+    src: exports
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  become: true
+
+- name: Reload nfs server
+  service: 
+    name: nfs-kernel-server
+    state: reloaded
+  become: true

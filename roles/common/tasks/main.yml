@@ -6,9 +6,8 @@
 - include: vim.yml
 - include: ruby.yml
 - include: git.yml
-#- include: jjava.yml
+#- include: java.yml
 #- include: pip.yml
 - include: scipy.yml
-- include: dnstools.yml
+- include: dnsutils.yml
 - include: mpi4py.yml
-- include: node-exporter.yml
