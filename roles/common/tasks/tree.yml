@@ -3,6 +3,7 @@
   apt: 
     name: tree
     state: present
+    update_cache: true
+  become: true
   tags: 
-    - tree
     - basic

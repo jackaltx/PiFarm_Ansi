@@ -1,16 +1,14 @@
 ---
 
-    - include: tasks/user.yml
-    - include: tasks/bash_profile.yml
-    - include: tasks/htop.yml
-    - include: tasks/tree.yml
-    - include: tasks/wget.yml
-    - include: tasks/vim.yml
-    - include: tasks/ruby.yml
-    - include: tasks/git.yml
-      #- include: tasks/java.yml
-      #- include: tasks/pip.yml
-    - include: tasks/scipy.yml
-    - include: tasks/dnstools.yml
-    - include: tasks/mpi4py.yml
-    - include: tasks/node-exporter.yml
+- include: htop.yml
+- include: tree.yml
+- include: wget.yml
+- include: vim.yml
+- include: ruby.yml
+- include: git.yml
+#- include: jjava.yml
+#- include: pip.yml
+- include: scipy.yml
+- include: dnstools.yml
+- include: mpi4py.yml
+- include: node-exporter.yml

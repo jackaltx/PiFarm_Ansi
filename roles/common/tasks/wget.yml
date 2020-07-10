@@ -3,6 +3,7 @@
   apt: 
     name: wget
     state: present
+    update_cache: true
+  become: true
   tags:
-    - wget
     - basic

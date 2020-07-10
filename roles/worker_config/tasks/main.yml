@@ -1,0 +1,5 @@
+---
+
+- include: user.yml
+- include: bash_profile.yml
+- include: host_name.yml

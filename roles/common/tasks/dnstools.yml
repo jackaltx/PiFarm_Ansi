@@ -4,3 +4,7 @@
     name: dnsutils
     state: present
     force: yes
+    update_cache: true
+  become: true
+  tags:
+    - basic

@@ -8,4 +8,8 @@
     - "python-scipy"
     - "python-matplotlib"
     state: present
+    update_cache: true
+  become: true
+  tags:
+    - basic
 

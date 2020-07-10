@@ -2,5 +2,6 @@
 
 - hosts: raspifarm-workers
   connection: ssh
+  become: yes
   roles:
-    - common
+    - worker_config

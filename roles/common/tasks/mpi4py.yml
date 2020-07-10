@@ -3,3 +3,7 @@
   apt: 
     name: python-mpi4py
     state: present
+    update_cache: true
+  become: true
+  tags:
+    - basic
