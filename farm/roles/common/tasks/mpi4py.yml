@@ -1,5 +1,0 @@
----
-- name: Install mpi4py
-  apt: 
-    name: python-mpi4py
-    state: present

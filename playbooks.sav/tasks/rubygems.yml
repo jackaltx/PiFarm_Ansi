@@ -1,5 +1,0 @@
----
-- name: Install rubygems
-  apt: 
-    name: rubygems
-    state: present

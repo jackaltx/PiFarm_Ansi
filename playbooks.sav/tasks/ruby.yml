@@ -1,6 +1,0 @@
----
-- name: Install Ruby
-  apt: 
-    name: ruby
-    state: present
-    force: yes

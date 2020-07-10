@@ -1,5 +1,0 @@
----
-- name: Install htop
-  apt: 
-    name: htop
-    state: present

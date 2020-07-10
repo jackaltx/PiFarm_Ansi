@@ -15,6 +15,7 @@
     group: "{{ remote_group }}"
     shell: /bin/bash
     home: "{{ home_dir }}"
+    generate_ssh_key: yes
   tags: create_user
 
 - name: Set authorized key taken from file
