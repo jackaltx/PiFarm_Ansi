@@ -9,7 +9,7 @@
 
 - name: Create configuration file
   template:
-    src: prometheus_node.yml.j2 
+    src: prometheus_server.xml.j2
     dest: /etc/prometheus/prometheus.yml
     owner: root
     group: root

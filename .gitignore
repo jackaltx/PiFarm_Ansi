@@ -1,4 +1,7 @@
 
+# no retry files
+*.retry
+
 # no logs
 logs/*
 
