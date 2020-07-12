@@ -1,0 +1,8 @@
+---
+
+ - hosts: raspifarm-master
+   #strategy: debug
+   become: true
+   roles:
+     - ansible-role-grafana
+
