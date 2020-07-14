@@ -1,6 +1,6 @@
 ---
 
-- name: scipy
+- name: Install scipy
   apt: 
     pkg:
     - "python-numpy"

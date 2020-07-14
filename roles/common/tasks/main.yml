@@ -5,6 +5,7 @@
 - include: wget.yml
 - include: vim.yml
 - include: ruby.yml
+- include: rubygems.yml
 - include: git.yml
 #- include: java.yml
 #- include: pip.yml

@@ -1,5 +1,5 @@
 ---
-- name: Install Ruby
+- name: Install ruby
   apt: 
     name: ruby
     state: present

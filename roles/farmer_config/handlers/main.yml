@@ -1,0 +1,14 @@
+---
+
+- name: Reload nfs server
+  service: 
+    name: nfs-kernel-server
+    state: reloaded
+  become: true
+
+- name: Retart node exporter
+  service:
+    name: prometheus-node-exporter
+    state: reloaded
+  become: true
+

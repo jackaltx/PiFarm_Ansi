@@ -15,10 +15,6 @@
     group: root
     mode: '0644'
   become: true
-
-- name: Start node exporter
-  service:
-    name: prometheus-node-exporter
-    state: started
-  become: true
+  notify:
+    - Restart node exporter
 
