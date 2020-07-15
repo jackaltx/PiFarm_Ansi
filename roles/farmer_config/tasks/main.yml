@@ -1,7 +1,7 @@
 ---
 
 - include: nfs_server.yml
-- include: node_exporter.yml
+# - include: node_exporter.yml
 
 
 #- include: apache.yml

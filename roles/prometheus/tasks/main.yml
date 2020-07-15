@@ -1,0 +1,5 @@
+---
+
+- include: snmp.yml
+- include: node_exporter.yml
+

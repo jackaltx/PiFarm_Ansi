@@ -1,0 +1,26 @@
+---
+
+- name: Install snmp with mibs
+  apt: 
+    name:
+      - snmp-mibs-downloader
+      - snmp
+    state: present
+  become: yes
+  tags:
+    - perfmon
+  when:  (install_snmp is defined) or install_snmp == True
+
+- name: Configure Prometheus snmp.yml
+  copy:
+    src: snmp.yml
+    dest: /etc/prometheus/snmp.yml
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  tags:
+    - perfmon
+  when:  (install_snmp is defined) or install_snmp == True
+
+

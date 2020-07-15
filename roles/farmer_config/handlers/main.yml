@@ -6,9 +6,3 @@
     state: reloaded
   become: true
 
-- name: Retart node exporter
-  service:
-    name: prometheus-node-exporter
-    state: reloaded
-  become: true
-
