@@ -4,5 +4,6 @@
   connection: ssh
   roles:
     - farmer_config
+    - prometheus
     - common
 
