@@ -1,9 +1,0 @@
----
-- name: Install vim
-  apt: 
-    name: vim
-    state: present
-    update_cache: true
-  become: true
-  tags:
-    - developer

@@ -1,0 +1,13 @@
+---
+
+pifarm_common_pkgs:
+  - vim
+  - git
+  - htop
+  - rsync
+  - vlan
+  - dnsutils
+  - tcpdump
+#  - rubygems
+  - ruby
+

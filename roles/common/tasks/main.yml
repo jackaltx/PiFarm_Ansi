@@ -1,14 +1,7 @@
 ---
 
-- include: htop.yml
-- include: tree.yml
-- include: wget.yml
-- include: vim.yml
-- include: ruby.yml
-- include: rubygems.yml
-- include: git.yml
+- include: base_install.yml
+- include: scipy.yml
+- include: mpi4py.yml
 #- include: java.yml
 #- include: pip.yml
-- include: scipy.yml
-- include: dnsutils.yml
-- include: mpi4py.yml
