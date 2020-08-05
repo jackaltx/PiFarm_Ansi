@@ -1,8 +1,6 @@
 home_dir: /home/pi
-raspi_farm_dir: "{{home_dir}}/raspifarm"
-remote_user_ssh0: "{{home_dir}}/.ssh/id_rsa.pub"
-remote_user_ssh: "/rhome/farmer/.ssh/id_rsa.pub"
-remote_user: pir
+remote_user_ssh: "{{home_dir}}/.ssh/id_rsa.pub"
+remote_user: pi
 remote_uid: 1000
 remote_group: pi
 remote_gid: 1000

@@ -3,8 +3,8 @@
   copy: 
     src: bash_profile
     dest: "{{ home_dir }}/.bash_profile"
-    owner: farmer
-    group: admin
+    owner: "{{ remote_user }}"
+    group: "{{ remote_group }}"
     mode: 0644
     backup: yes
   tags: bash_profile
