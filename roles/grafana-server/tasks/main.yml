@@ -1,0 +1,32 @@
+---
+
+- name: "Include  Raspian vars"
+  include_vars: "Raspian.yml"
+
+- name: "Install Grafana pkg"
+  include: "install-repo.yml"
+
+- name: "Install grafana raspberry pi"
+  include: "install-Raspian.yml"
+  when: vars['ansible_distribution_release'] == 'buster'
+
+- name: "Configure grafana"
+  include: "config.yml"
+
+- name: "Configure Provisioning"
+  include: "provision.yml"
+
+- name: "Enable and (re)start grafana service"
+  service:
+    name: "{{ grafana_service_name }}"
+    enabled: yes
+    state: restarted
+  become: yes
+
+- name: "Wait for grafana to start"
+  wait_for:
+    port: "{{ grafana_http_port }}"
+
+#- name: "Install plugins"
+#  include: "install-plugins.yml"
+

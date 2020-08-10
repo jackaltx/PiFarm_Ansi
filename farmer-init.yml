@@ -6,4 +6,4 @@
     - farmer_config
     - common
     - prometheus-server
-    - ansible-role-grafana
+    - grafana-server
