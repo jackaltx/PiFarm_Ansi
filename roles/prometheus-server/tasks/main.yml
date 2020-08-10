@@ -36,9 +36,10 @@
   notify:
     - Restart node exporter
 
-- name: Install snmp with mibs
+- name: Install snmp with mibs and exporter
   apt: 
     name:
+      - prometheus-snmp-exporter
       - snmp-mibs-downloader
       - snmp
     state: present
