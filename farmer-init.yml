@@ -4,6 +4,6 @@
   connection: ssh
   roles:
     - farmer_config
-    - prometheus
     - common
-
+    - prometheus-server
+    - ansible-role-grafana

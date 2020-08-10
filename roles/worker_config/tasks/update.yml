@@ -1,10 +1,27 @@
 ---
 
-- name: Update apt repo and cache on all Debian/Ubuntu boxes
-  apt: update_cache=yes cache_valid_time=3600
+- name: Update packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+    autoremove: yes
+  register: output
 
-- name: Upgrade all packages on servers
-  apt: upgrade=dist 
+- name: Check changes
+  set_fact:
+    updated: true
+  when: not output.stdout is search("0 upgraded, 0 newly installed")
+
+- name: Display changes
+  debug:
+    msg: "{{ output.stdout_lines }}"
+  when: updated is defined
+
+#- name: Update apt repo and cache on all Debian/Ubuntu boxes
+#  apt: update_cache=yes cache_valid_time=3600
+
+#- name: Upgrade all packages on servers
+#  apt: upgrade=dist 
 
 - name: Check if a reboot is needed on all servers
   register: reboot_required_file

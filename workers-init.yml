@@ -5,4 +5,4 @@
   become: yes
   roles:
     - worker_config
-    # - common
+    - common

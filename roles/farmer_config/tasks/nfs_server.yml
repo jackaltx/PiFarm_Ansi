@@ -8,6 +8,7 @@
     state: present
     update_cache: true
   become: true
+  when: export_nfs_share
 
 - name: Configure nfs-server
   copy: 
@@ -20,4 +21,5 @@
   become: true
   notify:
     - Reload nfs server
+  when: export_nfs_share
 

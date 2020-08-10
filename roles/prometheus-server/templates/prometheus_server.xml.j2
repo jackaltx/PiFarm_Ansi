@@ -49,7 +49,7 @@ scrape_configs:
   - job_name: 'snmp'
     static_configs:
       - targets:
-        - 192.168.2.1  # SNMP device.
+        - "{{ router_ip }}"  # SNMP device.
     metrics_path: /snmp
     params:
       module: [if_mib_ifname]

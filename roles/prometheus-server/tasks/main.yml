@@ -1,0 +1,62 @@
+---
+
+- name: Install prometheus server
+  apt: 
+    pkg:
+    - prometheus
+    state: present
+    update_cache: true
+  become: true
+
+- name: Install prometheus node exporter
+  apt: 
+    pkg:
+    - prometheus-node-exporter
+    state: present
+    update_cache: true
+  become: true
+
+- name: Create /etc/prometheus directory if it does not exist
+  file:
+    path: /etc/prometheus
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create configuration file
+  template:
+    src: prometheus_server.xml.j2
+    dest: /etc/prometheus/prometheus.yml
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  notify:
+    - Restart node exporter
+
+- name: Install snmp with mibs
+  apt: 
+    name:
+      - snmp-mibs-downloader
+      - snmp
+    state: present
+  become: yes
+  tags:
+    - perfmon
+  when:  (install_snmp is defined) or install_snmp == True
+
+- name: Configure Prometheus snmp.yml
+  copy:
+    src: snmp.yml
+    dest: /etc/prometheus/snmp.yml
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  tags:
+    - perfmon
+  when:  (install_snmp is defined) or install_snmp == True
+
+
