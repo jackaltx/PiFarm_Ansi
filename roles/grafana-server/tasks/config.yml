@@ -40,4 +40,5 @@
     owner: "{{ grafana_user }}"
     group: "{{ grafana_group }}"
     mode: 0644
+  become: yes
   register: defaults

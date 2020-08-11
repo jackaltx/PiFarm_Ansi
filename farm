@@ -1,6 +1,6 @@
 [raspifarm-workers]
 192.168.3.200 host_name=worker-1
-192.168.3.201 host_name=worker-2
+192.168.3.203 host_name=worker-2
 192.168.3.202 host_name=worker-3
 
 
