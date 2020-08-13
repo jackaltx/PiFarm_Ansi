@@ -1,7 +1,0 @@
----
-
-- hosts: raspifarm-master
-  connection: ssh
-  roles:
-    - prometheus
-

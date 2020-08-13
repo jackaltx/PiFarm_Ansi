@@ -1,0 +1,19 @@
+---
+- hosts: raspifarm-workers
+  connection: paramiko
+  gather_facts: no
+  tasks:
+
+    - name: Add Host Keys
+      command: ssh-keyscan -H {{ inventory_hostname }}
+      connection: local
+      ignore_errors: yes
+      changed_when: False
+
+    - name: Set authorized key taken from file
+      authorized_key:
+        user: "{{ remote_user }}"
+        state: present
+        key: "{{ lookup('file', remote_user_ssh) }}"
+
+
