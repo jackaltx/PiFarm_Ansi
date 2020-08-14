@@ -1,6 +1,16 @@
 ---
 
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    force_apt_get: yes
+    upgrade: yes
+    update_cache: yes
+    autoremove: yes
+    cache_valid_time: 86400 #One day
+
 - include: base_install.yml
+- include: ruby.yml
 - include: scipy.yml
 - include: mpi4py.yml
 #- include: java.yml

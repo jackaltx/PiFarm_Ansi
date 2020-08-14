@@ -8,6 +8,4 @@ pifarm_common_pkgs:
   - vlan
   - dnsutils
   - tcpdump
-#  - rubygems
-  - ruby
 
