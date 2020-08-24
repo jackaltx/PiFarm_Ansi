@@ -60,4 +60,16 @@
     - perfmon
   when:  (install_snmp is defined) or install_snmp == True
 
+ - name: Copy the MIB file to the proper location
+  copy:
+    src: UBNT-MIB 
+    dest: /var/lib/snmp/mibs/UBNT-MIB
+    owner: root
+    group: root
+    mode: '0664'
+  become: yes
+  tags:
+    - perfmon
+  when:  (install_snmp is defined) or install_snmp == True
 
+ 
