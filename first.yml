@@ -4,13 +4,19 @@
   gather_facts: no
   tasks:
 
-    - name: Add Host Keys
-      command: ssh-keyscan -H {{ inventory_hostname }}
+    - name: Add localhost Keys
+      local_action: shell ssh-keyscan -H localhost >> ~/.ssh/known_hosts
       connection: local
       ignore_errors: yes
       changed_when: False
 
-    - name: Set authorized key taken from file
+    - name: Add Host Keys
+      local_action: shell ssh-keyscan -H {{ inventory_hostname }} >> ~/.ssh/known_hosts
+      connection: local
+      ignore_errors: yes
+      changed_when: False
+
+    - name: Set this users authorized key on remote host
       authorized_key:
         user: "{{ remote_user }}"
         state: present

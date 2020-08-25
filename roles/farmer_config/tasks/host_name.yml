@@ -1,0 +1,15 @@
+---
+# tasks file for hostname
+- hostname:
+    name: "{{ host_name }}"
+  when: host_name is defined
+
+- name: changing 127.0.1.1 in /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1'
+    line: '127.0.1.1 {{ host_name }}'
+    owner: root
+    group: root
+    mode: 0644
+  when: host_name is defined

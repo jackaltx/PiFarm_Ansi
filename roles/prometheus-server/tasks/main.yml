@@ -60,7 +60,7 @@
     - perfmon
   when:  (install_snmp is defined) or install_snmp == True
 
- - name: Copy the MIB file to the proper location
+- name: Copy the MIB file to the proper location
   copy:
     src: UBNT-MIB 
     dest: /var/lib/snmp/mibs/UBNT-MIB
