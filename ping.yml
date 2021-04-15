@@ -1,0 +1,14 @@
+- hosts: all
+  connection: ssh
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  serial: 8
+  tasks:
+
+    - name: Ping the Farm
+      action: ping 
+      register: out
+
+    - debug:
+        var: out

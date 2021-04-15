@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  serial: 12
+  connection: ssh
+  become: yes
+  roles:
+    - update
+
