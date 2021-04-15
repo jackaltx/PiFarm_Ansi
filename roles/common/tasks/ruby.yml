@@ -1,4 +1,5 @@
 ---
+
 - name: Install ruby
   apt: 
     name: ruby
@@ -6,6 +7,10 @@
     force: yes
     update_cache: true
   become: true
-  tags:
-    - basic
-    - developer
+
+  #- name: Install rubygems
+  #  apt: 
+  #    name: rubygems
+  #    state: present
+  #    update_cache: true
+  #  become: true

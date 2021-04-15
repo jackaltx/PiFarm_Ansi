@@ -1,0 +1,17 @@
+- name: "Check if {{ grafana_repo }} is installed"
+  command: dpkg-query -W "{{ grafana_repo }}"
+  register: my_package_check_deb
+  failed_when: my_package_check_deb.rc > 1
+  changed_when: my_package_check_deb.rc == 1
+
+- name: "Download {{ grafana_repo }}"
+  get_url: 
+    url="{{ grafana_repo_loc }}/{{ grafana_repo }}"
+    dest="/tmp/{{ grafana_repo }}"
+  when: my_package_check_deb.rc == 1
+
+- name: "Install {{ grafana_repo }}"
+  apt: deb="/tmp/{{ grafana_repo }}"
+  become: true
+  when: my_package_check_deb.rc == 1
+

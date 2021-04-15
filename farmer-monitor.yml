@@ -3,5 +3,4 @@
 - hosts: raspifarm-master
   connection: ssh
   roles:
-    - prometheus
-
+    - grafana-server

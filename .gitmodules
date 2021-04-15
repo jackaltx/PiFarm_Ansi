@@ -1,3 +1,0 @@
-[submodule "roles/ansible-role-grafana"]
-	path = roles/ansible-role-grafana
-	url = https://github.com/jackaltx/ansible-role-grafana.git

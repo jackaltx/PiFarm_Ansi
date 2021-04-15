@@ -1,10 +1,7 @@
 [raspifarm-workers]
-192.168.2.102 host_name=pi-102
-192.168.2.103 host_name=pi-103
-192.168.2.104 host_name=pi-104
-192.168.2.105 host_name=pi-105
-192.168.2.106 host_name=pi-106
-192.168.2.107 host_name=pi-107
+192.168.3.200 host_name=worker-1
+192.168.3.201 host_name=worker-2
+192.168.3.203 host_name=worker-3
 
 
 [raspifarm-master]

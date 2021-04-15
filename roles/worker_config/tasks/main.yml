@@ -4,3 +4,4 @@
 - include: bash_profile.yml
 - include: host_name.yml
 - include: node_exporter.yml
+- include: update.yml

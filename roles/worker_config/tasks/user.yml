@@ -1,6 +1,5 @@
 ---
 
-
 - name: 'Ensure the group exists'
   group:
     gid: "{{ remote_gid }}"

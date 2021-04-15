@@ -1,2 +1,6 @@
-home_dir: /rhome/farmer
-raspi_farm_dir: /rhome/farmer/raspifarm
+---
+
+home_dir: /home/pi
+export_nfs_share: false
+router_ip: 192.168.3.1
+
