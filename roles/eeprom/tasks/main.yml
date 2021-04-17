@@ -16,12 +16,10 @@
   apt: 
     pkg: "{{ packages }}"
     state: present
-  become: true
 
 - name: Upgrade Pi Firmware (if required)
   command: rpi-eeprom-update -d -a
   register: upg_out
-  become: true
 
 - debug:
     var: upg_out.stdout_lines

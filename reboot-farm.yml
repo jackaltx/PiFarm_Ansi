@@ -1,0 +1,10 @@
+- hosts: raspifarm-workers
+  connection: ssh
+  become: yes
+  gather_facts: no
+  tasks:
+
+    - name: reboot cluster
+      command:  /sbin/reboot
+
+

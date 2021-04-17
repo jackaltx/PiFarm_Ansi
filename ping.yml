@@ -1,3 +1,4 @@
+---
 - hosts: all
   connection: ssh
   gather_facts: no

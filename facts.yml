@@ -1,39 +1,40 @@
-# Display facts from all hosts and store them indexed by I(hostname) at C(/tmp/facts).
-# ansible all -m setup --tree /tmp/facts
+---
+- hosts: all
+  connection: ssh
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  serial: 8
+  tasks:
 
-# Display only facts regarding memory found by ansible on all hosts and output them.
-# ansible all -m setup -a 'filter=ansible_*_mb'
+  - name: Create facts folder in current directory
+    local_action: 
+        module: file
+        path: './facts'
+        state: directory
+        owner: "{{ remote_user if remote_user is defined else local_user | default('root') }}"
+        group: "{{ remote_group if remote_group is defined else local_group | default('root') }}"
 
-# Display only facts returned by facter.
-# ansible all -m setup -a 'filter=facter_*'
+  - name: Collect only facts returned by facter
+    setup:
+      gather_subset:
+        - '!all'
+        - '!any'
+        - facter
+    register: facts_result
 
-# Collect only facts returned by facter.
-# ansible all -m setup -a 'gather_subset=!all,!any,facter'
+  - name: Remove the current previous file
+    local_action: 
+        module: file
+        path: "./facts/{{ facts_result }}"
+        state: absent
 
-- name: Collect only facts returned by facter
-  setup:
-    gather_subset:
-      - '!all'
-      - '!any'
-      - facter
+  - name: Create current facts file
+    local_action: 
+      module: copy
+      content: "{{ facts_result | to_nice_json }}"
+      dest: "facts/{{ host_name }}.json"
+      owner: "{{ ansible_env.SUDO_USER }}"
+      group: "{{ remote_group if remote_group is defined else local_group | default('root') }}"
+      mode: 0664
 
-# Display only facts about certain interfaces.
-# ansible all -m setup -a 'filter=ansible_eth[0-2]'
-
-# Restrict additional gathered facts to network and virtual (includes default minimum facts)
-# ansible all -m setup -a 'gather_subset=network,virtual'
-
-# Collect only network and virtual (excludes default minimum facts)
-# ansible all -m setup -a 'gather_subset=!all,!any,network,virtual'
-
-# Do not call puppet facter or ohai even if present.
-# ansible all -m setup -a 'gather_subset=!facter,!ohai'
-
-# Only collect the default minimum amount of facts:
-# ansible all -m setup -a 'gather_subset=!all'
-
-# Collect no facts, even the default minimum subset of facts:
-# ansible all -m setup -a 'gather_subset=!all,!min'
-
-# Display facts from Windows hosts with custom facts stored in C(C:\custom_facts).
-# ansible windows -m setup -a "fact_path='c:\custom_facts'"

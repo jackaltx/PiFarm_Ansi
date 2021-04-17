@@ -1,5 +1,5 @@
 ---
-- hosts: raspifarm-workers
+- hosts: workers
   connection: paramiko
   gather_facts: no
   tasks:
