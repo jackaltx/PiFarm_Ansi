@@ -3,12 +3,13 @@
 pifarm_common_pkgs:
   - vim
   - git
+  - wget
   - htop
   - rsync
   - vlan
   - dnsutils
   - tcpdump
-
+  - figlet
 
 pifarm_install_tmux: false
 

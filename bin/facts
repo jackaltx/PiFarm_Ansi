@@ -1,2 +1,2 @@
 #/!bin/sh
-ansible all -m setup --tree facts
+ansible localhost -m setup --tree facts

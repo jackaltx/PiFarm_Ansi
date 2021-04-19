@@ -3,6 +3,8 @@
 - name: update the cache
   apt: 
     update_cache: true
+    autoremove: yes
+    autoclean: yes
   register: upd_cache_out
 
 - debug:
@@ -10,8 +12,6 @@
 
 - name: Update all packages to the latest version
   apt:
-    autoremove: yes
-    autoclean: yes
     upgrade: dist
   register: upd_out
 

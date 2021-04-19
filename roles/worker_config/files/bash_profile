@@ -1,18 +1,4 @@
-
-echo  ""
-echo  "     _   _   _   _   _   _   _       "
-echo  "    / \ / \ / \ / \ / \ / \ / \      "
-echo  "   ( W | E | L | C | O | M | E )     "
-echo  "    \_/ \_/ \_/ \_/ \_/ \_/ \_/      "
-echo  "              _   _                  "
-echo  "             / \ / \                 "
-echo  "            ( T | O )                "
-echo  "             \_/ \_/                 "
-echo  "  _   _   _   _   _   _   _   _   _  "
-echo  " / \ / \ / \ / \ / \ / \ / \ / \ / \ "
-echo  "( R | A | S | P | I | F | A | R | M )"
-echo  " \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ "
-echo  ""
+echo "PiFarm Worker " | figlet
 
 # [[ -r ~/.profile ]] && . ~/.profile
 

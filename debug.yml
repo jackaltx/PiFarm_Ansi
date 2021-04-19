@@ -1,7 +1,7 @@
 ---
 
   - name: dump all
-    hosts: raspifarm-master
+    hosts: test
  
     tasks:
       - name: Print some debug information 

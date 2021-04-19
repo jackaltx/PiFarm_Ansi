@@ -16,10 +16,4 @@
       ignore_errors: yes
       changed_when: False
 
-    - name: Set this users authorized key on remote host
-      authorized_key:
-        user: "{{ remote_user }}"
-        state: present
-        key: "{{ lookup('file', remote_user_ssh) }}"
-
 

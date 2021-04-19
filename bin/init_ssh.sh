@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Used to setup the local machine for the "farmer" role
+# This is used one time only.  I did nothing to make it idempotent
+
 sudo apt install ansible -y
 sudo apt install ssh-askpass -y
 
