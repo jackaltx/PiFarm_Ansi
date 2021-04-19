@@ -1,6 +1,9 @@
 ---
 
-- include: user.yml
+# this is not down in worker_init
+# TODO: remove this on next refactor
+# - include: user.yml
+
 - include: bash_profile.yml
 - include: host_name.yml
 - include: node_exporter.yml

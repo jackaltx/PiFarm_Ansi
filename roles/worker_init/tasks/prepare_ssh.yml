@@ -1,0 +1,21 @@
+---
+
+- name: remove the known_hosts file
+  local_action: 
+    module: file
+    path: ~/.ssh/known_hosts
+    state: absent
+ 
+- name: Add localhost Keys
+  local_action: shell ssh-keyscan -H localhost >> ~/.ssh/known_hosts
+  connection: local
+  ignore_errors: yes
+  changed_when: False
+
+- name: Add Host Keys
+  local_action: shell ssh-keyscan -H {{ inventory_hostname }} >> ~/.ssh/known_hosts
+  connection: local
+  ignore_errors: yes
+  changed_when: False
+
+
