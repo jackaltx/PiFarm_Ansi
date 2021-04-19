@@ -9,3 +9,6 @@ pifarm_common_pkgs:
   - dnsutils
   - tcpdump
 
+
+pifarm_install_tmux: false
+

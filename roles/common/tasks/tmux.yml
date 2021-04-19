@@ -4,6 +4,3 @@
     name: tmux
     state: present
     update_cache: ture
-  become: true
-  tags:
-    - developer

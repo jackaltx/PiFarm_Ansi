@@ -13,5 +13,9 @@
 - include: ruby.yml
 - include: scipy.yml
 - include: mpi4py.yml
+
+- include: tmux.yml
+  when: pifarm_install_tmux
+
 #- include: java.yml
 #- include: pip.yml

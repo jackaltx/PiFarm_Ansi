@@ -1,6 +1,6 @@
 ---
 
-- hosts: raspifarm-workers
+- hosts: workers
   connection: ssh
   roles:
     - common
