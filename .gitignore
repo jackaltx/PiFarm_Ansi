@@ -5,6 +5,8 @@
 # no logs
 logs/*
 
-#
+# these should be private
 facts/*
 
+# attached roles
+roles/ansible-role-grafana/
