@@ -1,5 +1,5 @@
 ---
-- hosts: raspifarm-workers
+- hosts: workers
   connection: ssh
   gather_facts: no
   become: yes
