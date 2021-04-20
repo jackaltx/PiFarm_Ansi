@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  connection: ssh
+  become: yes
+  tasks:
+
+    - name: Turn off wifi
+      command: /usr/sbin/rfkill block wifi
+
+    - name: Turn off bluetooth
+      command: /usr/sbin/rfkill block bluetooth
+

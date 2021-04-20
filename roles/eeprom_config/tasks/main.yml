@@ -1,0 +1,12 @@
+---
+
+- copy:
+    src:  boot.conf
+    dest: /tmp/boot.conf
+
+- name: Generate new eeprom image
+  command: rpi-eeprom-config --config /tmp/boot.conf --out /tmp/newimage.bin pieeprom.bin
+
+- name: Update the eeprom with the new image
+  command: rpi-eeprom-update -d -f /tmp/newimage.bin
+

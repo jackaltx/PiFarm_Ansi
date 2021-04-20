@@ -3,4 +3,4 @@
 - hosts: farmer
   connection: ssh
   roles:
-    - grafana-server
+    - eeprom_config

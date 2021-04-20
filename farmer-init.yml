@@ -1,8 +1,8 @@
 ---
 
-- hosts: raspifarm-master
+- hosts: farmer
   connection: ssh
   roles:
-    - farmer_config
     - common
+    - farmer_config
     - prometheus-server
