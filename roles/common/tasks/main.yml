@@ -1,10 +1,12 @@
 ---
 
+- include: host_name.yml
+- include: hosts.yml
+
 - include: base_install.yml
 - include: ruby.yml
 - include: scipy.yml
 - include: mpi4py.yml
-- include: hosts.yml
 
 - include: tmux.yml
   when: pifarm_install_tmux

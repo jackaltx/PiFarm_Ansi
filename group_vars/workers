@@ -1,6 +1,6 @@
-home_dir: /home/farmer
-remote_user_ssh: "/rhome/farmer/.ssh/id_rsa.pub"
-remote_user: farmer
-remote_uid: 1001
-remote_group: admin
-remote_gid: 1001
+home_dir: /home/pi
+remote_user_ssh: "{{home_dir}}/.ssh/id_rsa.pub"
+remote_user: pi
+remote_uid: 1000
+remote_group: pi
+remote_gid: 1000

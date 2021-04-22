@@ -45,11 +45,11 @@ scrape_configs:
       {% for item in scraped_hosts %}- targets: ['{{item}}:9100']
       {% endfor %}
 
-{% if '{{install_snmp}}' %} 
+{% if '{{ prometheus-install_snmp}}' %} 
   - job_name: 'snmp'
     static_configs:
       - targets:
-        - "{{ router_ip }}"  # SNMP device.
+        - "{{ prometheus_router_ip }}"  # SNMP device.
     file_sd_configs:
         - files:
             - /etc/prometheus/snmp.yml

@@ -2,6 +2,7 @@
 
 - hosts: farmer
   connection: ssh
+  become: yes
   roles:
     - common
     - farmer_config

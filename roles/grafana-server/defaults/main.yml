@@ -5,7 +5,7 @@ grafana_configure: true
 #grafana_packages: moved to os specific vars
 
 grafana_admin_user: admin
-grafana_admin_password: admin
+grafana_admin_password: admin123
 grafana_conf_file: /etc/grafana/grafana.ini
 grafana_dir_conf: /etc/grafana
 grafana_dir_data: /var/lib/grafana

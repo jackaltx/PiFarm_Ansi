@@ -46,7 +46,7 @@
   become: yes
   tags:
     - perfmon
-  when:  (install_snmp is defined) or install_snmp == True
+  when: prometheus_install_snmp
 
 - name: Configure Prometheus snmp.yml
   copy:
@@ -58,7 +58,7 @@
   become: yes
   tags:
     - perfmon
-  when:  (install_snmp is defined) or install_snmp == True
+  when: prometheus_install_snmp
 
 - name: Copy the MIB file to the proper location
   copy:
@@ -70,6 +70,6 @@
   become: yes
   tags:
     - perfmon
-  when:  (install_snmp is defined) or install_snmp == True
+  when: prometheus_install_snmp
 
  

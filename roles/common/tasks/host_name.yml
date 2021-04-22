@@ -1,6 +1,6 @@
 ---
-# tasks file for hostname
-- hostname:
+- name:  "set the hostname to {{ host_name }}"
+  hostname:
     name: "{{ host_name }}"
   when: host_name is defined
 
