@@ -1,9 +1,8 @@
 ---
 
-
-- name: Restart node exporter
+- name: Restart prometheus server
   service:
-    name: prometheus-node-exporter
-    state: reloaded
+    name: prometheus
+    state: restarted
   become: true
 

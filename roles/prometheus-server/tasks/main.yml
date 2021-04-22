@@ -34,7 +34,7 @@
     mode: '0644'
   become: true
   notify:
-    - Restart node exporter
+    - Restart prometheus service
 
 - name: Install snmp with mibs and exporter
   apt: 
