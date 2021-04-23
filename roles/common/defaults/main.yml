@@ -41,3 +41,8 @@ hosts_network_interface: "{{ ansible_default_ipv4.interface }}"
 # Backup of previous host
 host_file_backup: no
 
+# for setting VLANs
+net_path: "/etc/network/interfaces.d"
+pifarm_manage_vlans: yes
+host_vlans: [  ]
+

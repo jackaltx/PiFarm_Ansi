@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  connection: ssh
+  become: yes
+  tasks:
+
+    - name: Removing VLANS
+      net_vlan:
+        state: absent
+

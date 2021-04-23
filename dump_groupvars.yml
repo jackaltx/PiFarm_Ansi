@@ -1,5 +1,5 @@
 ---
-- hosts: farmer
+- hosts: workers
   gather_facts: no
   tasks:
 

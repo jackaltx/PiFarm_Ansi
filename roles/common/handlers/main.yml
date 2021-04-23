@@ -1,0 +1,8 @@
+---
+- name: restart networking
+  service: 
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - networking
+    - dhcpcd

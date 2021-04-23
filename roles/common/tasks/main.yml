@@ -11,5 +11,9 @@
 - include: tmux.yml
   when: pifarm_install_tmux
 
+- include: vlans.yml
+  when: 
+    - pifarm_manage_vlans
+
 #- include: java.yml
 #- include: pip.yml

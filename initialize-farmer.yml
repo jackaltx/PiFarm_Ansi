@@ -2,8 +2,10 @@
 
 - hosts: farmer
   connection: ssh
+  gather_facts: yes
   become: yes
   roles:
+    - update
     - common
     - farmer_config
     - prometheus-server

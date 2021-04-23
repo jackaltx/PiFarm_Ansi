@@ -33,7 +33,7 @@
     local_action: 
       module: copy
       content: "{{ facts_result | to_nice_json }}"
-      dest: "facts/{{ host_name }}.json"
+      dest: "facts/{{ inventory_hostname }}.json"
       owner: "{{ ansible_env.SUDO_USER }}"
       group: "{{ remote_group if remote_group is defined else local_group | default('root') }}"
       mode: 0664

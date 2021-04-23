@@ -1,0 +1,23 @@
+---
+- name: Create VLANS
+  template:
+    src: vlans.j2
+    dest: "{{ net_path }}/vlans"
+  loop: "{{ host_vlans }}"
+  notify: restart networking
+  when:
+    - host_vlans is defined
+    - host_vlans|length > 0
+
+- name: Remove vlan file
+  file:
+    path: "{{ net_path }}/vlans"
+    state: absent
+  register: vlan_result
+  notify: restart networking
+  when:
+    - (host_vlans is not defined) or ( host_vlans is defined and host_vlans|length == 0)
+
+- debug:
+    var: vlan_result
+ 

@@ -1,0 +1,56 @@
+---
+
+workers:
+  hosts:
+    pi-102:
+      ansible_host: 192.168.2.102
+      ansible_fqdn: pi-102.pifarm.lab
+    pi-103:
+      ansible_host: 192.168.2.103
+      ansible_fqdn: pi-103.pifarm.lab
+    pi-104:
+      ansible_host: 192.168.2.104
+      ansible_fqdn: pi-104.pifarm.lab
+    pi-105:
+      ansible_host: 192.168.2.105
+      ansible_fqdn: pi-105.pifarm.lab
+    pi-106:
+      ansible_host: 192.168.2.106
+      ansible_fqdn: pi-106.pifarm.lab
+    pi-107:
+      ansible_host: 192.168.2.107
+      ansible_fqdn: pi-107.pifarm.lab
+  vars:
+    home_dir: /home/farmer
+    remote_user_ssh: "/rhome/farmer/.ssh/id_rsa.pub"
+    remote_user: farmer
+    remote_uid: 1001
+    remote_group: admin
+    remote_gid: 1001
+
+farmer:
+  hosts:
+    pi-farmer:
+      ansible_host: 192.168.2.10
+      ansible_fqdn: pi-10.pifarm.lab
+  vars:
+    local_user: farmer
+    local_group: admin
+    home_dir: /rhome/farmer
+    export_nfs_share: false
+    router_ip: 192.168.2.1
+
+test:
+  hosts:
+    pi-102:
+      ansible_host: 192.168.2.102
+      ansible_fqdn: pi-102.pifarm.lab
+  vars:
+    home_dir: /home/farmer
+    remote_user_ssh: "/rhome/farmer/.ssh/id_rsa.pub"
+    remote_user: farmer
+    remote_uid: 1001
+    remote_group: admin
+    remote_gid: 1001
+
+
