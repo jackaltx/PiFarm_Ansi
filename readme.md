@@ -43,7 +43,7 @@ Pfsense instructions
 
 the debugs, dumps, ... .
 
-## Confguration
+## Configuration
 
 This will be high level and break into deeper details
 
