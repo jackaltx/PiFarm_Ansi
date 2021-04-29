@@ -1,4 +1,6 @@
-<H1>PiFameAnsible Scripts</H1>   
+<H1>PiFarmAnsible Scripts</H1>   
+
+# Introduction
 
 <p>Use this to configure a Raspberry Pi Cluster with one node (the Farmer) and the others doing work tasks (the Worker).
 This work is based on the [RaspiFarm](https://raspi.farm/) work by two students from Switzerland.   The idea is is old and works
@@ -16,6 +18,10 @@ well.   I happened on thier work when I was curious about how to build a farm wi
   - ansible-playbook initialize_farmer.yml
   - Setup a granafa monitor on the farmer (ansible-playbook monitor-cluster)
 - test the cluster (ansible-playbook  run-sysbench)
+
+# Optional playbooks
+
+# Future work
 
 
 More later, this is starting the documention off.
