@@ -1,6 +1,6 @@
 <H1>PiFarmAnsible Scripts</H1>   
 
-# Introduction
+## Introduction
 
 <p>Use this to configure a Raspberry Pi Cluster with one node (the Farmer) and the others doing work tasks (the Worker).
 This work is based on the [RaspiFarm](https://raspi.farm/) work by two students from Switzerland.   The idea is is old and works
@@ -8,7 +8,27 @@ well.   I happened on thier work when I was curious about how to build a farm wi
 
 <p>This project hosts my experiments of building a Pi Cluster into a working Computer farm by using ansible.  It is far from perfect, but it it working well (for me).  I can take a default download of the [Raspberry Pi OS](https://www.raspberrypi.org/software/operating-systems/), connect them with a simple network appliance, and use these ansibles scripts to configure bare metal cluster.  I have done this many times with a VMs, but always seem to have issues with bare metal.</p>
 
-# Steps
+## Sample PiFarms
+
+###  The network appliance
+
+Ubiquiti Edgerouter X
+
+###  Farm types
+
+The two tyupes
+
+####  The 7 Pis where the farmer has an M.2 disk
+
+NFS
+
+####  The 4 Pis with no disk
+
+### Configuring you home router hints.
+
+Pfsense instructions
+
+## Steps
 - Edit the farm.yml to set infrastructure variables. (details pending)
 - On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
 - Push the keys to all the  WorkerNodes  (ansible-playbook -u pi -k initialize_cluster.yml)
@@ -19,9 +39,15 @@ well.   I happened on thier work when I was curious about how to build a farm wi
   - Setup a granafa monitor on the farmer (ansible-playbook monitor-cluster)
 - test the cluster (ansible-playbook  run-sysbench)
 
-# Optional playbooks
+## Optional playbooks
 
-# Future work
+the debugs, dumps, ... .
+
+## Confguration
+
+This will be high level and break into deeper details
+
+## Future work
 
 
 More later, this is starting the documention off.
