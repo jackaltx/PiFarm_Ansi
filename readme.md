@@ -22,9 +22,9 @@ The two types
 
 ![PiFarm.7 Hardwired](docs/images/PiFarm.7.Hard.png "Title")
 
-NFS
-
 ####  The 4 Pis with no disk
+
+![PiFarm.4 Hardwired](docs/images/PiFarm.4.Hard.png "Title")
 
 ### Configuring you home router hints.
 
