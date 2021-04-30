@@ -1,11 +1,12 @@
-<h1>PiFarm 7 - Hardwired</h1>
+# PiFarm 7 - Hardwired
 
-# Overview
+## Overview
 
-# Layout
+## Layout
 
 ![PiFarm.7 Hardwired](images/PiFarm.7.Hard.png "Title")
 
-# Components
+## Components
 
-# Photographs
+## Photographs
+
