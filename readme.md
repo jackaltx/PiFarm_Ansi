@@ -20,6 +20,8 @@ The two types
 
 ####  The 7 Pis where the farmer has an M.2 disk
 
+![PiFarm.7 Hardwired](docs/images/PiFarm.7.Hard.png "Title")
+
 NFS
 
 ####  The 4 Pis with no disk
