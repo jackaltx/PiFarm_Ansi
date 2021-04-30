@@ -20,9 +20,11 @@ The two types
 
 ####  The 7 Pis where the farmer has an M.2 disk
 
-NFS
+![PiFarm.7 Hardwired](docs/images/PiFarm.7.Hard.png "Title")
 
 ####  The 4 Pis with no disk
+
+![PiFarm.4 Hardwired](docs/images/PiFarm.4.Hard.png "Title")
 
 ### Configuring you home router hints.
 
