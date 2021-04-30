@@ -10,3 +10,6 @@
 
 ## Photographs
 
+Overall Shot
+
+![PiFarm.7 Overall](images/PiFarm.7.overall.jpeg "Title")
