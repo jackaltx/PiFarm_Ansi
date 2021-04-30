@@ -4,7 +4,7 @@
 
 # Layout
 
-![PiFarm.7 Hardwired](docs/images/PiFarm.7.Hard.png "Title")
+![PiFarm.7 Hardwired](images/PiFarm.7.Hard.png "Title")
 
 # Components
 
