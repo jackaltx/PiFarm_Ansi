@@ -1,0 +1,33 @@
+---
+
+workers:
+  hosts:
+    worker-1:
+      ansible_host: 192.168.3.200
+      ansible_fqdn: worker-1.pifarm.lab
+    worker-2:
+      ansible_host: 192.168.3.200
+      ansible_fqdn: worker-2.pifarm.lab
+    worker-3:
+      ansible_host: 192.168.3.203
+      ansible_fqdn: worker-3.pifarm.lab
+   vars:
+      home_dir: /home/pi
+      remote_user_ssh: "{{home_dir}}/.ssh/id_rsa.pub"
+      remote_user: pi
+      remote_uid: 1000
+      remote_group: pi
+      remote_gid: 1000
+
+farmer:
+  hosts:
+    pi-farmer:
+      ansible_host: 192.168.3.204
+      ansible_fqdn: pi-farmer.pifarm.lab
+  vars:
+    local_user: pi
+    local_group: pi
+    home_dir: /home/pi
+    export_nfs_share: false
+    router_ip: 192.168.3.1
+
