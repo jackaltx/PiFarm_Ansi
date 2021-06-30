@@ -24,6 +24,9 @@ External Farmers (ansible, dhcp, dns, [gateway]) and  All pi workers
 Pfsense instructions
 
 ## Steps
+
+Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
+
 - Edit the farm.yml to set infrastructure variables. (details pending)
 - On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
 - Push the keys to all the  WorkerNodes  (ansible-playbook -u pi -k initialize_cluster.yml)
