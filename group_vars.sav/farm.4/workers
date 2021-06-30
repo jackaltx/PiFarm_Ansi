@@ -1,6 +1,0 @@
-home_dir: /home/pi
-remote_user_ssh: "{{home_dir}}/.ssh/id_rsa.pub"
-remote_user: pi
-remote_uid: 1000
-remote_group: pi
-remote_gid: 1000
