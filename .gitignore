@@ -1,3 +1,5 @@
+# Mac Only File
+.DS_Store
 
 # no retry files
 *.retry
