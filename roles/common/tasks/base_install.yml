@@ -1,14 +1,14 @@
 ---
 - name: Install basic packages
-  apt: 
+  package: 
     name: "{{ pifarm_common_pkgs }}"
     state: present
     update_cache: true
   become: true
-  register: apt_out
+  register: package_out
   tags:
     - basic
 
 - debug:
-    var: apt_out
+    var: package_out
 

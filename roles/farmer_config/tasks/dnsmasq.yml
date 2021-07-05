@@ -1,7 +1,7 @@
 ---
     # dnsmasq 
 - name: Install dnsmasq
-  apt: 
+  package: 
     name: dnsmasq
     state: present
 

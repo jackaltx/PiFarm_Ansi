@@ -1,0 +1,18 @@
+---
+
+pifarm_install_tmux: false
+
+pifarm_install_scipy: true
+
+pifarm_install_mpi: true
+
+pifarm_common_pkgs:
+  - vim
+  - git
+  - wget
+  - htop
+  - rsync
+  - vlan
+  - dnsutils
+  - tcpdump
+  - figlet

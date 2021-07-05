@@ -1,20 +1,24 @@
 ---
 
 - name: Install prometheus server
-  apt: 
+  package: 
     pkg:
     - prometheus
     state: present
     update_cache: true
   become: true
+  when: 
+    - pifarm_install_prometheus
 
 - name: Install prometheus node exporter
-  apt: 
+  package: 
     pkg:
     - prometheus-node-exporter
     state: present
     update_cache: true
   become: true
+  when: 
+    - pifarm_install_prometheus
 
 - name: Create /etc/prometheus directory if it does not exist
   file:
@@ -24,6 +28,8 @@
     group: root
     mode: '0755'
   become: true
+  when: 
+    - pifarm_install_prometheus
 
 - name: Create configuration file
   template:
@@ -35,6 +41,8 @@
   become: true
   notify:
     - Restart prometheus service
+  when: 
+    - pifarm_install_prometheus
 
 - name: Install snmp with mibs and exporter
   apt: 
@@ -46,7 +54,9 @@
   become: yes
   tags:
     - perfmon
-  when: prometheus_install_snmp
+  when: 
+    - pifarm_install_prometheus
+    - prometheus_install_snmp
 
 - name: Configure Prometheus snmp.yml
   copy:
@@ -58,7 +68,9 @@
   become: yes
   tags:
     - perfmon
-  when: prometheus_install_snmp
+  when: 
+    - pifarm_install_prometheus
+    - prometheus_install_snmp
 
 - name: Copy the MIB file to the proper location
   copy:
@@ -70,6 +82,8 @@
   become: yes
   tags:
     - perfmon
-  when: prometheus_install_snmp
+  when: 
+    - pifarm_install_prometheus
+    - prometheus_install_snmp
 
  

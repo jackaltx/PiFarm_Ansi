@@ -1,0 +1,5 @@
+---
+
+export_nfs_share: false
+pifarmer_install_dnsmasq: false
+

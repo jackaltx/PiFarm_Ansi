@@ -1,0 +1,7 @@
+---
+
+- name: upgrade all centos packages
+  yum: name=* state=latest
+  notify:
+    - Restart server
+    - Wait for server to restart

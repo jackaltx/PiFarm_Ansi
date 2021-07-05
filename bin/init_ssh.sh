@@ -7,7 +7,7 @@
 
 # this will be centos  ssh-ask only for now
 sudo dnf install centos-release-ansible-29 openssh-askpass -y
-#sudo dns install ansible -y
+#sudo apt install ansible -y
 #sudo apt install ssh-askpass -y
 
 mkdir -p ~/.ssh

@@ -1,10 +1,12 @@
 ---
 
-#- include: host_name.yml
 - include: nfs_server.yml
+  when: export_nfs_share
 
-#- include: node_exporter.yml
 #- include: apache.yml
-#- include: dnsmasq.yml
+
+- include: dnsmasq.yml
+  when: pifarmer_install_dnsmasq
+
 #- include: node_and_npm.yml
 #- include: rabbitmq-server.yml

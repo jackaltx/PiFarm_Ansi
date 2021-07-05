@@ -1,12 +1,23 @@
 ---
 
+- name: "Include {{ ansible_os_family }} vars"
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - include: host_name.yml
 - include: hosts.yml
 
 - include: base_install.yml
 - include: ruby.yml
+
 - include: scipy.yml
+  when:
+    - ansible_os_family == "Debian"
+    - pifarm_install_scipy
+
 - include: mpi4py.yml
+  when:
+    - ansible_os_family == "Debian"
+    - pifarm_install_mpi
 
 - include: tmux.yml
   when: pifarm_install_tmux
