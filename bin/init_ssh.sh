@@ -6,7 +6,7 @@
 # TODO...determine the distro and install accordingly
 
 # this will be centos  ssh-ask only for now
-sudo dnf install centos-release-ansible-29 openssh-askpass -y
+sudo dnf install openssh-askpass -y
 #sudo apt install ansible -y
 #sudo apt install ssh-askpass -y
 
