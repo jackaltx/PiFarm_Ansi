@@ -4,17 +4,18 @@ workers:
   hosts:
     pi-101:
       ansible_host: 192.168.79.101
-      ansible_fqdn: pi-102.pifarm.lab
+      pifarm_hostname: pi-101
     pi-102:
       ansible_host: 192.168.79.102
-      ansible_fqdn: pi-103.pifarm.lab
+      pifarm_hostname: pi-102
     pi-103:
       ansible_host: 192.168.79.103
-      ansible_fqdn: pi-104.pifarm.lab
+      pifarm_hostname: pi-103
     pi-104:
       ansible_host: 192.168.79.104
-      ansible_fqdn: pi-105.pifarm.lab
+      pifarm_hostname: pi-104
   vars:
+    pifarm_domainname: pifarm.lab
     home_dir: /home/lab
     remote_user_ssh: "/home/lab/.ssh/id_rsa.pub"
     remote_user: lab
@@ -27,8 +28,9 @@ farmer:
     pi-farmer:
       # ansible_host: 192.168.79.2
       ansible_host: 127.0.0.1
-      ansible_fqdn: farmer.pifarm.lab
+      pifarm_hostname: farmer
   vars:
+    pifarm_domainname: pifarm.lab
     local_user: lavender
     local_group: lavender
     home_dir: /home/lavender
