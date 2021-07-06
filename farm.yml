@@ -15,7 +15,6 @@ workers:
       ansible_host: 192.168.79.104
       pifarm_hostname: pi-104
   vars:
-    pifarm_domainname: pifarm.lab
     home_dir: /home/lab
     remote_user_ssh: "/home/lab/.ssh/id_rsa.pub"
     remote_user: lab
@@ -30,13 +29,16 @@ farmer:
       ansible_host: 127.0.0.1
       pifarm_hostname: farmer
   vars:
-    pifarm_domainname: pifarm.lab
+    # ... defind controlling user
     local_user: lavender
     local_group: lavender
     home_dir: /home/lavender
+
+    # ... pifarm services (on farmer)
     export_nfs_share: false
     pifarm_install_prometheus: false
-    prometheus_install_snmp: false
-    pifarmer_install_dnsmasq: true
+    pifarm_install_dnsmasq: true
+
+    # ... networking
     router_ip: 192.168.79.1
 

@@ -8,4 +8,11 @@
     - update
     - common
     - farmer_config
-    - prometheus-server
+
+    - role: prometheus-server
+      when: pifarm_install_prometheus
+
+    - role: dnsmasq
+      when: pifarm_install_dnsmasq
+
+ 

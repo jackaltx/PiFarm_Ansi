@@ -16,6 +16,7 @@ pifarm_install_tmux: false
 pifarm_install_scipy: true
 pifarm_install_mpi: true
 
+pifarm_domainname: not-specified.lab
 
 # If set to true, an entry for `ansible_hostname`, bound to the host's default IPv4 address is added added.
 hosts_add_default_ipv4: true

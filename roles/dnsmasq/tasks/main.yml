@@ -1,0 +1,9 @@
+---
+
+- block:
+
+  - include: dnsmasq.yml
+
+  when:
+    - pifarm_install_dnsmasq
+ 
