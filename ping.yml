@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: workers
   connection: ssh
   gather_facts: no
   become: yes
@@ -7,7 +7,7 @@
   serial: 8
   tasks:
 
-    - name: Ping the Farm
+    - name: Ping the Farma Workers
       action: ping 
       register: out
 

@@ -1,0 +1,4 @@
+---
+
+# By default we are connected to the internet, so we can get updates
+pifarm_connected_internet: True

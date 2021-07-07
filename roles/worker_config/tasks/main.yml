@@ -1,4 +1,8 @@
 ---
 
 - include: bash_profile.yml
+
+
 - include: node_exporter.yml
+  when:
+    - pifarm_connected_internet

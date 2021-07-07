@@ -6,25 +6,34 @@
 - include: host_name.yml
 - include: hosts.yml
 
-- include: base_install.yml
-- include: ruby.yml
+- block:
 
-- include: scipy.yml
+  - include: base_install.yml
+
+  - include: ruby.yml
+    when:
+      - ansible_os_family == "Debian"
+      - pifarm_install_ruby
+
+  - include: scipy.yml
+    when:
+      - ansible_os_family == "Debian"
+      - pifarm_install_scipy
+
+  - include: mpi4py.yml
+    when:
+      - ansible_os_family == "Debian"
+      - pifarm_install_mpi
+
+  - include: tmux.yml
+    when: pifarm_install_tmux
+
+  - include: vlans.yml
+    when: 
+      - pifarm_manage_vlans
+
+  # - include: java.yml
+  # - include: pip.yml
+
   when:
-    - ansible_os_family == "Debian"
-    - pifarm_install_scipy
-
-- include: mpi4py.yml
-  when:
-    - ansible_os_family == "Debian"
-    - pifarm_install_mpi
-
-- include: tmux.yml
-  when: pifarm_install_tmux
-
-- include: vlans.yml
-  when: 
-    - pifarm_manage_vlans
-
-#- include: java.yml
-#- include: pip.yml
+    - pifarm_connected_internet

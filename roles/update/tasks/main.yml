@@ -6,6 +6,7 @@
 - name: "Update Debian (raspberry pi)"
   include: "update_pi.yml"
   when:
+    - pifarm_connected_internet 
     - ansible_os_family == "Debian" 
     - vars['ansible_distribution_release'] == 'buster'
 

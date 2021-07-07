@@ -12,8 +12,8 @@
         module: file
         path: './facts'
         state: directory
-        owner: "{{ remote_user if remote_user is defined else local_user | default('root') }}"
-        group: "{{ remote_group if remote_group is defined else local_group | default('root') }}"
+        owner: "{{ hostvars['pi-farmer'].local_user  }}"
+        group: "{{ hostvars['pi-farmer'].local_group }}"
 
   - name: Collect only facts returned by facter
     setup:
@@ -34,7 +34,7 @@
       module: copy
       content: "{{ facts_result | to_nice_json }}"
       dest: "facts/{{ inventory_hostname }}.json"
-      owner: "{{ ansible_env.SUDO_USER }}"
-      group: "{{ remote_group if remote_group is defined else local_group | default('root') }}"
+      owner: "{{ hostvars['pi-farmer'].local_user  }}"
+      group: "{{ hostvars['pi-farmer'].local_group }}"
       mode: 0664
 

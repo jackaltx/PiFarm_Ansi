@@ -1,20 +1,13 @@
 ---
 
-# pifarm_common_pkgs:
-#   - vim
-#   - git
-#   - wget
-#   - htop
-#   - rsync
-#   - vlan
-#   - dnsutils
-#   - tcpdump
-#   - figlet
+# By default we are connected to the internet, so we can get updates
+pifarm_connected_internet: True
 
 # TODO  document and refactor
-pifarm_install_tmux: false
-pifarm_install_scipy: true
-pifarm_install_mpi: true
+pifarm_install_tmux: False
+pifarm_install_scipy: True
+pifarm_install_mpi: True
+pifarm_install_ruby: False
 
 pifarm_domainname: not-specified.lab
 
