@@ -6,3 +6,5 @@
 - include: node_exporter.yml
   when:
     - pifarm_connected_internet
+    - pifarm_configure_node_exporter
+

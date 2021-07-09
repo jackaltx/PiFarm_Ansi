@@ -7,4 +7,4 @@
   roles:
     - update
     - common
-    - worker_config
+    - worker-config

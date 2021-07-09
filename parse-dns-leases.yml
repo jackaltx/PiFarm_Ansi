@@ -4,6 +4,6 @@
   gather_facts: no
   become: no
   roles:
-    - parse-dnsmasq
+    - { role: farm-tools/parse-dnsmasq }
 
 

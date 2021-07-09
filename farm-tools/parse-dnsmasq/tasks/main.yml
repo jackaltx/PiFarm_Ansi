@@ -3,10 +3,12 @@
 - name: Capturing DNSMasq DHCP Leases
   shell: cat /var/lib/dnsmasq/dnsmasq.leases | awk '{ print $4,$3,$2 }'
   register: _dnsmasq_dhcp_leases
-  # changed_when: false
+  changed_when: false
 
-#- debug:
-#    var: _dnsmasq_dhcp_leases
+- name: Parsed DHCP Leases
+  debug:
+    var: _dnsmasq_dhcp_leases
+    verbosity: 1
 
 - name: Updating {{ inventory_dir }}
   template:

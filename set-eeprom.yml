@@ -3,4 +3,4 @@
 - hosts: farmer
   connection: ssh
   roles:
-    - eeprom_config
+  - { role: pi-tools/eeprom_config
