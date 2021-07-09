@@ -14,16 +14,16 @@ This project hosts my experiments of building a Pi Cluster into a working Comput
 
 ###  The network appliance
 
-Any old Swich
+Any old switch and or firewall.
 
 ###  Farm types
 
-External Farmers (ansible, dhcp, dns, [gateway]) and  All pi workers
+External Services (ansible, dhcp, [dns)], with or without a gateway.  Then a cluster of rasperry pi workers.
+Current I am using dnsmasq to do DHCP.
 
+### Configuring you router hints.
 
-### Configuring you home router hints.
-
-Pfsense instructions
+THis is out of scope.  The inside IP needs to be the gateway set in the DHCP server.
 
 ## Steps
 
@@ -32,18 +32,18 @@ Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 - Edit the farm.yml to set infrastructure variables. (details pending)
 - (Optional) On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
 - Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at you pi's user/password  (my images: pi/pifarm)
-  - ansible-playbook -e ansible_user=pi -k initialize_cluster-workers.yml
+  - ```ansible-playbook -e ansible_user=pi -k initialize_cluster-workers.yml```
 - Setup the ssh known_hosts by doing:
-  - ansible-playbook initialize-known-hosts.yml
+  - ```ansible-playbook initialize-known-hosts.yml```
 - (Optional) Gather all the ansible facts into a folder
-  - ansible-playbook get-facts.yml
+  - ```ansible-playbook get-facts.yml```
 - Then initialize the farmer and workers:
-  - ansible-playbook initialize_workers.yml
-  - ansible-playbook initialize_farmer.yml
+  - ```ansible-playbook initialize_workers.yml```
+  - ```ansible-playbook initialize_farmer.yml```
 - (Optional) Setup a granafa monitor on the farmer:
-  - ansible-playbook monitor-cluster.yml
+  - ```ansible-playbook monitor-cluster.yml```
 - (Optional) test the cluster using sysbench:
-  - ansible-playbook  run-sysbench.yml
+  - ```ansible-playbook  run-sysbench.yml```
 
 ## Optional playbooks
 
