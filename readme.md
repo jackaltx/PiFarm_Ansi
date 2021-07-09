@@ -21,7 +21,11 @@ Any old switch and or firewall.
 External Services (ansible, dhcp, [dns)], with or without a gateway.  Then a cluster of rasperry pi workers.
 Current I am using dnsmasq to do DHCP.
 
-### Configuring you router hints.
+### Reference Network Diagram
+
+The Farmer is multi-homed.  Do not put a gateway on it.  
+
+The Pi's only know their private nework and have the router internal address as their gateway.
 
 ![Reference image]( docs/images/ReferenceNetwork.png )
 
