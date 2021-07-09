@@ -23,7 +23,7 @@ Current I am using dnsmasq to do DHCP.
 
 ### Configuring you router hints.
 
-THis is out of scope.  The inside IP needs to be the gateway set in the DHCP server.
+![Reference image]( docs/images/ReferenceNetwork.png )
 
 ## Steps
 
