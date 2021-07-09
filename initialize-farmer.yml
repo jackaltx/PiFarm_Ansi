@@ -5,15 +5,12 @@
   gather_facts: yes
   become: yes
   roles:
-    - init-cluster-farmer 
     - update
     - common
-    - farmer_config
+    - farmer-config
+    - prometheus-server
+      #      when: pifarm_install_dnsmasq
 
-    - role: prometheus-server
-      when: pifarm_install_prometheus
-
-    - role: dnsmasq
-      when: pifarm_install_dnsmasq
+    - dnsmasq
 
  
