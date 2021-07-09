@@ -23,7 +23,7 @@ Current I am using dnsmasq to do DHCP.
 
 ### Reference Network Diagram
 
-The Farmer is multi-homed.  Do not put a gateway on it.  
+The Farmer is multi-homed.  Do not put a gateway on the internal one or you will get a network loop. 
 
 The Pi's only know their private nework and have the router internal address as their gateway.
 
