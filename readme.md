@@ -49,8 +49,7 @@ Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 ## Optional playbooks
 
 Dump Ansible Host Variables (host-vars)
-``ansible-playbook dump-hostvars.yml
-
+```ansible-playbook dump-hostvars.yml```
 Shutdown the farm worker nodes
 ```
 ansible-playbook shutdown-farm.yml
