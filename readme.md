@@ -61,17 +61,16 @@ ansible-playbook reboot-farm.yml
 ```
 Update the Pi firmware the farm worker nodes
 ```
-ansible-playbook set-eeprom.yml
+ansible-playbook update-firmware.yml
 ```
 Stop Bluetooth and WiFi on the farm worker nodes.  Currently I don't enable, but just in case.
 ```
 ansible-playbook stop-wireless
 ```
-## Configuration
+## Invetory
 
-This will be high level and break into deeper details
+{{md  .. farm.yml }} 
 
 ## Future work
-
 
 More later, this is starting the documention off.
