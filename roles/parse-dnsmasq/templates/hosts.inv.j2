@@ -1,0 +1,14 @@
+
+Put this in the farm.yml file.  you may need to edit addresses out. 
+
+{% for _host in _dnsmasq_dhcp_leases['stdout_lines']|sort %}
+{{ _host.split(' ')[0] }}:
+   ansible_host: {{ _host.split(' ')[1] }}
+   pifarm_hostname: {{_host.split(' ')[0] }}
+{% endfor %}
+
+Put this in /etc/hosts file.  
+
+{% for _host in _dnsmasq_dhcp_leases['stdout_lines']|sort %}
+{{_host.split(' ')[0] }}  {{ _host.split(' ')[0] }}.{{ pifarm_domainname }} {{ _host.split(' ')[0] }}
+{% endfor %}

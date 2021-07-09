@@ -1,0 +1,9 @@
+---
+
+- hosts: localhost
+  gather_facts: no
+  become: no
+  roles:
+    - parse-dnsmasq
+
+
