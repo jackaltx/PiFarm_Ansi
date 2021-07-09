@@ -46,11 +46,25 @@ Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 ## Optional playbooks
 
 Dump Ansible Host Variables (host-vars)
-
 ```
 ansible-playbook dump-hostvars.yml
 ```
-
+Shutdown the farm worker nodes
+```
+ansible-playbook shutdown-farm.yml
+```
+Reboot the farm worker nodes
+```
+ansible-playbook reboot-farm.yml
+```
+Update the Pi firmware the farm worker nodes
+```
+ansible-playbook set-eeprom.yml
+```
+Stop Bluetooth and WiFi on the farm worker nodes.  Currently I don't enable, but just in case.
+```
+ansible-playbook stop-wireless
+```
 ## Configuration
 
 This will be high level and break into deeper details
