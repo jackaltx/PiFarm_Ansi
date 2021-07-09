@@ -8,9 +8,8 @@
     - update
     - common
     - farmer-config
-    - prometheus-server
-      #      when: pifarm_install_dnsmasq
 
+    - farm-tools/prometheus-server
     - dnsmasq
 
  
