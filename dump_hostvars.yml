@@ -3,6 +3,6 @@
   gather_facts: no
   tasks:
 
-    - name: dump groupvars
+    - name: dump hostvars
       debug:
         var: hostvars[inventory_hostname]

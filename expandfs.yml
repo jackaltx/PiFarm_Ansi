@@ -1,16 +1,10 @@
 ---
 
-# Expand the last partitions on the SD Card
-
-- hosts: all
+- hosts: workers
+  serial: 12
   connection: ssh
-  gather_facts: no
-  become: yes
-  tasks:
+  become: true
+  roles:
+    - pi-expand-rootfs
 
-    - name: Expand the last partition
-      command: raspi-config --expand-rootfs
-      register: out
 
-    - debug:
-        var: out

@@ -16,21 +16,19 @@ workers:
       pifarm_hostname: pi-104
   vars:
 
-    # ... this is the farmes public ssh key
+    # ... this is the farms public ssh key
     remote_user_ssh: "/home/lavender/.ssh/id_rsa.pub"
 
     # ... this is the pi user which will be used
     home_dir: /home/lab
     remote_user: lab
-    remote_uid: 1001
     remote_group: lab
-    remote_gid: 1001
     
     # ... this is the user to connect to the pifarm with (TODO fix)
     ansible_user: lab
 
     # ... This lab is not connected to the internet
-    pifarm_connected_internet: False
+    pifarm_connected_internet: True
 
 farmer:
   hosts:
@@ -47,7 +45,7 @@ farmer:
     # ... pifarm services (on farmer)
     export_nfs_share: false
     pifarm_install_prometheus: false
-    pifarm_install_dnsmasq: true
+    pifarm_install_dnsmasq: false
 
     # ... networking
     router_ip: 192.168.102.1

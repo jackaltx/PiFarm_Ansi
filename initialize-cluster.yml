@@ -1,7 +1,0 @@
----
-- hosts: workers
-  connection: paramiko
-  gather_facts: no
-  roles:
-    - worker_init
-

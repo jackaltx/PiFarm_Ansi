@@ -5,6 +5,7 @@
   gather_facts: yes
   become: yes
   roles:
+    - init-cluster-farmer 
     - update
     - common
     - farmer_config

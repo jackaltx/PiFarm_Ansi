@@ -8,7 +8,8 @@
   tasks:
 
     - name: Ping the Farma Workers
-      action: ping 
+      action: ping
+      debugger: on_failed 
       register: out
 
     - debug:

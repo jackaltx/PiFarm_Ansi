@@ -1,0 +1,10 @@
+---
+    
+- hosts: workers
+  # connection: paramiko
+  connection: ssh
+  become_method: sudo
+  become: yes
+  gather_facts: no
+  roles:
+    - init-cluster-worker

@@ -28,18 +28,28 @@ Pfsense instructions
 Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 
 - Edit the farm.yml to set infrastructure variables. (details pending)
-- On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
-- Push the keys to all the  WorkerNodes  (ansible-playbook -u pi -k initialize_cluster.yml)
-- (Optional) Gather all the ansible facts into a folder (ansible-playbook get-facts.yml)
-- Then initialize the farmer and workers (in no particular order by
+- (Optional) On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
+- Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at you pi's user/password  (my images: pi/pifarm)
+  - ansible-playbook -e ansible_user=pi -k initialize_cluster-workers.yml
+- Setup the ssh known_hosts by doing:
+  - ansible-playbook initialize-known-hosts.yml
+- (Optional) Gather all the ansible facts into a folder
+  - ansible-playbook get-facts.yml
+- Then initialize the farmer and workers:
   - ansible-playbook initialize_workers.yml
   - ansible-playbook initialize_farmer.yml
-  - Setup a granafa monitor on the farmer (ansible-playbook monitor-cluster)
-- test the cluster (ansible-playbook  run-sysbench)
+- (Optional) Setup a granafa monitor on the farmer:
+  - ansible-playbook monitor-cluster.yml
+- (Optional) test the cluster using sysbench:
+  - ansible-playbook  run-sysbench.yml
 
 ## Optional playbooks
 
-the debugs, dumps, ... .
+Dump Ansible Host Variables (host-vars)
+
+```
+ansible-playbook dump-hostvars.yml
+```
 
 ## Configuration
 
