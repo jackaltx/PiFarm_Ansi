@@ -73,6 +73,7 @@
   register: __dnsmasq_init_system
   changed_when: False
 
+
 - name: Set init system
   set_fact: dnsmasq_init_system="{{ __dnsmasq_init_system.stdout }}"
 
@@ -95,7 +96,7 @@
 
   - name: Reload systemd
     command: systemctl daemon-reload
-    when: __dnsmasq_systemd|changed
+    when: __dnsmasq_systemd
 
   when: dnsmasq_init_system == 'systemd'
   tags: ["systemd", "init"]

@@ -3,8 +3,9 @@
 - name: "Include {{ ansible_os_family }} vars"
   include_vars: "{{ ansible_os_family }}.yml"
 
-# - include: host_name.yml
-# - include: hosts.yml
+- include: host_name.yml
+  when: pifarm_set_hostname
+- include: hosts.yml
 
 - block:
 

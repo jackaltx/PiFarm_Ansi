@@ -1,8 +1,8 @@
 ---
 dnsmasq_pidfile: /var/run/dnsmasq.pid
 
-dnsmasq_user: nobody
-dnsmasq_group: nobody
+dnsmasq_user: dnsmasq
+dnsmasq_group: dnsmasq
 
 dnsmasq_packages:
   dnsmasq:

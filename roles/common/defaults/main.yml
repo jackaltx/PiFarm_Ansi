@@ -3,6 +3,8 @@
 # By default we are connected to the internet, so we can get updates
 pifarm_connected_internet: True
 
+pifarm_set_hostname: False
+
 # TODO  document and refactor
 pifarm_install_tmux: False
 pifarm_install_scipy: True

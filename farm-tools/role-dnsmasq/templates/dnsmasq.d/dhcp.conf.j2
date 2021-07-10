@@ -48,7 +48,7 @@ dhcp-no-override
 # service.
 {% for values in dnsmasq_conf_dhcp -%}
 {% set key=values["device"] %}
-dhcp-range=set:{{ key }},{{ values["range"] | join(',') }}
+dhcp-range={{ key }},{{ values["range"] | join(',') }}
 
 {% if values["option"] is defined -%}
 # Send options to hosts which ask for a DHCP lease.
@@ -62,7 +62,7 @@ dhcp-range=set:{{ key }},{{ values["range"] | join(',') }}
 # are some options which are recommended, they are detailed at the
 # end of this section.
 {% for opt in values["option"] -%}
-dhcp-option=tag:{{ key }},{{ opt }}
+dhcp-option={{ key }},{{ opt }}
 {% endfor %}
 {% endif %}
 
@@ -117,6 +117,12 @@ dhcp-hostsfile={{ dnsmasq_config_dhcphosts }}
 # Completely suppress use of the lease database file. The file will not be
 # created, read, or written.
 leasefile-ro
+{% endif %}
+
+{% if dnsmasq_conf_dhcp_leasefile is defined and not dnsmasq_conf_dhcp_leasefile is none -%}
+# Whenever a new DHCP lease is created, or an old one destroyed, or a TFTP file
+# transfer completes, the executable specified by this option is run.
+dhcp-leasefile={{ dnsmasq_conf_dhcp_leasefile }}
 {% endif %}
 
 {% if dnsmasq_conf_dhcp_script is defined and not dnsmasq_conf_dhcp_script is none -%}

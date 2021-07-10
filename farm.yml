@@ -40,6 +40,9 @@ all:
         remote_user: lab
         remote_group: lab
         
+        # ... set the hostname to match this inventory
+        pifarm_set_hostname: true
+
         # ... this is the user to connect to the pifarm for ansible scripts
         # This seems crude, but I am not sure how to specify it any other way.
         ansible_user: lab
@@ -69,12 +72,57 @@ all:
         # What services to setup on the farmers
         export_nfs_share: false
         pifarm_install_prometheus: false
-        pifarm_install_dnsmasq: false
+        pifarm_install_dnsmasq: true
 
         # ... networking (not used today)
         # It is set on the PiFarm workers via the DHCP server (dnsmasq or ubiquiti router)
         router_ip: 192.168.102.2
 
+    dnsmasq:
+      hosts:
+        pi-farmer:
+      vars:
+        dnsmasq_enabled_on_startup: True
+
+        # Manage resolvconf
+        dnsmasq_resolvconf: False
+
+        # Install from upstream repos or directly from operating system packages
+        dnsmasq_os_packages: True
+
+        # Global parameters, settings needed! otherwise are ignored!
+        dnsmasq_dhcp: True
+        dnsmasq_tftp: False
+
+        dnsmasq_conf_listen: [ 192.168.102.1, "enp4s0f0" ]
+        dnsmasq_conf_bind_interfaces: static
+
+        ### resolv.conf
+        #dnsmasq_host_domain: local
+        #dnsmasq_host_search: local
+        dnsmasq_host_resolvers: [ "192.168.101.1" ]
+  
+        # SMELL
+        dnsmasq_conf_domain: "pifarm.lab"
+        
+        # Should be set when dnsmasq is definitely the only DHCP server on a network.
+        dnsmasq_conf_dhcp_authoritative: True
+
+        # Dnsmasq is designed to choose IP addresses for DHCP clients using a hash
+        # of the client's MAC address.
+        dnsmasq_conf_dhcp_sequential_ip: False
+
+        # this is for the pifarm network
+        # dnsmasq_conf_dhcp: []
+        dnsmasq_conf_dhcp:
+          - device: "enp4s0f0"
+            range: [ 192.168.102.101, 192.168.102.129, "infinite"]
+            option: [ "option:router, 192.168.102.2" ] 
+
+        dnsmasq_conf_dhcp_leasefile_ro: False
+        dnsmasq_conf_dhcp_leasefile: /var/lib/dnsmasq/dnsmasq.leases
+
+  # .................................................................................
   #  This contains site wide variables. 
   vars:
     pifarm_domainname: pifarm.lab

@@ -61,7 +61,9 @@ dnsmasq_conf_bogus_priv: True
 dnsmasq_conf_no_hosts: False
 
 # Additional hosts file, /etc/hosts format
-dnsmasq_conf_hosts: []
+#dnsmasq_conf_hosts: []
+#  TODO fix this  SMELL
+
 
 # Set the dns memory cachesize here.
 cache-size: 1024

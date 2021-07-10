@@ -1,6 +1,6 @@
 ---
 
-- hosts: farmer
+- hosts: pi-farmer
   connection: ssh
   roles:
     - grafana-server

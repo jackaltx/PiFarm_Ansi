@@ -5,8 +5,4 @@
   gather_facts: yes
   become: yes
   roles:
-    - update
-    - common
-    - farmer-config
-    - farm-tools/prometheus-server
-
+    - farm-tools/role-dnsmasq
