@@ -17,6 +17,11 @@
     set -o pipefail
     bash /etc/network/restart.sh
   failed_when: false
+  register: package_out
+
+- debug:
+    var: package_out
+    verbosity: 1
 
 - name: Cleanup Network Restart script
   file:

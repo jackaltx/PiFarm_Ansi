@@ -3,12 +3,16 @@
 #- name: "Include {{ ansible_os_family }} vars"
 #  include_vars: "{{ ansible_os_family }}.yml"
 
+# SMELL  use pi facts????
+
 - name: "Update Debian (raspberry pi)"
   include: "update_pi.yml"
   when:
     - pifarm_connected_internet 
     - ansible_os_family == "Debian" 
     - vars['ansible_distribution_release'] == 'buster'
+    - vars['ansible_machine'] == 'armv7l'
+
 
 - name: "Update Centos systems"
   include: "update_centos.yml"

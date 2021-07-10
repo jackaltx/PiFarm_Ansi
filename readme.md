@@ -40,10 +40,10 @@ Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 - Setup the ssh known_hosts by doing:
   - ```ansible-playbook initialize-known-hosts.yml```
 - (Optional) Gather all the ansible facts into a folder
-  - ```ansible-playbook get-facts.yml```
+  - ```ansible-playbook -K get-facts.yml```
 - Then initialize the farmer and workers:
   - ```ansible-playbook initialize_workers.yml```
-  - ```ansible-playbook initialize_farmer.yml```
+  - ```ansible-playbook -K initialize_farmer.yml```
 - (Optional) Setup a granafa monitor on the farmer:
   - ```ansible-playbook monitor-cluster.yml```
 - (Optional) test the cluster using sysbench:

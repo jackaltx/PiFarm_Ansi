@@ -10,6 +10,7 @@
 
 - debug:
     var: package_out
+    verbosity: 1
 
 
   #- name: Install rubygems
