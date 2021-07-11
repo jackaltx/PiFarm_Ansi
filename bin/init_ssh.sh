@@ -5,10 +5,12 @@
 
 # TODO...determine the distro and install accordingly
 
-# this will be centos  ssh-ask only for now
-sudo dnf install openssh-askpass -y
-#sudo apt install ansible -y
-#sudo apt install ssh-askpass -y
+# ... RHEL family
+sudo dnf install ansible openssh-askpass -y
+
+# ... Debian
+# sudo apt install ansible -y
+# sudo apt install ssh-askpass -y
 
 mkdir -p ~/.ssh
 ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
