@@ -5,13 +5,8 @@
 # role to use a script for network reconfiguration.
 # Tested on Debian Jessie / Ubuntu 14.04 LTS and with Ethernet, Bonding Interfaces
 
-- name: Create a restart script
+- name: Restart Pi Networking
   service:
-    src: networking
-    dest: /etc/network/restart.sh
-    state: restart
-  register: restart_nic
-
-- debug:
-    var: restart_nic
-    # verbosity: 1
+    name: networking
+    state: restarted
+  

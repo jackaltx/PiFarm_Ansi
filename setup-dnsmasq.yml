@@ -1,6 +1,6 @@
 ---
 
-- hosts: pi-farmer
+- hosts: dnsmasq
   connection: ssh
   gather_facts: yes
   become: yes

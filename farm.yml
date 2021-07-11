@@ -90,12 +90,12 @@ all:
         # Install from upstream repos or directly from operating system packages
         dnsmasq_os_packages: True
 
-        # Global parameters, settings needed! otherwise are ignored!
         dnsmasq_dhcp: True
         dnsmasq_tftp: False
-
+        dnsmasq_conf_servers: [ 1.1.1.1, 8.8.8.8]
         dnsmasq_conf_listen: [ 192.168.102.1, "enp4s0f0" ]
         dnsmasq_conf_bind_interfaces: static
+        dnsmasq_conf_dhcp_log: True
 
         ### resolv.conf
         #dnsmasq_host_domain: local
