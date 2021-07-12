@@ -36,15 +36,17 @@ Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 - Edit the farm.yml to set infrastructure variables. A sample is given below.
 - (Optional) On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
 - Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at you pi's user/password  (my images: pi/pifarm)
-  - ``` ansible-playbook -e ansible_user=pi -k initialize_cluster-workers.yml```
+  - ``` ansible-playbook -e ansible_user=pi -k initialize-cluster-workers.yml```
 - Setup the ssh known_hosts by doing:
   - ``` ansible-playbook initialize-known-hosts.yml```
 - (Optional) Gather all the ansible facts into a folder
   - ``` ansible-playbook -K get-facts.yml```
+- (Optional) Expand the file root filesystem  (required if my image used)
+  - ``` ansible-playbook  expandfs.yml```
 - Then initialize the farmer and workers:
-  - ``` ansible-playbook initialize_workers.yml```
-  - ``` ansible-playbook -K initialize_farmer.yml```
-- (Optional) Setup a granafa monitor on the farmer:
+  - ``` ansible-playbook initialize-workers.yml```
+  - ``` ansible-playbook -K initialize-farmer.yml```
+- (Optional) Setup a grafana monitor on the farmer:
   - ``` ansible-playbook monitor-cluster.yml```
 - (Optional) test the cluster using sysbench:
   - ``` ansible-playbook  run-sysbench.yml```
