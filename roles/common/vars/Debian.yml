@@ -16,3 +16,4 @@ pifarm_common_pkgs:
   - dnsutils
   - tcpdump
   - figlet
+  - python3-scapy
