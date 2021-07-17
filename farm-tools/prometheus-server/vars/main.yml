@@ -1,0 +1,3 @@
+---
+  prometheus_server: "{{ ansible_eth0.ipv4.address }}"
+  scraped_hosts: "{{ hostvars[inventory_hostname]['groups']['workers']  }}"

@@ -1,0 +1,9 @@
+---
+dnsmasq_pidfile: /var/run/dnsmasq.pid
+
+dnsmasq_user: dnsmasq
+dnsmasq_group: dnsmasq
+
+dnsmasq_packages:
+  dnsmasq:
+    state: latest
