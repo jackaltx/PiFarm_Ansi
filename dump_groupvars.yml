@@ -1,8 +1,0 @@
----
-- hosts: workers
-  gather_facts: no
-  tasks:
-
-    - name: dump groupvars
-      debug:
-        var: hostvars[inventory_hostname]

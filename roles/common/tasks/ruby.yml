@@ -1,12 +1,17 @@
 ---
 
 - name: Install ruby
-  apt: 
+  package: 
     name: ruby
     state: present
-    force: yes
     update_cache: true
+  register: package_out
   become: true
+
+- debug:
+    var: package_out
+    verbosity: 1
+
 
   #- name: Install rubygems
   #  apt: 

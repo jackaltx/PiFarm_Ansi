@@ -1,0 +1,36 @@
+---
+
+- name: 'Ensure the group exists'
+  become: yes
+  group:
+    # gid: "{{ remote_gid }}"
+    name: "{{ remote_group }}"
+    state: present
+  tags: create_user
+
+- name: 'Create the user'
+  become: yes
+  user:
+    name: "{{ remote_user }}"
+    # uid: "{{ remote_uid }}"
+    group: "{{ remote_group }}"
+    shell: /bin/bash
+    home: "{{ home_dir }}"
+    generate_ssh_key: yes
+  tags: create_user
+
+- name: Set authorized key taken from file
+  become: yes
+  authorized_key:
+    user: "{{ remote_user }}"
+    state: present
+    key: "{{ lookup('file', remote_user_ssh) }}"
+  tags: create_user
+
+- name: Add group to the sudoers file
+  become: yes
+  lineinfile:
+    path: /etc/sudoers
+    regexp: "^%{{ remote_group }}"
+    line: "%{{ remote_group }} ALL=(ALL) NOPASSWD: ALL"
+    validate: 'visudo -cf %s'

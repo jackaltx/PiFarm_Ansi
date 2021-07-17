@@ -3,7 +3,7 @@
 127.0.0.1  localhost.localdomain  localhost
 127.0.1.1  {{ ansible_hostname }}
 {% if hosts_add_default_ipv4 %}
-{{ ansible_default_ipv4.address }}  {{ ansible_fqdn }} {{ ansible_hostname }}
+{{ ansible_default_ipv4.address }}  {{ ansible_hostname }}.{{ pifarm_domainname }} {{ ansible_hostname }}
 {% endif %}
 {% if hosts_add_basic_ipv6 %}
 #
@@ -21,7 +21,7 @@ ff02::2  ip6-allrouters
 #
 {% for group in hosts_add_ansible_managed_hosts_groups %}
 {% for host in groups[group] if hostvars[host][hosts_ansible_network_interface] is defined %}
-{{ hostvars[host][hosts_ansible_network_interface][hosts_ip_protocol]['address'] }} {{ hostvars[host]['ansible_fqdn'] }} {{ hostvars[host]['ansible_hostname'] }}
+{{ hostvars[host][hosts_ansible_network_interface][hosts_ip_protocol]['address'] }} {{ hostvars[host]['ansible_hostname'] }}.{{ pifarm_domainname }} {{ hostvars[host]['ansible_hostname'] }}
 {% endfor %}
 {% endfor %}
 {% endif %}

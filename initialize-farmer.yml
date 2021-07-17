@@ -1,11 +1,12 @@
 ---
 
-- hosts: farmer
+- hosts: pi-farmer
   connection: ssh
   gather_facts: yes
   become: yes
   roles:
     - update
     - common
-    - farmer_config
-    - prometheus-server
+    - farmer-config
+    - farm-tools/prometheus-server
+

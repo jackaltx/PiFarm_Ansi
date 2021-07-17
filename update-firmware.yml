@@ -6,5 +6,5 @@
   become: true
   roles:
     - update
-    - eeprom
+    - { role: pi-tools/eeprom }
 

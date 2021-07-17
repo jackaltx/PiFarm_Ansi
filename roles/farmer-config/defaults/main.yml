@@ -1,0 +1,7 @@
+---
+
+# default all services to off
+export_nfs_share: false
+
+
+

@@ -1,33 +1,22 @@
 ---
 
-- name: update the cache
-  apt: 
-    update_cache: true
-    autoremove: yes
-    autoclean: yes
-  register: upd_cache_out
+#- name: "Include {{ ansible_os_family }} vars"
+#  include_vars: "{{ ansible_os_family }}.yml"
 
-- debug:
-    var: upd_cache_out
+# SMELL  use pi facts????
 
-- name: Update all packages to the latest version
-  apt:
-    upgrade: dist
-  register: upd_out
+- name: "Update Debian (raspberry pi)"
+  include: "update_pi.yml"
+  when:
+    - pifarm_connected_internet 
+    - ansible_os_family == "Debian" 
+    - vars['ansible_distribution_release'] == 'buster'
+    - vars['ansible_machine'] == 'armv7l'
 
-- debug:
-    var: upd_out
 
-- name: Check if a reboot is needed for Debian and Ubuntu boxes
-  register: reboot_required_file
-  stat: path=/var/run/reboot-required get_md5=no
-
-- name: Reboot the Debian or Ubuntu server
-  reboot:
-    msg: "Reboot initiated by Ansible due to kernel updates"
-    connect_timeout: 5
-    reboot_timeout: 300
-    pre_reboot_delay: 0
-    post_reboot_delay: 30
-    test_command: uptime
-  when: reboot_required_file.stat.exists
+- name: "Update Centos systems"
+  include: "update_centos.yml"
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution == "CentOS"
+#   - ansible_distribution_major_version == "8"

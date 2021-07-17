@@ -1,6 +1,11 @@
 ---
 - name: Install tmux
-  apt: 
+  package: 
     name: tmux
     state: present
-    update_cache: ture
+    update_cache: true
+  register: package_out
+
+- debug:
+    var: package_out
+

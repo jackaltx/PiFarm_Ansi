@@ -1,55 +1,167 @@
-<H1>PiFarmAnsible Scripts</H1>   
+# PiFarmAnsible Scripts
 
 ## Introduction
 
-<p>Use this to configure a Raspberry Pi Cluster with one mangement node (the Farmer) and the others doing tasks (the Workers).
-This work is based on the [RaspiFarm](https://raspi.farm/) work by two students from Switzerland.   The idea is is old and works quite
-well, and I am grateful for them showing me how to do it with Pi's.   I happened on their work when I was curious about how to build a farm with commodity single board computers. Raspberry Pi's have been an cost effective way to assemble a bare metal cluster, so off I went to amazon. It was on the RaspiFarm site I got to learn about [ansible](https://www.ansible.com/).  I had started working with Puppet at the beginning of the last decade and had used it satifactorally in a few projects.  The issue was always...I had to install ruby, and pupput AND teach others how to do ruby AND pupper.   I worked with an organziation that has been embrasing python. Pythong was available everyplace I needed it. So this was an opportunity to learn more about ansible and python.  It's still a love-hate relationship, but it grows on me.  Best of all, other people wanted to make it work for them.</p>
+Use this to configure a Raspberry Pi Cluster with an external mangement node (the Farmer) and group of Raspberry Pi's doing tasks (the Workers).
+This work is based on the [RaspiFarm](https://raspi.farm/) work by two students from Switzerland. The idea is is old and works quite
+well, and I am grateful for them showing me how to do it with Pi's. I happened on their work when I was curious about how to build a cluster of commodity single board computers.  Raspberry Pi's have been an cost effective way to assemble a bare metal cluster, so off I went to amazon.
 
-<p>This project hosts my experiments of building a Pi Cluster into a working Computer farm by using ansible.  It is far from perfect, but it it working well (for me).  I can take a default download of the [Raspberry Pi OS](https://www.raspberrypi.org/software/operating-systems/), connect them with a simple network appliance, and use these ansibles scripts to configure bare metal cluster.  I have done this many times with a VMs, but always seem to have issues with bare metal.</p>
+It was on the RaspiFarm site I got to learn about [ansible](https://www.ansible.com/).  Earlier in my career had started working with Puppet and have used it satifactorally in a few projects.  The issue was always...I had to install ruby, and puppet AND teach others how to do ruby/puppet. Plus there were enginers and engineers like control.  Declarative languages are sometimes a bridge to far. The organizaiton I worked with an organization hasb been embracing python. Python was available everyplace I needed it.  And installed on every Linux OS. So this was an opportunity to learn more about ansible and python.  It's still a love-hate relationship, but it grows on me.  Best of all, other people wanted to make it work for them.</p>
+
+This project hosts my experiments of building a Pi Cluster into a working Computer farm by using ansible.  It is far from perfect, but it it working well (for me). I can take a default download of the [Raspberry Pi OS](https://www.raspberrypi.org/software/operating-systems/), connect them with a simple network appliance, and use these ansibles scripts to configure bare metal cluster. I have done this many times with a VMs, but always seem to have issues with bare metal.</p>
 
 ## Sample PiFarms
 
-###  The network appliance
+### The network appliance
 
-Ubiquiti Edgerouter X
+Any old switch and or firewall.
 
-###  Farm types
+### Farm types
 
-The two types
+External Services (ansible, dhcp, [dns)], with or without a gateway.  Then a cluster of rasperry pi workers.
+Current I am using dnsmasq to do DHCP.
 
-####  The 7 Pis where the farmer has an M.2 disk
+### Reference Network Diagram
 
-![PiFarm.7 Hardwired](docs/images/PiFarm.7.Hard.png "Title")
+The Farmer is multi-homed.  Do not put a gateway on the internal one or you will get a network loop.
 
-####  The 4 Pis with no disk
+The Pi's only know their private nework and have the router internal address as their gateway.
 
-![PiFarm.4 Hardwired](docs/images/PiFarm.4.Hard.png "Title")
-
-### Configuring you home router hints.
-
-Pfsense instructions
+![Reference image]( docs/images/ReferenceNetwork.png )
 
 ## Steps
-- Edit the farm.yml to set infrastructure variables. (details pending)
-- On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
-- Push the keys to all the  WorkerNodes  (ansible-playbook -u pi -k initialize_cluster.yml)
-- (Optional) Gather all the ansible facts into a folder (ansible-playbook get-facts.yml)
-- Then initialize the farmer and workers (in no particular order by
-  - ansible-playbook initialize_workers.yml
-  - ansible-playbook initialize_farmer.yml
-  - Setup a granafa monitor on the farmer (ansible-playbook monitor-cluster)
-- test the cluster (ansible-playbook  run-sysbench)
+
+Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
+
+- Edit the farm.yml to set infrastructure variables. A sample is given below.
+- (Optional) On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
+- Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at you pi's user/password  (my images: pi/pifarm)
+  - ``` ansible-playbook -e ansible_user=pi -k initialize-cluster-workers.yml```
+- Setup the ssh known_hosts on the farmer:
+  - ``` ansible-playbook initialize-known-hosts.yml```
+- (Optional) Gather all the ansible facts into a folder
+  - ``` ansible-playbook -K get-facts.yml```
+- (Optional) Expand the file root filesystem  (required if my image used)
+  - ``` ansible-playbook  expandfs.yml```
+- Then initialize the farmer and workers:
+  - ``` ansible-playbook initialize-workers.yml```
+  - ``` ansible-playbook -K initialize-farmer.yml```
+- (Optional) Setup a grafana monitor on the farmer:
+  - ``` ansible-playbook monitor-cluster.yml```
+- (Optional) test the cluster using sysbench:
+  - ``` ansible-playbook  run-sysbench.yml```
 
 ## Optional playbooks
 
-the debugs, dumps, ... .
+Dump Ansible Host Variables (host-vars)
 
-## Configuration
+```bash
+ansible-playbook dump-hostvars.yml
+```
 
-This will be high level and break into deeper details
+Shutdown the farm worker nodes
+
+```bash
+ansible-playbook shutdown-farm.yml
+```
+
+Reboot the farm worker nodes
+
+```bash
+ansible-playbook reboot-farm.yml
+```
+
+Update the Pi firmware the farm worker nodes
+
+```bash
+ansible-playbook update-firmware.yml
+```
+
+Stop Bluetooth and WiFi on the farm worker nodes.  Currently I don't enable, but just in case.
+
+```bash
+ansible-playbook stop-wireless
+```
+
+## Inventory
+
+```yml
+---
+
+# This is the PiFarm Inventory and variables file.
+# This file along with all those in the "group_vars" directory will
+# set all the controlling variables for the ansible scripts
+
+# There are two main sections "workers"  and "farmer".
+# First in are two dictionary variables of "host" and their associated "vars"
+
+workers:
+  hosts:
+    pi-101:
+      ansible_host: 192.168.102.110
+      pifarm_hostname: pi-101
+    pi-102:
+      ansible_host: 192.168.102.122
+      pifarm_hostname: pi-102
+    pi-103:
+      ansible_host: 192.168.102.111
+      pifarm_hostname: pi-103
+    pi-104:
+      ansible_host: 192.168.102.108
+      pifarm_hostname: pi-104
+  
+  # vars for all workers are in this section.
+  vars:
+
+    # ... this is the farms public ssh key
+    # this is crude and needs to be better set as sometimes 
+    # I don't want to use the users ssh keys, but ones setup
+    # for this task.
+    remote_user_ssh: "/home/lavender/.ssh/id_rsa.pub"
+
+    # ... this is the pi user which will be used
+    # This user will be setup. I don't like to use the default user ('pi')
+    # This user has no password, so it is only usable via ssh.
+    home_dir: /home/lab
+    remote_user: lab
+    remote_group: lab
+    
+    # ... this is the user to connect to the pifarm for ansible scripts
+    # This seems crude, but I am not sure how to specify it any other way.
+    ansible_user: lab
+
+    # ... Is this lab connected to the internet so I can update?
+    # If there is no gateway to the internet, then set this to False.
+    # As my default boot image grow older, this is desired.
+    pifarm_connected_internet: True
+
+# The farmer is a "master" concept.  For not it is a single machine, but
+# in the furture it could be more.
+# Notice how the ansible_user is set on the host level and not the common level.
+
+farmer:
+  hosts:
+    pi-farmer:
+      ansible_host: 192.168.102.1
+      pifarm_hostname: farmer
+      ansible_user: lavender
+  vars:
+    # ... define controlling user.
+    local_user: lavender
+    local_group: lavender
+    home_dir: /home/lavender
+
+    # ... pifarm services (on farmer)
+    # What services to setup on the farmers
+    export_nfs_share: false
+    pifarm_install_prometheus: false
+    pifarm_install_dnsmasq: false
+
+    # ... networking (not used today)
+    # It is set on the PiFarm workers via the DHCP server (dnsmasq or ubiquiti router)
+    router_ip: 192.168.102.2
+```
 
 ## Future work
-
 
 More later, this is starting the documention off.

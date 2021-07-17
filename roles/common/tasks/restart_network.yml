@@ -6,20 +6,12 @@
 # Tested on Debian Jessie / Ubuntu 14.04 LTS and with Ethernet, Bonding Interfaces
 
 - name: Create a restart script
-  template:
-    src: restartscript.j2
+  service:
+    src: networking
     dest: /etc/network/restart.sh
-    mode: 0755
+    state: restart
+  register: restart_nic
 
-# Execute configuration change
-- name: Execute Network Restart
-  shell: |
-    set -o pipefail
-    bash /etc/network/restart.sh
-  failed_when: false
-
-- name: Cleanup Network Restart script
-  file:
-    path: /etc/network/restart.sh
-    state: absent
-
+- debug:
+    var: restart_nic
+    # verbosity: 1

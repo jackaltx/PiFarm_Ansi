@@ -1,6 +1,5 @@
 ---
 - name:  "set the hostname"
   hostname:
-    name: "{{ ansible_fqdn }}"
-
+    name: "{{ pifarm_hostname }}"
 

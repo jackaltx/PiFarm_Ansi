@@ -1,19 +1,40 @@
 ---
 
+- name: "Include {{ ansible_os_family }} vars"
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - include: host_name.yml
+  when: pifarm_set_hostname
 - include: hosts.yml
 
-- include: base_install.yml
-- include: ruby.yml
-- include: scipy.yml
-- include: mpi4py.yml
+- block:
 
-- include: tmux.yml
-  when: pifarm_install_tmux
+  - include: base_install.yml
 
-- include: vlans.yml
-  when: 
-    - pifarm_manage_vlans
+  - include: ruby.yml
+    when:
+      - ansible_os_family == "Debian"
+      - pifarm_install_ruby
 
-#- include: java.yml
-#- include: pip.yml
+  - include: scipy.yml
+    when:
+      - ansible_os_family == "Debian"
+      - pifarm_install_scipy
+
+  - include: mpi4py.yml
+    when:
+      - ansible_os_family == "Debian"
+      - pifarm_install_mpi
+
+  - include: tmux.yml
+    when: pifarm_install_tmux
+
+  - include: vlans.yml
+    when: 
+      - pifarm_manage_vlans
+
+  # - include: java.yml
+  # - include: pip.yml
+
+  when:
+    - pifarm_connected_internet

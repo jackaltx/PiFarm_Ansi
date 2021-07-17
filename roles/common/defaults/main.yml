@@ -1,18 +1,17 @@
 ---
 
-pifarm_common_pkgs:
-  - vim
-  - git
-  - wget
-  - htop
-  - rsync
-  - vlan
-  - dnsutils
-  - tcpdump
-  - figlet
+# By default we are connected to the internet, so we can get updates
+pifarm_connected_internet: True
 
-pifarm_install_tmux: false
+pifarm_set_hostname: False
 
+# TODO  document and refactor
+pifarm_install_tmux: False
+pifarm_install_scipy: True
+pifarm_install_mpi: True
+pifarm_install_ruby: False
+
+pifarm_domainname: not-specified.lab
 
 # If set to true, an entry for `ansible_hostname`, bound to the host's default IPv4 address is added added.
 hosts_add_default_ipv4: true
