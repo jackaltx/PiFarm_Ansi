@@ -1,0 +1,9 @@
+---
+
+# Set wifi country
+- name: set wifi country
+  command: "raspiconfig nonint do_wifi_country {{ wifi_country }}"
+  when: "wifi_country|default(false) and wifi_country != raspi_wifi_country"
+
+
+

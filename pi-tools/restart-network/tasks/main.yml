@@ -1,0 +1,12 @@
+---
+# Restart interfaces to load new configuration
+#
+# We had a lot of problems with lost connectivity, therefore we changed the
+# role to use a script for network reconfiguration.
+# Tested on Debian Jessie / Ubuntu 14.04 LTS and with Ethernet, Bonding Interfaces
+
+- name: Restart Pi Networking
+  service:
+    name: networking
+    state: restarted
+  
