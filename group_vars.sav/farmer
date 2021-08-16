@@ -1,7 +1,0 @@
----
-local_user: farmer
-local_group: admin
-home_dir: /rhome/farmer
-export_nfs_share: false
-router_ip: 192.168.2.1
-

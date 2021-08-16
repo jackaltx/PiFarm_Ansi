@@ -1,0 +1,9 @@
+---
+
+- hosts: localhost
+  gather_facts: no
+  become: no
+  roles:
+    - { role: farm-tools/parse-dnsmasq }
+
+

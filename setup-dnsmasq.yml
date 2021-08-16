@@ -1,0 +1,8 @@
+---
+
+- hosts: dnsmasq
+  connection: ssh
+  gather_facts: yes
+  become: yes
+  roles:
+    - farm-tools/role-dnsmasq

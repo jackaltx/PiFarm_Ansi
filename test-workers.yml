@@ -1,0 +1,12 @@
+---
+- hosts: workers
+  gather_facts: no
+  become: false
+  tasks:
+
+    - name: Check if connection is possible
+      shell: id
+      register: result
+ 
+    - debug:
+        var: result
