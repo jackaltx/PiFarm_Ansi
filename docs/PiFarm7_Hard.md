@@ -12,4 +12,4 @@
 
 Overall Shot
 
-![PiFarm.7 Overall](images/PiFarm.7.overall.jpeg "Title")
+![PiFarm.7 Overall](images/Pifarm.7.overall.jpeg "Photo of PiFarm cluster")
