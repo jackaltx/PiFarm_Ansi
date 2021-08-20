@@ -1,0 +1,8 @@
+---
+
+- name: set the timezone
+  ansible.builtin.command:
+    cmd:  timedatectl set-timezone "{{ pifarm_timezone }}"
+  when: pifarm_timezone is defined and pifarm_timezone == True
+  notify:
+    - restart timezone

@@ -3,7 +3,12 @@
 # By default we are connected to the internet, so we can get updates
 pifarm_connected_internet: True
 
+# Not sure why I defaulted this to false
 pifarm_set_hostname: False
+
+# set the time zone.
+pifarm_set_timezone: True
+pifarm_timezone: 'America/Chicago'
 
 # TODO  document and refactor
 pifarm_install_tmux: False

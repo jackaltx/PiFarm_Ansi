@@ -6,3 +6,12 @@
   loop:
     - networking
     - dhcpcd
+
+- name: restart timezone
+  service: 
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - cron
+    - rsyslog
+    - avahi-daemon

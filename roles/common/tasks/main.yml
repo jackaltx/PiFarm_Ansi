@@ -5,7 +5,11 @@
 
 - include: host_name.yml
   when: pifarm_set_hostname
-- include: hosts.yml
+
+- include: host_tz.yml
+  when: pifarm_set_timezone
+
+- include: hosts_file.yml
 
 - block:
 
