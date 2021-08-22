@@ -9,32 +9,31 @@
 
   - name: Create facts folder in current directory
     local_action: 
-        module: file
+        module: ansible.builtin.file
         path: './facts'
         state: directory
         owner: "{{ hostvars['pi-farmer'].local_user  }}"
         group: "{{ hostvars['pi-farmer'].local_group }}"
 
   - name: Collect only facts returned by facter
-    setup:
+    ansible.builtin.setup:
       gather_subset:
         - '!all'
         - '!any'
         - facter
     register: facts_result
-
-  - name: Remove the current previous file
+    
+  - name: Remove the previous fact files
     local_action: 
         module: file
         path: "./facts/{{ facts_result }}"
         state: absent
 
-  - name: Create current facts file
+  - name: Create current facts files
     local_action: 
-      module: copy
+      module: ansible.builtin.copy
       content: "{{ facts_result | to_nice_json }}"
       dest: "facts/{{ inventory_hostname }}.json"
       owner: "{{ hostvars['pi-farmer'].local_user  }}"
       group: "{{ hostvars['pi-farmer'].local_group }}"
       mode: 0664
-
