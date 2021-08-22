@@ -16,6 +16,9 @@ roles/ansible-role-grafana/
 
 # preserve the running configuration
 # add how to set these files up in the documentation
-farm
+farm.yml
+
+# SMELL remove when ready
 group_vars/farmer
 group_vars/workers
+
