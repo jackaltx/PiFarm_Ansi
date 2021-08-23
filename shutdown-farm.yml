@@ -1,4 +1,4 @@
-- hosts: workers
+- hosts: workers helpers
   connection: ssh
   become: yes
   gather_facts: no
