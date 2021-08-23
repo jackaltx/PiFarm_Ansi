@@ -1,6 +1,6 @@
 ---
 - name: restart networking
-  service: 
+  ansible.builtin.service: 
     name: "{{ item }}"
     state: restarted
   loop:
@@ -8,10 +8,8 @@
     - dhcpcd
 
 - name: restart timezone
-  service: 
+  ansible.builtin.service: 
     name: "{{ item }}"
     state: restarted
-  loop:
-    - cron
-    - rsyslog
-    - avahi-daemon
+  loop: "{{ pifarm_timezone_services }}"
+  

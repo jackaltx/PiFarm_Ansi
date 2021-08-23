@@ -17,3 +17,8 @@ pifarm_common_pkgs:
   - tcpdump
   - figlet
   - python3-scapy
+
+pifarm_timezone_services:
+  - cron
+  - rsyslog
+  - avahi-daemon

@@ -18,3 +18,8 @@ pifarm_common_pkgs:
   # - dnsutils
   - tcpdump
   # - figlet
+
+pifarm_timezone_services:
+  - crond
+  - rsyslog
+  - avahi-daemon

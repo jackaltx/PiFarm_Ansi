@@ -20,7 +20,9 @@
     changed_when: False
 
 
-- hosts: workers servants
+- hosts: 
+    - workers 
+    - helpers
   connection: ssh
   gather_facts: no
   tasks:

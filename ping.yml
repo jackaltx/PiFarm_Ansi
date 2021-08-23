@@ -7,7 +7,23 @@
   serial: 8
   tasks:
 
-    - name: Ping the Farma Workers
+    - name: Ping the Farm Workers
+      action: ping
+      debugger: on_failed 
+      register: out
+
+    - debug:
+        var: out
+
+- hosts: helpers
+  connection: ssh
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  serial: 8
+  tasks:
+
+    - name: Ping the Farm Helpers
       action: ping
       debugger: on_failed 
       register: out

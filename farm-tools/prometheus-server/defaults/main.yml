@@ -1,3 +1,6 @@
 ---
+
+pifarm_install_prometheus: False
+
 prometheus_install_snmp: False
 prometheus_router_ip: 192.168.1.1

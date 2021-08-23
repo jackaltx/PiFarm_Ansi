@@ -41,6 +41,7 @@ Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
   - ``` ansible-playbook -e ansible_user=pi -k initialize-cluster-workers.yml```
 - (Optional) Gather all the ansible facts into a folder
   - ``` ansible-playbook -K get-facts.yml```
+  - ``` ansible -m debug -a "var=hostvars"  localhost > facts/hostvars.json ```
 - (Optional) Expand the file root filesystem  (required if my image used)
   - ``` ansible-playbook  expandfs.yml```
 - Then initialize the farmer and workers:
