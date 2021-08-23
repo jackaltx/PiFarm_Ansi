@@ -30,18 +30,6 @@ hosts_add_ansible_managed_hosts: true
 # Select specific groups of Ansible managed hosts to be added in the hosts file.
 hosts_add_ansible_managed_hosts_groups: ['all']
 
-# Custom hosts entries to be added
-hosts_entries: []
-
-# Custom host file snippets to be added
-hosts_file_snippets: []
-
-# IP protocol to use
-hosts_ip_protocol: 'ipv4'
-
-# Network interface to use
-hosts_network_interface: "{{ ansible_default_ipv4.interface }}"
-
 # Backup of previous host
 host_file_backup: no
 
