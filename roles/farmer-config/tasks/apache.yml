@@ -1,6 +1,6 @@
 ---
 - name: Install apache
-  apt: 
+  ansible.builtin.package: 
     name: apache2
     state: present
     update_cache: ture
@@ -8,17 +8,18 @@
   tags: apache
 
 - name: Stop apache2
-  service:
+  ansible.builtin.service:
     name: apache2
     state: stopped
   become: true
   tags: apache
 
 - name: Disable default config 
-  command: a2dissite 000-default.conf
+  ansible.builtin.command: a2dissite 000-default.conf
   tags: apache
 
-- copy: 
+- name: Configuration File
+  ansible.builtin.copy: 
     src: raspifarm.conf
     dest: /etc/apache2/sites-available/raspifarm.conf
     owner: root
@@ -29,19 +30,19 @@
   tags: apache
 
 - name: Enable raspifarm config
-  command: a2ensite raspifarm.conf
+  ansible.builtin.command: a2ensite raspifarm.conf
   become: true
   tags: apache
 
 - name: Start apache
-  service:
+  ansible.builtin.service:
     name: apache2
     state: started
   become: true
   tags: apache
 
 - name: Reload apache
-  service: 
+  ansible.builtin.service: 
     name: apache2
     state: reloaded
   become: true

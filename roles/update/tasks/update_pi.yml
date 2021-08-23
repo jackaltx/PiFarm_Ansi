@@ -1,22 +1,24 @@
 ---
 
 - name: update the cache (Debian)
-  apt: 
+  ansible.builtin.apt: 
     update_cache: true
     autoremove: yes
     autoclean: yes
   register: upd_cache_out
 
-- debug:
+- name: update cache results
+  ansible.builtin.debug:
     var: upd_cache_out
     verbosity: 1
 
 - name: Update all packages to the latest version (Debian)
-  apt:
+  ansible.builtin.apt:
     upgrade: dist
   register: upd_out
 
-- debug:
+- name: Package update results
+  ansible.builtin.debug:
     var: upd_out
     verbosity: 1
 
@@ -24,13 +26,14 @@
   register: reboot_is_required
   stat: path=/var/run/reboot-required get_md5=no
 
-- debug:
-    var: reboot_is_required
+- name: rebood required results
+  ansible.builtin.debug:
+    ansible.builtin.var: reboot_is_required
     verbosity: 1
 
 # SMELL  move this to a hander ????
 - name: Reboot the Debian or Ubuntu server
-  reboot:
+  ansible.builtin.reboot:
     msg: "Reboot initiated by Ansible due to kernel updates"
     connect_timeout: 5
     reboot_timeout: 300

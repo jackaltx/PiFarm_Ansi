@@ -8,7 +8,8 @@
   register: package_out
   
 
-- ansible.builtin.debug:
+- name: Package Install Debug Output
+  ansible.builtin.debug:
     var: package_out
     verbosity: 1
 

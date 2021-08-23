@@ -1,35 +1,33 @@
 ---
-- name: Install SNMPD
-  apt: 
-    name: snmpd
-    state: present
-  tags:
-    - perfmon
-    - server
 
-- name: Stop SNMPD
-  service:
-    name: snmpd
-    state: stopped
-  tags:
-    - perfmon
-    - server
+- block:
 
-- copy: 
-    src: snmpd.conf
-    dest: /etc/snmp/snmpd.conf
-    owner: root
-    group: root
-    mode: 0600
-    backup: yes
-  tags:
-    - perfmon
-    - server
+  - name: Install SNMPD
+    ansible.builtin.apt: 
+      name: snmpd
+      state: present
 
-- name: Start SNMPD
-  service:
-    name: snmpd
-    state: started
+
+  - name: Stop SNMPD
+    ansible.builtin.service:
+      name: snmpd
+      state: stopped
+
+
+  - name: cofiguration 
+    ansible.builtin.copy: 
+      src: snmpd.conf
+      dest: /etc/snmp/snmpd.conf
+      owner: root
+      group: root
+      mode: 0600
+      backup: yes
+
+
+  - name: Start SNMPD
+    service:
+      name: snmpd
+      state: started
+
   tags:
     - perfmon
-    - server

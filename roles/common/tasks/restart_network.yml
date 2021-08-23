@@ -6,12 +6,13 @@
 # Tested on Debian Jessie / Ubuntu 14.04 LTS and with Ethernet, Bonding Interfaces
 
 - name: Create a restart script
-  service:
+  ansible.builtin.service:
     src: networking
     dest: /etc/network/restart.sh
     state: restart
   register: restart_nic
 
-- debug:
+- name: network restart results
+  ansible.builtin.debug:
     var: restart_nic
     # verbosity: 1

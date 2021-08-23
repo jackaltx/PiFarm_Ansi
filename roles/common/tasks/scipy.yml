@@ -2,7 +2,7 @@
 
 - name: Install scipy
   apt: 
-    pkg:
+    ansible.builtin.pkg:
     - "python-numpy"
     - "python-pickleshare"
     - "python-scipy"
@@ -12,6 +12,7 @@
   become: true
   register: package_out
 
-- debug:
+- name: Scipy Package install output
+  ansible.builtin.debug:
     var: package_out
     verbosity: 1

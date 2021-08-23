@@ -5,4 +5,4 @@
   gather_facts: yes
   become: yes
   roles:
-    - farm-tools/role-dnsmasq
+    - farm-tools/role_dnsmasq
