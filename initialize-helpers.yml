@@ -8,4 +8,5 @@
     - update
     - common
     - worker_config
+    - farm-tools/nfs_server
     - farm-tools/prometheus_server

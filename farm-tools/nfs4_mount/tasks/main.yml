@@ -1,0 +1,16 @@
+---
+# tasks file for nfs4_mount
+
+- name: Mount NFS share
+  become: true
+  mount:
+    fstype: nfs
+    name: "{{ item.path }}"
+    opts: "vers={{ nfs_version }},{{ item.opts | default(nfs_mount_opts) }}"
+    src: "{{ item.location }}"
+    dump: "{{ item.dump | default(omit) }}"
+    passno: "{{ item.passno | default(omit) }}"
+    state: "{{ item.state | default( 'mounted' ) }}"
+  with_items: "{{ nfs_share_mounts }}"
+  when: nfs_share_mounts is defined and (nfs_share_mounts|length>0)
+  tags: mount_nfs
