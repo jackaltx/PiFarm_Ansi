@@ -1,32 +1,30 @@
 ---
-- name: Install pip
-  apt:
-    name: "{{ item }}"
-    state: present
-    force: yes
-  with_items:
-    - "python-pip"
-    - "python-dev"
-    - "build-essential"
-  tags:
-    - basic
-    - developer
 
-- name: Upgrade pip
-  pip:
-    name: pip
-    state: present
-  tags:
-    - basic
-    - developer
+- block:
 
-- name: Install virtualenv
-  pip:
-    name: virtualenv
-    state: present
-  tags:
-    - basic
-    - developer
+  - name: Install pip
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+      force: yes
+    become: true
+    with_items:
+      - "python-pip"
+      - "python-dev"
+      - "build-essential"
+
+  - name: Upgrade pip
+    ansible.builtin.pip:
+      name: pip
+      state: present
+
+  - name: Install virtualenv
+    ansible.builtin.pip:
+      name: virtualenv
+      state: present
+
+    tags:
+      - install_pip
 
 
 

@@ -1,12 +1,17 @@
 ---
-- name: Install tmux
-  ansible.builtin.package: 
-    name: tmux
-    state: present
-    update_cache: true
-  register: package_out
 
-- name: tmux install results
-  ansible.builtin.debug:
-    var: package_out
+- block:
 
+  - name: Install tmux
+    ansible.builtin.package: 
+      name: tmux
+      state: present
+      update_cache: true
+    register: package_out
+    become: true
+
+  - name: tmux install results
+    ansible.builtin.debug:
+      var: package_out
+
+  tags: install_tmux

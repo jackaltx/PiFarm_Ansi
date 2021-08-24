@@ -5,14 +5,19 @@
 # role to use a script for network reconfiguration.
 # Tested on Debian Jessie / Ubuntu 14.04 LTS and with Ethernet, Bonding Interfaces
 
-- name: Create a restart script
-  ansible.builtin.service:
-    src: networking
-    dest: /etc/network/restart.sh
-    state: restart
-  register: restart_nic
+- block:
 
-- name: network restart results
-  ansible.builtin.debug:
-    var: restart_nic
-    # verbosity: 1
+  - name: Create a restart script
+    ansible.builtin.service:
+      src: networking
+      dest: /etc/network/restart.sh
+      state: restart
+    register: restart_nic
+    become: true
+
+  - name: network restart results
+    ansible.builtin.debug:
+      var: restart_nic
+      # verbosity: 1
+
+  tags: restart_network

@@ -1,4 +1,4 @@
-- hosts: workers
+- hosts: workers helpers
   connection: ssh
   become: yes
   gather_facts: no
@@ -9,7 +9,8 @@
         reboot_timeout: 60
       register: reboot_msg
 
-    - debug:
+    - name: Reboot results
+      debug:
         #msg: "Seconds waiting for reboot {{ elapsed }}"
         var: reboot_msg
 
@@ -19,5 +20,3 @@
         sleep: 5
         delay: 5
         timeout: 300
-
-

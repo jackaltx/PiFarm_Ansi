@@ -1,10 +1,11 @@
 ---
 
-- hosts: workers
+- hosts: helpers
   connection: ssh
-  become_method: sudo
+  become_method: sudo 
   gather_facts: yes
   roles:
     - update
     - common
     - worker_config
+    - farm-tools/prometheus_server

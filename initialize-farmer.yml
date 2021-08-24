@@ -7,6 +7,6 @@
   roles:
     - update
     - common
-    - farmer-config
-    - farm-tools/prometheus-server
+    - farmer_config
+    - farm-tools/prometheus_server
 

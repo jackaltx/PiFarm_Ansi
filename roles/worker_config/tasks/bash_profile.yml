@@ -1,10 +1,11 @@
 ---
-- name: 'Copy .bash_profile to home'
-  copy: 
-    src: bash_profile
+- name: "Copy .bash_profile to home ({{ ansible_env.HOME }}) for {{ ansible_user }}"
+  ansible.builtin.template: 
+    src: bash_profile.j2
     dest: "{{ ansible_env.HOME }}/.bash_profile"
     owner: "{{ worker_user }}"
     group: "{{ worker_group }}"
     mode: 0644
     backup: yes
+  become: true
   tags: bash_profile

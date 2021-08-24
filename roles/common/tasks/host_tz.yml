@@ -1,8 +1,23 @@
 ---
 
-- name: set the timezone
-  ansible.builtin.command:
-    cmd:  timedatectl set-timezone "{{ pifarm_timezone }}"
+- block:
+
+  - name: get the timezone
+    ansible.builtin.shell:
+      # cmd: "timedatectl show | head -n1"
+      cmd: "timedatectl show | grep '^Timezone=' | cut -f2 -d= "
+    register: results
+    changed_when: false
+    
+  - name: set the timezone if required
+    ansible.builtin.command:
+      cmd:  timedatectl set-timezone "{{ pifarm_timezone }}"
+    when: pifarm_timezone not in results.stdout
+    notify:
+      - restart timezone
+
   when: pifarm_set_timezone
-  notify:
-    - restart timezone
+  tags:
+    - set_tz
+    - basic
+    

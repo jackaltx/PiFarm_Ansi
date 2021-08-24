@@ -1,26 +1,36 @@
 ---
 
-- name: set the firmware update config to 'stable'
-  copy: 
-    src: rpi-eeprom-update
-    dest: "/etc/default/rpi-eeprom-update"
-    owner: root
-    group: root
-  become: true
+- block:
+  - name: set the firmware update config to 'stable'
+    ansible.builtin.copy: 
+      src: rpi-eeprom-update
+      dest: "/etc/default/rpi-eeprom-update"
+      mode: 0644
+      owner: root
+      group: root
+    become: true
 
-- name: Install rpi-eeprom
-  vars:
-    packages:
-      - "rpi-eeprom"
-      - "rpi-eeprom-images"
-  apt: 
-    pkg: "{{ packages }}"
-    state: present
+  - name: Install rpi-eeprom
+    vars:
+      packages:
+        - "rpi-eeprom"
+        - "rpi-eeprom-images"
+    ansible.builtin.apt: 
+      pkg: "{{ packages }}"
+      state: present
 
-- name: Upgrade Pi Firmware (if required)
-  command: rpi-eeprom-update -d -a
-  register: upg_out
+  - name: Upgrade Pi Firmware (if required)
+    ansible.builtin.command: rpi-eeprom-update -d -a
+    register: upg_out
 
-- debug:
-    var: upg_out.stdout_lines
+  - name: firmware upgrade results
+    ansible.builtin.debug:
+      var: upg_out.stdout_lines
+  
+  when:
+    - pifarm_connected_internet 
+    - ansible_os_family == "Debian" 
+    - vars['ansible_distribution_release'] == 'buster'
+    - vars['ansible_architecture'] == 'aarch64'
+
 

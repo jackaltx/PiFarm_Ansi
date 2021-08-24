@@ -1,0 +1,21 @@
+---
+
+- block:
+
+  - name: Create /u01 
+    ansible.builtin.file:
+      path: /u01
+      state: directory
+      mode: '0755'
+    become: true
+
+  - name: Mount the drive
+    ansible.posix.mount:
+      path: /u01
+      src: /dev/sda1
+      fstype: ext4
+      opts: rw,auto
+      state: mounted
+    become: true
+    
+  tags:  setup_u01

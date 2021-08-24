@@ -1,6 +1,6 @@
 ---
 - name: Install prometheus node exporter
-  apt: 
+  ansible.builtin.apt: 
     pkg:
     - prometheus-node-exporter
     state: present
@@ -8,7 +8,7 @@
   become: true
 
 - name: Create /etc/prometheus directory if it does not exist
-  file:
+  ansible.builtin.file:
     path: /etc/prometheus
     state: directory
     owner: root
@@ -17,7 +17,7 @@
   become: true
 
 - name: Create prometheus configuration file
-  template:
+  ansible.builtin.template:
     src: prometheus_node.yml.j2 
     dest: /etc/prometheus/prometheus.yml
     owner: root
@@ -26,7 +26,7 @@
   become: true
 
 - name: Start node exporter
-  service:
+  ansible.builtin.service:
     name: prometheus-node-exporter
     state: started
   become: true

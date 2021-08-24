@@ -3,7 +3,8 @@
 # from https://github.com/glennklockwood/rpi-ansible  with no license
 
 - name: get Raspberry Pi model type
-  shell: "raspi-config nonint get_pi_type"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_pi_type"
   register: raspi_type
   changed_when: False
   check_mode: no
@@ -11,7 +12,8 @@
     - raspi
 
 - name: get hostname via raspi-config
-  shell: "raspi-config nonint get_hostname"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_hostname"
   register: current_hostname
   changed_when: False
   check_mode: no
@@ -19,7 +21,8 @@
     - raspi
 
 - name: get boot-to-gui setting 
-  shell: "raspi-config nonint get_boot_cli" # 0 == "boot to cli"; 1 == "boot to gui"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_boot_cli" # 0 == "boot to cli"; 1 == "boot to gui"
   register: raspi_boot_gui
   changed_when: False
   check_mode: no
@@ -27,7 +30,8 @@
     - raspi
 
 - name: get autologin setting
-  shell: "raspi-config nonint get_autologin" # 0 == "enable autologin"; 1 == "disable autologin"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_autologin" # 0 == "enable autologin"; 1 == "disable autologin"
   register: raspi_noautologin
   changed_when: False
   check_mode: no
@@ -35,7 +39,8 @@
     - raspi
 
 - name: get wait-for-network-on-boot setting 
-  shell: "raspi-config nonint get_boot_wait" # 0 == "wait"; 1 == "don't wait"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_boot_wait" # 0 == "wait"; 1 == "don't wait"
   register: raspi_boot_nowait
   changed_when: False
   check_mode: no
@@ -43,7 +48,8 @@
     - raspi
 
 - name: get splash screen setting 
-  shell: "raspi-config nonint get_boot_splash" # 0 == "wait"; 1 == "don't wait"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_boot_splash" # 0 == "wait"; 1 == "don't wait"
   register: raspi_boot_splash
   changed_when: False
   check_mode: no
@@ -51,7 +57,8 @@
     - raspi
 
 - name: get wifi country
-  shell: "raspi-config nonint get_wifi_country || echo unknown"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_wifi_country || echo unknown"
   register: raspi_wifi_country
   changed_when: False
   check_mode: no
@@ -59,7 +66,8 @@
     - raspi
 
 - name: get camera status
-  shell: "raspi-config nonint get_camera" # 0 == "camera enabled"; 1 == "camera disabled"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_camera" # 0 == "camera enabled"; 1 == "camera disabled"
   register: raspi_camera_disabled
   changed_when: False
   check_mode: no
@@ -67,7 +75,8 @@
     - raspi
 
 - name: get ssh enabled status
-  shell: "raspi-config nonint get_ssh"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_ssh"
   register: raspi_ssh_disabled
   changed_when: False
   check_mode: no
@@ -75,7 +84,8 @@
     - raspi
 
 - name: get VNC enabled status
-  shell: "raspi-config nonint get_vnc"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_vnc"
   register: raspi_vnc_disabled
   changed_when: False
   check_mode: no
@@ -83,7 +93,8 @@
     - raspi
 
 - name: get SPI enabled status
-  shell: "raspi-config nonint get_spi"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_spi"
   register: raspi_spi_disabled
   changed_when: False
   check_mode: no
@@ -91,7 +102,8 @@
     - raspi
 
 - name: get I2C enabled status
-  shell: "raspi-config nonint get_i2c"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_i2c"
   register: raspi_i2c_disabled
   changed_when: False
   check_mode: no
@@ -99,7 +111,8 @@
     - raspi
 
 - name: get serial enabled status
-  shell: "raspi-config nonint get_serial"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_serial"
   register: raspi_serial_disabled
   changed_when: False
   check_mode: no
@@ -107,7 +120,8 @@
     - raspi
 
 - name: get hardware serial enabled status
-  shell: "raspi-config nonint get_serial_hw"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_serial_hw"
   register: raspi_serial_hw_disabled
   changed_when: False
   check_mode: no
@@ -115,7 +129,8 @@
     - raspi
 
 - name: get onewire enabled status
-  shell: "raspi-config nonint get_onewire"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_onewire"
   register: raspi_onewire_disabled
   changed_when: False
   check_mode: no
@@ -123,7 +138,8 @@
     - raspi
 
 - name: get remote gpio enabled status
-  shell: "raspi-config nonint get_rgpio"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_rgpio"
   register: raspi_rgpio_disabled
   changed_when: False
   check_mode: no
@@ -131,7 +147,8 @@
     - raspi
 
 - name: get overclock state 
-  shell: "raspi-config nonint get_config_var arm_freq /boot/config.txt"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_config_var arm_freq /boot/config.txt"
   register: raspi_overclock
   changed_when: False
   check_mode: no
@@ -139,7 +156,8 @@
     - raspi
 
 - name: get fs expandability
-  shell: "raspi-config nonint get_can_expand"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_can_expand"
   register: raspi_fs_unexpandable
   changed_when: False
   check_mode: no
@@ -147,7 +165,8 @@
     - raspi
 
 - name: get overscan setting
-  shell: "raspi-config nonint get_overscan"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_overscan"
   register: raspi_overscan_enabled
   changed_when: False
   check_mode: no
@@ -155,7 +174,8 @@
     - raspi
 
 - name: get GPU memory split
-  shell: "raspi-config nonint get_config_var gpu_mem /boot/config.txt"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_config_var gpu_mem /boot/config.txt"
   register: raspi_gpu_mem
   changed_when: False
   check_mode: no
@@ -163,7 +183,8 @@
     - raspi
 
 - name: get GPU memory split 256
-  shell: "raspi-config nonint get_config_var gpu_mem_256 /boot/config.txt"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_config_var gpu_mem_256 /boot/config.txt"
   register: raspi_gpu_mem_256
   changed_when: False
   check_mode: no
@@ -171,7 +192,8 @@
     - raspi
 
 - name: get GPU memory split 512
-  shell: "raspi-config nonint get_config_var gpu_mem_512 /boot/config.txt"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_config_var gpu_mem_512 /boot/config.txt"
   register: raspi_gpu_mem_512
   changed_when: False
   check_mode: no
@@ -179,7 +201,8 @@
     - raspi
 
 - name: get GPU memory split 1024
-  shell: "raspi-config nonint get_config_var gpu_mem_1024 /boot/config.txt"
+  ansible.builtin.command: 
+    cmd: "raspi-config nonint get_config_var gpu_mem_1024 /boot/config.txt"
   register: raspi_gpu_mem_1024
   changed_when: False
   check_mode: no
@@ -187,7 +210,8 @@
     - raspi
 
 - name: determine last allocated disk sector
-  shell: "parted /dev/mmcblk0 -ms unit s p | tail -n1 | awk -F':' '{ print $3 + 0 }'"
+  ansible.builtin.command: 
+    cmd: "parted /dev/mmcblk0 -ms unit s p | tail -n1 | awk -F':' '{ print $3 + 0 }'"
   register: raspi_last_alloced_sector
   changed_when: False
   check_mode: no
@@ -195,7 +219,8 @@
     - raspi
 
 - name: get Raspberry Pi revision info
-  command: awk '/^Revision/ {print $3}' /proc/cpuinfo
+  ansible.builtin.command: 
+    cmd: awk '/^Revision/ {print $3}' /proc/cpuinfo
   register: raspi_rev_check
   changed_when: False
   check_mode: no

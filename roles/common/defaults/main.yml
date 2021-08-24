@@ -18,6 +18,9 @@ pifarm_install_ruby: False
 
 pifarm_domainname: not-specified.lab
 
+# mount that cool usb m.2 drive on the pi-hat
+pifarm_mount_usb_drive: False
+
 # If set to true, an entry for `ansible_hostname`, bound to the host's default IPv4 address is added added.
 hosts_add_default_ipv4: true
 

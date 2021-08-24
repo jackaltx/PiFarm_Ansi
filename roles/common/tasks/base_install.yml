@@ -1,15 +1,22 @@
 ---
-- name: Install basic packages
-  ansible.builtin.package: 
-    name: "{{ pifarm_common_pkgs }}"
-    state: present
-    update_cache: true
-  become: true
-  register: package_out
-  
 
-- name: Package Install Debug Output
-  ansible.builtin.debug:
-    var: package_out
-    verbosity: 1
+- block:
 
+  - name: Install basic packages
+    ansible.builtin.package: 
+      name: "{{ pifarm_common_pkgs }}"
+      state: present
+      update_cache: true
+    become: True
+    register: package_out
+    
+
+  - name: Package Install Debug Output
+    ansible.builtin.debug:
+      var: package_out
+      verbosity: 1
+    
+
+  tags: 
+    - basic_packages
+    - basic

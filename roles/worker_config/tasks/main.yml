@@ -1,10 +1,14 @@
 ---
 
 - include: bash_profile.yml
+  tags:
+    - setup_bash
 
 
 - include: node_exporter.yml
   when:
     - pifarm_connected_internet
-    - pifarm_configure_node_exporter
+    - pifarm_node_exporter
+  tags:
+    - setup_node_exporter
 

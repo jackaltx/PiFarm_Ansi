@@ -1,8 +1,8 @@
 ---
 
 - name: Install scipy
-  apt: 
-    ansible.builtin.pkg:
+  ansible.builtin.apt: 
+    pkg:
     - "python-numpy"
     - "python-pickleshare"
     - "python-scipy"

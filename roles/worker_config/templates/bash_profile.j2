@@ -1,0 +1,7 @@
+echo "PiFarm {{ group_names[0] }}" | figlet
+
+# [[ -r ~/.profile ]] && . ~/.profile
+
+export PATH=$PATH:$HOME/spark/bin/
+export SPARK_HOME=$HOME/spark/
+export PYTHONPATH=$PYTHONPATH:$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip

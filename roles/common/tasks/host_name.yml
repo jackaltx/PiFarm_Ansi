@@ -2,4 +2,7 @@
 - name:  "set the hostname"
   hostname:
     name: "{{ pifarm_hostname }}"
+  tags: 
+    - set_hostname
+    - basic
 

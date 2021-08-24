@@ -26,12 +26,12 @@
   register: reboot_is_required
   stat: path=/var/run/reboot-required get_md5=no
 
-- name: rebood required results
+- name: reboot required results
   ansible.builtin.debug:
-    ansible.builtin.var: reboot_is_required
+    var: reboot_is_required
     verbosity: 1
 
-# SMELL  move this to a hander ????
+# SMELL  move this to a handler ????
 - name: Reboot the Debian or Ubuntu server
   ansible.builtin.reboot:
     msg: "Reboot initiated by Ansible due to kernel updates"

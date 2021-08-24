@@ -7,6 +7,7 @@
 
 - name: "Update Debian (raspberry pi)"
   include: "update_pi.yml"
+  become: true
   when:
     - pifarm_connected_internet 
     - ansible_os_family == "Debian" 
@@ -16,6 +17,7 @@
 
 - name: "Update Centos systems"
   include: "update_centos.yml"
+  become: true
   when:
     - pifarm_connected_internet 
     - pifarm_update_centos

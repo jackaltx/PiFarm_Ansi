@@ -8,3 +8,6 @@
     group: root
     mode: 0644
     backup: "{{ host_file_backup }}"
+  become: true
+  tags: 
+    - create_hostfile

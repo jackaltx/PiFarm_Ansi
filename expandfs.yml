@@ -5,6 +5,6 @@
   connection: ssh
   become: true
   roles:
-    - pi-expand-rootfs
+    - pi_expand_rootfs
 
 

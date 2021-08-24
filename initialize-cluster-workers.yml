@@ -1,9 +1,9 @@
 ---
     
-- hosts: workers
+- hosts: workers helpers
   connection: ssh
   become_method: sudo
   become: yes
   gather_facts: no
   roles:
-    - create-worker
+    - create_worker

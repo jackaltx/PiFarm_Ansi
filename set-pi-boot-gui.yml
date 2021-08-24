@@ -8,11 +8,13 @@
 #B1 cli, B2 cli autologin, B3 desktop, B4 desktop autologin
 
     - name: Set Raspberry Pi to boot to CLI
-      shell: raspi-config nonint do_boot_behaviour B4
+      ansible.builtin.command: 
+        cmd: raspi-config nonint do_boot_behaviour B4
       async: 1
       poll: 0
       register: result
 
-    - debug:
+    - name: command result
+      ansible.builtin.debug:
         var: result
 

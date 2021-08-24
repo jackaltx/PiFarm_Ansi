@@ -1,5 +1,6 @@
 ---
 - name: Install Java
-  apt: 
+  ansible.builtin.apt: 
     name: oracle-java8-jdk
     state: present
+  become: true

@@ -6,10 +6,12 @@
   loop:
     - networking
     - dhcpcd
+  become: true
 
 - name: restart timezone
   ansible.builtin.service: 
     name: "{{ item }}"
     state: restarted
   loop: "{{ pifarm_timezone_services }}"
+  become: true
   
