@@ -1,0 +1,9 @@
+---
+
+- hosts: workers
+  connection: ssh
+  become_method: sudo
+  gather_facts: yes
+  roles:
+  - pi-tools/raspi_facts
+

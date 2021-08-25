@@ -1,6 +1,9 @@
 ---
 # tasks file for nfs4_mount
 
+# this snippet from https://github.com/ome/ansible-role-nfs-mount/blob/master/tasks/main.yml
+# bsd-2-clause license
+
 - name: Mount NFS share
   become: true
   mount:
