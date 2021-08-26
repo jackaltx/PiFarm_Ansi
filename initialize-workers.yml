@@ -8,4 +8,5 @@
     - update
     - common
     - worker_config
+    - pi_configs
     - farm-tools/nfs4_mount

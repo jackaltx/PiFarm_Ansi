@@ -8,5 +8,6 @@
     - update
     - common
     - worker_config
+    - pi_configs
     - farm-tools/nfs_server
     - farm-tools/prometheus_server

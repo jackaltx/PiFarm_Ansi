@@ -2,8 +2,8 @@
 - hosts: workers
   connection: ssh
   gather_facts: no
-  become: yes
-  become_method: sudo
+  #become: yes
+  #become_method: sudo
   serial: 8
   tasks:
 
@@ -12,14 +12,16 @@
       debugger: on_failed 
       register: out
 
-    - debug:
-        var: out
+    # - name: Print the ping results
+    #   ansible.builtin.debug:
+    #     var: out
+    #     verbosity: 1
 
 - hosts: helpers
   connection: ssh
   gather_facts: no
-  become: yes
-  become_method: sudo
+  #become: yes
+  #become_method: sudo
   serial: 8
   tasks:
 
@@ -28,5 +30,8 @@
       debugger: on_failed 
       register: out
 
-    - debug:
-        var: out
+    # - name: Print the ping results
+    #   ansible.builtin.debug:
+    #     var: out
+    #     verbosity: 1
+

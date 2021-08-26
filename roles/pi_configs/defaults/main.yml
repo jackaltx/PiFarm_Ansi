@@ -1,0 +1,4 @@
+---
+# defaults file for pi_configs
+
+wifi_country: US
