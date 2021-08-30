@@ -21,6 +21,7 @@
       cmd: sed  's/$/ cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1/'  /boot/cmdline.txt
     # when: pi_image_setup_cgroup is defined and pi_image_setup_cgroup is True
     become: True
+    
     tags:
       - configure
       - cgroup
