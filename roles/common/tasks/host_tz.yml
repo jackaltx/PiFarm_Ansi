@@ -10,6 +10,7 @@
     changed_when: false
     
   - name: set the timezone if required
+    become: true
     ansible.builtin.command:
       cmd:  timedatectl set-timezone "{{ pifarm_timezone }}"
     when: pifarm_timezone not in results.stdout

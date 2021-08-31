@@ -1,5 +1,6 @@
 ---
 - name:  "set the hostname"
+  become: True
   hostname:
     name: "{{ pifarm_hostname }}"
   tags: 
