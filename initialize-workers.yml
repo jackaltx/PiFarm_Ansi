@@ -1,12 +1,17 @@
 ---
 
-- hosts: workers
+- hosts:
+  - helpers
+  - workers
   connection: ssh
   become_method: sudo
   gather_facts: yes
   roles:
     - update
+    - pi_configs
     - common
     - worker_config
-    - pi_configs
-    - farm-tools/nfs4_mount
+    - nfs_server
+    - usb_hd_mount
+
+    # - farm-tools/prometheus_server

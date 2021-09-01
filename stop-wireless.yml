@@ -5,9 +5,33 @@
   become: yes
   tasks:
 
-    - name: Turn off wifi
-      command: /usr/sbin/rfkill block wifi
+    - block:
 
-    - name: Turn off bluetooth
-      command: /usr/sbin/rfkill block bluetooth
+      - name: Check wifi status
+        ansible.builtin.command: /usr/sbin/rfkill list wifi
+        register: wifi_status
+        changed_when: false
+
+      - name: Turn off wifi
+        ansible.builtin.command: /usr/sbin/rfkill block wifi
+        when: 
+          - wifi_status is defined
+          - "'Soft blocked: no' in  wifi_status.stdout"
+
+      - name: Check bluetooth status
+        ansible.builtin.command: /usr/sbin/rfkill list wifi
+        register: bluetooth_status
+        changed_when: false
+        
+      - name: Turn off bluetooth
+        ansible.builtin.command: /usr/sbin/rfkill block bluetooth
+        when: 
+          - bluetooth is defined
+          - "'Soft blocked: no' in  bluetooth.stdout"
+
+      when:
+        - ( ansible_facts.architecture is search("arm") and
+          ansible_facts.userspace_bits == "64" ) or
+          ansible_facts.architecture is search("aarch64")
+
 

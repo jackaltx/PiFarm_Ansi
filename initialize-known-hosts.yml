@@ -45,7 +45,7 @@
   tasks:
 
   - name: Add inventory Host Keys for  workers and helpers"
-    local_action: shell ssh-keyscan -H {{ ansible_host }} >> ~/.ssh/known_hosts
+    local_action: "shell ssh-keyscan -H {{ ansible_host }} >> ~/.ssh/known_hosts"
     connection: local
-    ignore_errors: yes
+    # ignore_errors: yes
     changed_when: False

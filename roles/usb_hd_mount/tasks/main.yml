@@ -1,0 +1,33 @@
+---
+# tasks file for usb_hd_mount
+
+
+- block:
+
+  - name: Install hard disk tools
+    ansible.builtin.apt:
+      name:
+        - smartmontools
+        - hdparm
+      state: present
+      update_cache: true
+    become: true
+
+  - name: Create /u01 mount point
+    ansible.builtin.file:
+      path: /u01
+      state: directory
+      mode: '0755'
+    become: true
+
+  - name: Mount the /u01 drive
+    ansible.posix.mount:
+      path: /u01
+      src: /dev/sda1
+      fstype: ext4
+      opts: defaults
+      state: mounted
+    become: true
+
+  when: pifarm_mount_usb_drive 
+  tags:  setup_u01

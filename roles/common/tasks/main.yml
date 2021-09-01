@@ -12,9 +12,6 @@
 
 - include: hosts_file.yml
 
-- include: mount_u01.yml
-  when: pifarm_mount_usb_drive
-
 - block:
 
   - include: base_install.yml

@@ -42,8 +42,6 @@ Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 - (Optional) Gather all the ansible facts into a folder
   - ``` ansible-playbook -K get-facts.yml```
   - ``` ansible -m debug -a "var=hostvars"  localhost > facts/hostvars.json ```
-- (Optional) Expand the file root filesystem  (required if my image used)
-  - ``` ansible-playbook  expandfs.yml```
 - Then initialize the farmer and workers:
   - ``` ansible-playbook initialize-workers.yml```
   - ``` ansible-playbook -K initialize-farmer.yml```
@@ -59,6 +57,13 @@ Dump Ansible Host Variables (host-vars)
 ```bash
 ansible-playbook dump-hostvars.yml
 ```
+
+Expand the file root filesystem.  This is for a special case where there is unallocated space on the SD card.
+
+``` bash
+ansible-playbook  expandfs.yml
+```
+
 
 Shutdown the farm worker nodes
 

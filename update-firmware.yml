@@ -6,5 +6,11 @@
   become: true
   roles:
     - update
-    - { role: pi-tools/eeprom }
+
+    - role: pi-tools/eeprom
+      when:
+        - ( ansible_facts.architecture is search("arm") and
+          ansible_facts.userspace_bits == "64" ) or
+          ansible_facts.architecture is search("aarch64")
+
 
