@@ -5,10 +5,10 @@
     - setup_bash
 
 
-- include: node_exporter.yml
-  when:
-    - pifarm_connected_internet
-    - pifarm_node_exporter
-  tags:
-    - setup_node_exporter
+# - include: node_exporter.yml
+#   when:
+#     - pifarm_connected_internet
+#     - pifarm_node_exporter
+#   tags:
+#     - setup_node_exporter
 

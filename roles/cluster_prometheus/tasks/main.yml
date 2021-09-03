@@ -1,0 +1,17 @@
+---
+# tasks file for cluster_prometheus
+
+- include: node_exporter.yml
+  when:
+    - pifarm_connected_internet
+    - pifarm_node_exporter
+  tags:
+    - setup_node_exporter
+
+- include: node_exporter.yml
+  when:
+    - pifarm_connected_internet
+    - pifarm_prometheus_server
+  tags:
+    - setup_prometheus_server
+

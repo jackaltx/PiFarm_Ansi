@@ -1,4 +1,6 @@
-echo "PiFarm {{ group_names[0] }}" | figlet
+# ....
+echo "PiFarm host:  {{ pifarm_hostname }}.{{ pifarm_domainname }} ({{ inventory_hostname }})"
+echo "PiFarm Groups: {{ group_names }}"
 
 # [[ -r ~/.profile ]] && . ~/.profile
 

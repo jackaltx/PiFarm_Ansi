@@ -75,6 +75,17 @@ kube-system   svclb-traefik-xq9bs                       2/2     Running     0   
 kube-system   svclb-traefik-djk24                       2/2     Running     0          19h
 kube-system   svclb-traefik-scrwf                       2/2     Running     0          19h
 ```
+== Get nodes in wide
 
-
+$ kubectl get node -o wide
+```
+NAME       STATUS   ROLES                  AGE   VERSION        INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION   CONTAINER-RUNTIME
+pi-serv1   Ready    control-plane,master   22h   v1.21.4+k3s1   192.168.2.110   <none>        Debian GNU/Linux 10 (buster)   5.10.60-v8+      containerd://1.4.9-k3s1
+pi-108     Ready    <none>                 21h   v1.21.4+k3s1   192.168.2.108   <none>        Debian GNU/Linux 10 (buster)   5.10.60-v8+      containerd://1.4.9-k3s1
+pi-100     Ready    <none>                 21h   v1.21.4+k3s1   192.168.2.100   <none>        Debian GNU/Linux 10 (buster)   5.10.60-v8+      containerd://1.4.9-k3s1
+pi-101     Ready    <none>                 21h   v1.21.4+k3s1   192.168.2.101   <none>        Debian GNU/Linux 10 (buster)   5.10.60-v8+      containerd://1.4.9-k3s1
+pi-113     Ready    <none>                 21h   v1.21.4+k3s1   192.168.2.113   <none>        Debian GNU/Linux 10 (buster)   5.10.60-v8+      containerd://1.4.9-k3s1
+pi-103     Ready    <none>                 21h   v1.21.4+k3s1   192.168.2.103   <none>        Debian GNU/Linux 10 (buster)   5.10.60-v8+      containerd://1.4.9-k3s1
+pi-102     Ready    <none>                 21h   v1.21.4+k3s1   192.168.2.102   <none>        Debian GNU/Linux 10 (buster)   5.10.60-v8+      containerd://1.4.9-k3s1
+```
                    

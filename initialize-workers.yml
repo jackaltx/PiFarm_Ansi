@@ -7,11 +7,20 @@
   become_method: sudo
   gather_facts: yes
   roles:
+
+    # configuration.  
+    # Note we assume there is a proper user on all the PiFarm cluster nodes.
     - update
     - pi_configs
     - common
     - worker_config
-    - nfs_server
     - usb_hd_mount
+
+    # warning, this configure both service and collectors
+    - cluster_prometheus
+
+
+    # Services
+    - nfs_server
 
     # - farm-tools/prometheus_server

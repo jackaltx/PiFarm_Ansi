@@ -1,5 +1,7 @@
 ---
-- hosts: workers
+- hosts:
+    - helpers
+    - workers
   connection: ssh
   gather_facts: no
   #become: yes
@@ -7,7 +9,7 @@
   serial: 8
   tasks:
 
-    - name: Ping the Farm Workers
+    - name: Ping the PiFarm
       action: ping
       debugger: on_failed 
       register: out
@@ -16,22 +18,3 @@
     #   ansible.builtin.debug:
     #     var: out
     #     verbosity: 1
-
-- hosts: helpers
-  connection: ssh
-  gather_facts: no
-  #become: yes
-  #become_method: sudo
-  serial: 8
-  tasks:
-
-    - name: Ping the Farm Helpers
-      action: ping
-      debugger: on_failed 
-      register: out
-
-    # - name: Print the ping results
-    #   ansible.builtin.debug:
-    #     var: out
-    #     verbosity: 1
-

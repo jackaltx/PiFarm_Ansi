@@ -1,0 +1,20 @@
+---
+# defaults file for cluster_prometheus
+
+# By default we are connected to the internet, so we can get updates
+pifarm_connected_internet: True
+
+# Don't put in the prometheus node exporter
+pifarm_node_exporter: False
+
+# The Prometheus monitor server
+prometheus_monitor_ip:  '127.0.0.1'
+
+# By default don't install the server
+pifarm_prometheus_server: False
+
+# This is solely configured to use my Ubiquiti EdgeRouter X
+prometheus_install_snmp: False
+
+# SMELL ????
+prometheus_router_ip: 192.168.1.1
