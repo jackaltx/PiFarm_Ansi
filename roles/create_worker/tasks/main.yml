@@ -2,14 +2,14 @@
 
 - name: 'Ensure the group exists'
   become: yes
-  group:
+  ansible.builtin.group:
     name: "{{ worker_group }}"
     state: present
   tags: create_user
 
 - name: 'Create the user'
   become: yes
-  user:
+  ansible.builtin.user:
     name: "{{ worker_user }}"
     group: "{{ worker_group }}"
     shell: /bin/bash
@@ -19,7 +19,7 @@
 
 - name: Set authorized key taken from file
   become: yes
-  authorized_key:
+  ansible.builtin.authorized_key:
     user: "{{ worker_user }}"
     state: present
     key: "{{ lookup('file', remote_ssh_access_key) }}"
@@ -34,3 +34,15 @@
     regexp: "^%{{ worker_group }}"
     line: "%{{ worker_group }} ALL=(ALL) NOPASSWD: ALL"
     validate: 'visudo -cf %s'
+
+- block:
+  - name: Get the new pi password from secrets
+    include_vars: vault.yml
+  
+  - name: change the pi password
+    ansible.builtin.user: 
+      name: pi
+      update_password: always
+      password: "{{ new_passwd|password_hash('sha512') }}"
+  when:  change_pi_password
+  tags:  reset_pi_password
