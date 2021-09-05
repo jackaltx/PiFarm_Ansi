@@ -22,5 +22,6 @@
 
     # Services
     - nfs_server
+    - nfs4_mount
 
     # - farm-tools/prometheus_server
