@@ -5,7 +5,8 @@
   tasks:
 
     - name: Check if connection is possible
-      shell: id
+      ansible.builtin.command: id
+      changed_when: false
       register: result
  
     - debug:

@@ -1,6 +1,0 @@
----
-
-- hosts: workers
-  connection: ssh
-  roles:
-    - common
