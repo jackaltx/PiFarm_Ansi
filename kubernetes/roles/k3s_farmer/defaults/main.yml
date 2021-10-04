@@ -1,0 +1,8 @@
+---
+# defaults file for k3s_farmer
+
+#k3s_version: v1.17.5+k3s1
+#k3s_version: v1.21.4+k3s1
+k3s_version: v1.22.2+k3s1
+bin_dir: /usr/local/bin
+

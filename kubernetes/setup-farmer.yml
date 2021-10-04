@@ -1,0 +1,8 @@
+---
+
+- hosts: pi-farmer
+  connection: ssh
+  gather_facts: yes
+  become: yes
+  roles:
+    - k3s_farmer

@@ -1,0 +1,23 @@
+---
+# tasks file for k3s_farmer
+
+# assume the farmer is a centos x64 computer
+
+- block:
+
+  - name: Download k3s binary for the farmer (x84)
+    get_url:
+      url: https://github.com/k3s-io/k3s/releases/download/{{ k3s_version }}/k3s
+      checksum: sha256:https://github.com/k3s-io/k3s/releases/download/{{ k3s_version }}/sha256sum-amd64.txt
+      dest: "{{ bin_dir }}/k3s"
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: Create kubectl symbolic link 
+    file:
+      src: "{{ bin_dir }}/k3s"
+      dest: "{{ bin_dir }}/kubectl"
+      state: link
+
+  when: ansible_facts.architecture == "x86_64"

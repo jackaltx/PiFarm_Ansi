@@ -9,7 +9,7 @@
   local_action: 
     module: ansible.builtin.copy
     content: "{{ raspi_facts | to_nice_json }}"
-    dest: "facts/raspi_facts_{{ inventory_hostname }}.json"
+    dest: "{{ lookup('env', 'PWD') }}/facts/raspi_facts_{{ inventory_hostname }}.json"
     owner: "{{ hostvars['pi-farmer'].local_user  }}"
     group: "{{ hostvars['pi-farmer'].local_group }}"
     mode: 0664

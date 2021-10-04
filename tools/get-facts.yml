@@ -10,7 +10,7 @@
   - name: Create facts folder in current directory
     local_action: 
         module: ansible.builtin.file
-        path: './facts'
+        path: "{{ lookup('env', 'PWD') }}/facts"
         state: directory
         owner: "{{ hostvars['pi-farmer'].local_user  }}"
         group: "{{ hostvars['pi-farmer'].local_group }}"
@@ -26,14 +26,14 @@
   - name: Remove the previous fact files
     local_action: 
         module: file
-        path: "./facts/{{ facts_result }}"
+        path: "{{ lookup('env', 'PWD') }}/facts/{{ facts_result }}"
         state: absent
 
   - name: Create current facts files
     local_action: 
       module: ansible.builtin.copy
       content: "{{ facts_result | to_nice_json }}"
-      dest: "facts/{{ inventory_hostname }}.json"
+      dest: "{{ lookup('env', 'PWD') }}/facts/{{ inventory_hostname }}.json"
       owner: "{{ hostvars['pi-farmer'].local_user  }}"
       group: "{{ hostvars['pi-farmer'].local_group }}"
       mode: 0664
