@@ -33,14 +33,15 @@ The Pi's only know their private nework and have the router internal address as 
 
 Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 
-- Edit the farm.yml to set infrastructure variables. A sample is given below.
+- Edit the farm.yml to set infrastructure variables.
+- Create the environment variable:   ``export PIFARM_VAULT_PASSWORD=test``
 - (Optional) On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
 - Setup the ssh known_hosts on the farmer for the ip address:
   - ``` ansible-playbook initialize-known-hosts.yml```
-- Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at you pi's user/password  (default images: pi/raspberry)
-  - ``` ansible-playbook -e ansible_user=pi -k initialize-cluster-workers.yml```
+- Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at your pi's user/password  (default images: worker/raspberry)
+  - ``` ansible-playbook -e ansible_user=worker -k initialize-cluster-workers.yml```
 - (Optional) Gather all the ansible facts into a folder
-  - ``` ansible-playbook -K get-facts.yml```
+  - ``` ansible-playbook -K tools/get-facts.yml```
   - ``` ansible -m debug -a "var=hostvars"  localhost > facts/hostvars.json ```
 - Then initialize the farmer and workers:
   - ``` ansible-playbook initialize-workers.yml```

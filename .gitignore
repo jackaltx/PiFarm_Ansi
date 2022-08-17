@@ -8,7 +8,7 @@
 # no logs
 logs/*
 
-# these should be private
+# Private facts about local cluster
 facts/*
 
 # attached roles
