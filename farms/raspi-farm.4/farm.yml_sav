@@ -1,0 +1,130 @@
+---
+
+# This is the PiFarm Inventory and variables file.
+# This file along with all those in the "group_vars" directory will
+# set all the controlling variables for the ansible scripts
+
+# There are two main sections "workers"  and "farmer".
+# First in are two dictionary variables of "host" and their associated "vars"
+
+all:
+  children:
+    workers:
+      hosts:
+        pi-101:
+          ansible_host: 192.168.102.110
+          pifarm_hostname: pi-101
+        pi-102:
+          ansible_host: 192.168.102.122
+          pifarm_hostname: pi-102
+        pi-103:
+          ansible_host: 192.168.102.111
+          pifarm_hostname: pi-103
+        pi-104:
+          ansible_host: 192.168.102.108
+          pifarm_hostname: pi-104
+      
+      # vars for all workers are in this section.
+      vars:
+
+        # ... this is the farms public ssh key
+        # this is crude and needs to be better set as sometimes 
+        # I don't want to use the users ssh keys, but ones setup
+        # for this task.
+        remote_user_ssh: "/home/lavender/.ssh/id_rsa.pub"
+
+        # ... this is the pi user which will be used
+        # This user will be setup. I don't like to use the default user ('pi')
+        # This user has no password, so it is only usable via ssh.
+        home_dir: /home/lab
+        remote_user: lab
+        remote_group: lab
+        
+        # ... set the hostname to match this inventory
+        pifarm_set_hostname: true
+
+        # ... this is the user to connect to the pifarm for ansible scripts
+        # This seems crude, but I am not sure how to specify it any other way.
+        ansible_user: lab
+
+        # ... Is this lab connected to the internet so I can update?
+        # If there is no gateway to the internet, then set this to False.
+        # As my default boot image grow older, this is desired.
+        pifarm_connected_internet: True
+
+    # The farmer is a "master" concept.  For not it is a single machine, but
+    # in the furture it could be more.
+    # Notice how the ansible_user is set on the host level and not the common level.
+
+    farmer:
+      hosts:
+        pi-farmer:
+          ansible_host: 192.168.102.1
+          pifarm_hostname: farmer
+          ansible_user: lavender
+      vars:
+        # ... define controlling user.
+        local_user: lavender
+        local_group: lavender
+        home_dir: /home/lavender
+
+        # ... pifarm services (on farmer)
+        # What services to setup on the farmers
+        export_nfs_share: false
+        pifarm_install_prometheus: false
+        pifarm_install_dnsmasq: true
+
+        # ... networking (not used today)
+        # It is set on the PiFarm workers via the DHCP server (dnsmasq or ubiquiti router)
+        router_ip: 192.168.102.2
+
+    dnsmasq:
+      hosts:
+        pi-farmer:
+      vars:
+        dnsmasq_enabled_on_startup: True
+
+        # Manage resolvconf
+        dnsmasq_resolvconf: False
+
+        # Install from upstream repos or directly from operating system packages
+        dnsmasq_os_packages: True
+
+        dnsmasq_dhcp: True
+        dnsmasq_tftp: False
+        dnsmasq_conf_servers: [ 1.1.1.1, 8.8.8.8]
+        dnsmasq_conf_listen: [ 192.168.102.1, "enp4s0f0" ]
+        dnsmasq_conf_bind_interfaces: static
+        dnsmasq_conf_dhcp_log: True
+
+        ### resolv.conf
+        #dnsmasq_host_domain: local
+        #dnsmasq_host_search: local
+        dnsmasq_host_resolvers: [ "192.168.101.1" ]
+  
+        # SMELL
+        dnsmasq_conf_domain: "pifarm.lab"
+        
+        # Should be set when dnsmasq is definitely the only DHCP server on a network.
+        dnsmasq_conf_dhcp_authoritative: True
+
+        # Dnsmasq is designed to choose IP addresses for DHCP clients using a hash
+        # of the client's MAC address.
+        dnsmasq_conf_dhcp_sequential_ip: False
+
+        # this is for the pifarm network
+        # dnsmasq_conf_dhcp: []
+        dnsmasq_conf_dhcp:
+          - device: "enp4s0f0"
+            range: [ 192.168.102.101, 192.168.102.129, "infinite"]
+            option: [ "option:router, 192.168.102.2" ] 
+
+        dnsmasq_conf_dhcp_leasefile_ro: False
+        dnsmasq_conf_dhcp_leasefile: /var/lib/dnsmasq/dnsmasq.leases
+
+  # .................................................................................
+  #  This contains site wide variables. 
+  vars:
+    pifarm_domainname: pifarm.lab
+
+ 
