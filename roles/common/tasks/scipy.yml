@@ -1,12 +1,12 @@
 ---
 
-- name: Install scipy
+- name: Install scipy for python 3
   ansible.builtin.apt: 
     pkg:
-    - "python-numpy"
-    - "python-pickleshare"
-    - "python-scipy"
-    - "python-matplotlib"
+    - "python3-numpy"
+    - "python3-pickleshare"
+    - "python3-scipy"
+    - "python3-matplotlib"
     state: present
     update_cache: true
   become: true

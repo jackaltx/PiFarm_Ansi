@@ -49,6 +49,13 @@ all:
         pifarm_set_timezone: True
         pifarm_node_exporter: True
 
+        pifarm_nfs_share_mounts:
+        - path: "/farmshare"
+          location: "192.168.11.0:/u01/farmshare"
+        - path: "/rhome"
+          location: "192.168.11.0:/u01/rhome"
+
+
     # ................................................
     helpers:
       hosts:
@@ -72,7 +79,7 @@ all:
         pifarm_set_timezone: True
         pifarm_node_exporter: True
 
-        export_nfs_share: false
+        export_nfs_share: true
 
     # ................................................
     farmer:

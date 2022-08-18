@@ -2,7 +2,7 @@
 
 - block:
 
-  - name: Install nfs-server
+  - name: Install nfs4-server
     ansible.builtin.apt:
       name:
         - nfs-kernel-server
@@ -11,7 +11,10 @@
       update_cache: true
     become: true
   
-  - name: Configure nfs-server
+## SMELL....the share is hardcoded.
+## needs to be done for each host
+
+  - name: Configure nfs4-server
     ansible.builtin.copy: 
       src: exports
       dest: /etc/exports

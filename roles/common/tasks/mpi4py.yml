@@ -1,7 +1,7 @@
 ---
 - name: Install mpi4py
   ansible.builtin.package: 
-    name: python-mpi4py
+    name: python3-mpi4py
     state: present
     update_cache: true
   become: true

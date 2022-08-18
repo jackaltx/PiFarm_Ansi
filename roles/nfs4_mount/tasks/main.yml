@@ -15,5 +15,5 @@
     passno: "{{ item.passno | default(omit) }}"
     state: "{{ item.state | default( 'mounted' ) }}"
   with_items: "{{ nfs_share_mounts }}"
-  when: nfs_share_mounts is defined and (nfs_share_mounts|length>0)
+  when: pifarm_nfs_share_mounts is defined and (pifarm_nfs_share_mounts|length>0)
   tags: mount_nfs
