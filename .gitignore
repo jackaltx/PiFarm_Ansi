@@ -21,3 +21,6 @@ roles/ansible-role-grafana/
 # group_vars/farmer
 # group_vars/workers
 
+# my temporary testing scripts that I don't want released
+./scratch_*
+

@@ -1,4 +1,5 @@
 ---
 # defaults file for nfs_server
 
-export_nfs_share: False
+pifarm_export_nfs_share: false
+pifarm_nfs_exports: []

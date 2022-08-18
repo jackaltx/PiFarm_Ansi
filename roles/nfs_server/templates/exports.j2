@@ -9,8 +9,6 @@
 # /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
 #
 
-## SMELL
-
-/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)
-/u01/rhome 192.168.11.0/24(rw,nohide,insecure,no_subtree_check,sync,no_root_squash)
-/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)
+{% for item in pifarm_nfs_exports %}
+  {{ item }}
+{% endfor %}

@@ -51,9 +51,9 @@ all:
 
         pifarm_nfs_share_mounts:
         - path: "/farmshare"
-          location: "192.168.11.0:/u01/farmshare"
+          location: "192.168.11.10:/u01/farmshare"
         - path: "/rhome"
-          location: "192.168.11.0:/u01/rhome"
+          location: "192.168.11.10:/u01/rhome"
 
 
     # ................................................
@@ -79,7 +79,14 @@ all:
         pifarm_set_timezone: True
         pifarm_node_exporter: True
 
-        export_nfs_share: true
+        pifarm_export_nfs_share: true
+
+        # TODO  save these as vault items?
+        # TODO  separate the share and options from the authorized IPs
+        pifarm_nfs_exports:
+          - "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
+          - "/u01/rhome 192.168.11.0/24(rw,nohide,insecure,no_subtree_check,sync,no_root_squash)"
+          - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
 
     # ................................................
     farmer:

@@ -2,7 +2,7 @@
 
 - block:
 
-  - name: Install nfs4-server
+  - name: Install nfs-server
     ansible.builtin.apt:
       name:
         - nfs-kernel-server
@@ -14,9 +14,11 @@
 ## SMELL....the share is hardcoded.
 ## needs to be done for each host
 
-  - name: Configure nfs4-server
-    ansible.builtin.copy: 
-      src: exports
+##  This is for the pi only today
+
+  - name: Configure nfs-server
+    ansible.builtin.template: 
+      src: exports.j2
       dest: /etc/exports
       owner: root
       group: root
@@ -26,5 +28,9 @@
     notify:
       - Reload nfs server
 
-  when: export_nfs_share
-  tags: nfs_share
+  when: 
+    - pifarm_export_nfs_share
+    - pifarm_nfs_exports is defined and (pifarm_nfs_exports|length>0)
+    - ( ansible_facts.architecture is search("arm") and
+      ansible_facts.userspace_bits == "64" ) or
+      ansible_facts.architecture is search("aarch64")
