@@ -49,14 +49,14 @@ Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 - (Optional) Setup a grafana monitor on the farmer:
   - ``` ansible-playbook monitor-cluster.yml```
 - (Optional) test the cluster using sysbench:
-  - ``` ansible-playbook  run-sysbench.yml```
+  - ``` ansible-playbook run-sysbench.yml```
 
 ## Optional playbooks
 
 Dump Ansible Host Variables (host-vars)
 
 ```bash
-ansible-playbook dump-hostvars.yml
+ansible-playbook tools/dump-hostvars.yml
 ```
 
 Expand the file root filesystem.  This is for a special case where there is unallocated space on the SD card.

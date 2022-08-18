@@ -8,6 +8,8 @@ all:
     # SMELL  hardcoded IP 
     prometheus_monitor_ip: 192.168.11.10
 
+    pifarm_update_centos: false
+
   children:
 
     # ................................................
