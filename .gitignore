@@ -10,6 +10,7 @@ logs/*
 
 # Private facts about local cluster
 facts/*
+benchmarks/*
 
 # attached roles
 roles/ansible-role-grafana/

@@ -1,0 +1,43 @@
+---
+
+- name: Create facts folder in current directory
+  local_action: 
+      module: ansible.builtin.file
+      path: "{{ lookup('env', 'PWD') }}/benchmarks"
+      state: directory
+      owner: "{{ hostvars['pi-farmer'].local_user  }}"
+      group: "{{ hostvars['pi-farmer'].local_group }}"
+
+- name: test nfs mount
+  command: "./iozone {{iozone_flags }} -f {{ iozone_testmount }}/testfile_{{ inventory_hostname }} -b {{ iozone_working_dir }}/iozone_{{ inventory_hostname }}.xls"
+  args:
+    chdir: "{{ iozone_working_dir }}/iozone3/src/current"
+  register: myoutput
+  failed_when:
+    - result.rc != 0 or result.failed
+  become: true
+
+- debug:
+    var: myoutput
+    verbosity: 1
+
+- name: store locally iozone command results log
+  local_action: 
+    module: ansible.builtin.copy
+    content: "{{ myoutput.stdout_lines | join('\n') }}" 
+    dest: "{{ lookup('env', 'PWD') }}/benchmarks/iozone_{{ inventory_hostname }}.log"
+
+- ansible.builtin.stat:
+    path: "{{ iozone_working_dir }}/iozone_{{ inventory_hostname }}.xls"
+  register: report_file
+
+- debug:
+    msg: "iozone output does not exist: {{ iozone_working_dir }}/iozone_{{ inventory_hostname }}.xls"
+  when: not report_file.stats.exists
+
+- name: store locally iozone excel ouput xls
+  ansible.builtin.fetch:
+    src: "{{ iozone_working_dir }}/iozone_{{ inventory_hostname }}.xls"
+    dest: "{{ lookup('env', 'PWD') }}/benchmarks/"
+    flat: yes
+  when: report_file.stats.exists

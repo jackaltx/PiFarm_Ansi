@@ -1,10 +1,5 @@
 ---
 
-
-# TODO nfs is deprecated...remove
-- include: nfs_server.yml
-  when: export_nfs_share
-
 #- include: apache.yml
 #- include: node_and_npm.yml
 #- include: rabbitmq-server.yml

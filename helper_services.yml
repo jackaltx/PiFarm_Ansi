@@ -1,0 +1,19 @@
+- hosts:
+    - helpers
+  connection: ssh
+  become_method: sudo
+  become: yes
+  gather_facts: yes
+  collections:
+    - nginxinc.nginx_core
+    
+  tasks:
+    - name: Install NGINX
+      ansible.builtin.include_role:
+        name: nginx
+      vars:
+        nginx_setup: uninstall
+        nginx_enable: true
+        
+
+## https://github.com/nginxinc/ansible-collection-nginx
