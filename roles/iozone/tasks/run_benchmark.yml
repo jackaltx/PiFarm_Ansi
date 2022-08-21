@@ -11,7 +11,7 @@
 - name: test nfs mount
   command: "./iozone {{iozone_flags }} -f {{ iozone_testmount }}/testfile_{{ inventory_hostname }} -b {{ iozone_working_dir }}/iozone_{{ inventory_hostname }}.xls"
   args:
-    chdir: "{{ iozone_working_dir }}/iozone3/src/current"
+    chdir: "{{ iozone_working_dir }}/{{ iozone3_ver }}/src/current"
   register: myoutput
   failed_when:
     - result.rc != 0 or result.failed

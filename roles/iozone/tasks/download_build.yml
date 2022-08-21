@@ -1,8 +1,8 @@
 ---
 
-- name: Download iozone3 tarball (493)
+- name: "Download iozone3 tarball ({{ iozone3_ver }})"
   ansible.builtin.get_url:
-    url: http://www.iozone.org/src/current/iozone3_493.tgz
+    url: "http://www.iozone.org/src/current/{{ iozone3_ver }}.tgz"
     dest: "{{ iozone_working_dir }}/iozone3.tgz"
     mode: '0440'
   become: true
@@ -11,11 +11,12 @@
   ansible.builtin.unarchive:
     src: "{{ iozone_working_dir }}/iozone3.tgz"
     dest: "{{ iozone_working_dir }}"
+    remote_src: yes
   become: true
 
 - name: build iozone3
   command: make linux-arm
   args:
-    chdir: "{{ iozone_working_dir }}/iozone3/src/current"
+    chdir: "{{ iozone_working_dir }}/{{ iozone3_ver }}/src/current"
     creates: iozone
   become: true

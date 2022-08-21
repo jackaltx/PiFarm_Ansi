@@ -57,6 +57,11 @@ all:
         - path: "/rhome"
           location: "192.168.11.10:/u01/rhome"
 
+        # override defaults
+        nfs_mount_opts: vers=4.1,tcp,sec=sys
+        #nfs_mount_opts: rsize=8192,wsize=8192,timeo=14,intr
+
+
 
     # ................................................
     helpers:

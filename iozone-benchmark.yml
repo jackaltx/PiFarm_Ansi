@@ -2,7 +2,7 @@
   connection: ssh
   gather_facts: yes
   become_method: sudo
-  serial: 8
+  serial: 3
   any_errors_fatal: true
   roles:
     - iozone

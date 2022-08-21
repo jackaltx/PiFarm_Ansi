@@ -1,8 +1,17 @@
 ---
 - name: Install mpi4py
   ansible.builtin.package: 
-    name: python3-mpi4py
+    name: 
+      - python3-mpi4py
+      - libatlas-base-dev 
+      - mpich 
+      - gfortran
     state: present
     update_cache: true
   become: true
-  
+  register: package_out
+
+- name: mpi Package install output
+  ansible.builtin.debug:
+    var: package_out
+    verbosity: 1

@@ -3,3 +3,4 @@
 iozone_working_dir:  /tmp
 iozone_testmount: /rhome
 iozone_flags: "-aczR -g 2G"
+iozone3_ver: iozone3_493
