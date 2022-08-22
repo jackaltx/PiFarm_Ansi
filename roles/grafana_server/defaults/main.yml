@@ -1,6 +1,10 @@
 ---
 # defaults file for ansible-role-grafana
 
+
+pifarm_grafana_server: false
+
+
 grafana_configure: true
 #grafana_packages: moved to os specific vars
 

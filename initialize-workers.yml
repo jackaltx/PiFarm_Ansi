@@ -16,10 +16,8 @@
     - worker_config
     - usb_hd_mount
 
-    # Note: this configure both service and collectors
-    # for now
+    # Note: this configures both node_exporters and collectors
     - cluster_prometheus
-
 
     # Services
     - nfs_server

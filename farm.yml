@@ -96,6 +96,8 @@ all:
         # currently only one level deep
         pifarm_prometheus_collector: true
 
+        # SMELL:  this will likely only work where the prometheus grafana servers are colocated
+        pifarm_grafana_server: true
  
         # TODO  save the mounts as vault items?
         # TODO  separate the shares and options from the authorized IPs

@@ -1,17 +1,14 @@
-- name: "Check if {{ grafana_repo }} is installed"
-  command: dpkg-query -W "{{ grafana_repo }}"
-  register: my_package_check_deb
-  failed_when: my_package_check_deb.rc > 1
-  changed_when: my_package_check_deb.rc == 1
+---
 
-- name: "Download {{ grafana_repo }}"
-  get_url: 
-    url="{{ grafana_repo_loc }}/{{ grafana_repo }}"
-    dest="/tmp/{{ grafana_repo }}"
-  when: my_package_check_deb.rc == 1
+# always try to use HTTPS. I'm not sure why the nginx folks don't provide it.
+- name: add grafana apt-key
+  apt_key: 
+    url: https://packages.grafana.com/gpg.key
+    state: present 
 
-- name: "Install {{ grafana_repo }}"
-  apt: deb="/tmp/{{ grafana_repo }}"
-  become: true
-  when: my_package_check_deb.rc == 1
-
+- name: add grafana apt repository
+  apt_repository: 
+    repo: 'deb https://packages.grafana.com/oss/deb stable main' 
+    state: present 
+    filename: nginx 
+    update_cache: yes
