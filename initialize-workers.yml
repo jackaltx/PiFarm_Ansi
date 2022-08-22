@@ -16,7 +16,8 @@
     - worker_config
     - usb_hd_mount
 
-    # warning, this configure both service and collectors
+    # Note: this configure both service and collectors
+    # for now
     - cluster_prometheus
 
 
@@ -24,4 +25,6 @@
     - nfs_server
     - nfs4_mount
 
+    # not sure what this one yet....investigate
     # - farm-tools/prometheus_server
+    

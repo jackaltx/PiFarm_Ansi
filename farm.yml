@@ -10,6 +10,12 @@ all:
 
     pifarm_update_centos: false
 
+    # ... Is this lab connected to the internet so I can update?
+    # If there is no gateway to the internet, then set this to False.
+    # As my default boot image grow older, this is desired.
+    pifarm_connected_internet: True
+
+
   children:
 
     # ................................................
@@ -69,7 +75,7 @@ all:
         helper1:
           ansible_host: 192.168.11.10
           pifarm_hostname: pi-serv1
-          # pifarm_install_prometheus: true
+          pifarm_install_prometheus: true
           pifarm_mount_usb_drive: true
 
       vars:
@@ -86,15 +92,26 @@ all:
         pifarm_set_timezone: True
         pifarm_node_exporter: True
 
-        pifarm_export_nfs_share: true
+        # Setup the prometheus server for metrics collection
+        # currently only one level deep
+        pifarm_prometheus_collector: true
 
-        # TODO  save these as vault items?
-        # TODO  separate the share and options from the authorized IPs
+ 
+        # TODO  save the mounts as vault items?
+        # TODO  separate the shares and options from the authorized IPs
+        pifarm_export_nfs_share: true
         pifarm_nfs_exports:
-          - "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
+          #- "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
           - "/u01/rhome 192.168.11.0/24(rw,nohide,insecure,no_subtree_check,sync,no_root_squash)"
           - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
 
+    # ................................................
+    # this is an external box, usually centos or rocky
+    # I am not ready for it
+    # ................................................
+    # ................................................
+    # ................................................
+    # ................................................
     # ................................................
     farmer:
       hosts:
@@ -113,7 +130,7 @@ all:
         pifarm_set_timezone: True
 
         export_nfs_share: false
-        router_ip: 192.168.2.1
+        # router_ip: 192.168.2.1
 
 # test:
 #   hosts:

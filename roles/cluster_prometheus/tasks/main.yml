@@ -8,10 +8,10 @@
   tags:
     - setup_node_exporter
 
-- include: node_exporter.yml
+- include: collector.yml
   when:
     - pifarm_connected_internet
-    - pifarm_prometheus_server
+    - pifarm_prometheus_collector
   tags:
     - setup_prometheus_server
 

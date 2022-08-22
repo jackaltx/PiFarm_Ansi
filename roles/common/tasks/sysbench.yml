@@ -1,8 +1,8 @@
 ---
-- name: Install sysbench
-  apt: 
-    name: sysbench
-    state: present
-  tags:
-    - smoke
-    - sysbench
+#- name: Install sysbench
+#  apt: 
+#    name: sysbench
+#    state: present
+#  tags:
+#    - smoke
+#    - sysbench

@@ -2,5 +2,8 @@
 
 iozone_working_dir:  /tmp
 iozone_testmount: /rhome
-iozone_flags: "-aczR -g 2G"
-iozone3_ver: iozone3_493
+#iozone_flags: "-aczR -g 2G -i1 -i8"
+#iozone_flags: "-aczR -g 100M -i0 -i8"
+#iozone_flags: "-e -I -a -s 100M -r 4k -i 0 -i 1 -i 2"
+iozone_flags: "-e -I -a -g 100M -i 0 -i 1 -i 2"
+iozone3_ver: "iozone3_493"
