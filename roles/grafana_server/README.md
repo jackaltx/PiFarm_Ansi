@@ -20,7 +20,7 @@ Role Variables
 
 #### role flags:
 * `grafana_configure: true` - if you want no configuration this is the option for you to set to `false`
-* `grafana_prometehus: true` - configures grafana with a datasource named Prometheus as the default datasource.
+* `grafana_promethehus: true` - configures grafana with a datasource named Prometheus as the default datasource.
 
 #### Variables worth mentioning:
 
@@ -44,9 +44,9 @@ In production I don't want people changing dashboards without going through Git 
 * TODO move to git based population ...
 
 #### Prometheus Integration:
-* `grafana_prometehus: true`
-* `grafana_prometehus_host: localhost`
-* `grafana_prometehus_port: 9090`
+* `grafana_prometheus: true`
+* `grafana_prometheus_host: localhost`
+* `grafana_prometheus_port: 9090`
 * TODO: look at authentication
 
 #### Grafana Database:

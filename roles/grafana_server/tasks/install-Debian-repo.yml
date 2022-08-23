@@ -1,6 +1,4 @@
 ---
-
-# always try to use HTTPS. I'm not sure why the nginx folks don't provide it.
 - name: add grafana apt-key
   apt_key: 
     url: https://packages.grafana.com/gpg.key

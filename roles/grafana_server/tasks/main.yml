@@ -1,22 +1,22 @@
 ---
 
+#  SMELL:  this only worked for rasberry pi.
+#
 - block:
 
-  - name: "Include Raspian vars"
-    include_vars: "Raspian.yml"
+  # SMELL:  only works for debian distro
+  - block: 
+      - include_vars: "Debian.yml"
+      - include_tasks: "install-Debian-repo.yml"
+      - include_tasks: "install-Debian.yml"
+    when:
+      - ansible_os_family == "Debian"
 
-  - name: "Install Grafana pkg"
-    include: "install-repo.yml"
-
-  - name: "Install grafana raspberry pi"
-    include: "install-Raspian.yml"
-    # when: vars['ansible_distribution_release'] == 'buster'
-
-  - name: "Configure grafana"
-    include: "config.yml"
+  - name: "Configure Grafana"
+    include_tasks: "config.yml"
 
   - name: "Configure Provisioning"
-    include: "provision.yml"
+    include_tasks: "provision.yml"
 
   - name: "Enable and (re)start grafana service"
     service:
@@ -32,4 +32,7 @@
   #- name: "Install plugins"
   #  include: "install-plugins.yml"
 
-  when: pifarm_grafana_server
+  when: 
+    - pifarm_grafana_server
+    - ansible_os_family == "Debian"
+

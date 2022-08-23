@@ -1,9 +1,0 @@
----
-
-- name: Install grafana on Raspberry Pi
-  apt: 
-    name: grafana
-    state: present
-    update_cache: true
-  become: true
-

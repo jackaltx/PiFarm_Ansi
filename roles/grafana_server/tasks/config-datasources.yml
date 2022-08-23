@@ -9,7 +9,7 @@
   register: grafana_prometheus
   failed_when: false
   changed_when: false
-  when: grafana_prometehus
+  when: grafana_prometheus
 
 - name: "Configure Prometheus Datasource"
   uri:
@@ -20,10 +20,10 @@
     body:
       name: "Prometheus"
       type: "prometheus"
-      url: "http://{{ proemtheus_hostname | d('localhost') }}:9090"
+      url: "http://{{ prometheus_hostname | d('localhost') }}:9090"
       access: "proxy"
       isDefault: true
     force_basic_auth: yes
     status_code: 200
     body_format: json
-  when: grafana_prometehus and grafana_prometheus.status == 404
+  when: grafana_prometheus and grafana_prometheus.status == 404
