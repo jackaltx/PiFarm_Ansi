@@ -5,9 +5,16 @@ all:
   vars:
     pifarm_domainname: pifarm.lab
 
-    # SMELL  hardcoded IP 
+    # BAD SMELL... This is used for SNMP only, which worked for UBNT edgerouter.
+    # the prometheus service configuration file uses this ONLY
+    # this needs to transform to a list of SNMP network devices used for prometheus.
+    pifarm_net_gw: 192.168.11.1
+
+    # BAD SMELL... Hardcoded IP used for prometheus.
     prometheus_monitor_ip: 192.168.11.10
 
+    # SMELL...  currently not testing VMs, which will be a mix of debian, arch and rocky
+    # I will have a mix of workers and helpers.
     pifarm_update_centos: false
 
     # ... Is this lab connected to the internet so I can update?
@@ -19,6 +26,7 @@ all:
   children:
 
     # ................................................
+    # First the worker hosts, then ...
     workers:
       hosts:
 
@@ -44,26 +52,34 @@ all:
         #..........................................
 
       vars:
+
+        # SMELL  rethink this
         ansible_user: farmer
 
-        ################### BAD SMELL
+        # BAD SMELL... both hardcoded and dependent on the users key.
         remote_ssh_access_key: "/home/lavender/.ssh/id_rsa.pub"
 
-        # ....this is the "user" to be created a a worker
+        # ....this is the "user" to be created on the worker node to manage it.
+        # SMELL  revaluate accounts.  Currently I have two:  worker and farmer.
+        # They both can manage the pi.
         worker_user: farmer
         worker_group: admin
 
         pifarm_set_hostname: True
         pifarm_set_timezone: True
+
+        # this installs prometheus "node_exporters" on the farm
         pifarm_node_exporter: True
 
+        # TODO  currently this only manages the client.  I like the
+        # "cluster_nfs" role to handle both parts.
         pifarm_nfs_share_mounts:
         - path: "/farmshare"
           location: "192.168.11.10:/u01/farmshare"
         - path: "/rhome"
           location: "192.168.11.10:/u01/rhome"
 
-        # override defaults
+        # SMELL testing only.  Am override defaults
         nfs_mount_opts: vers=4.1,tcp,sec=sys
         #nfs_mount_opts: rsize=8192,wsize=8192,timeo=14,intr
 
@@ -90,6 +106,8 @@ all:
 
         pifarm_set_hostname: True
         pifarm_set_timezone: True
+
+        # SMELL do I need this....the prometheu collector changed the configuration file.
         pifarm_node_exporter: True
 
         # Setup the prometheus server for metrics collection
@@ -98,7 +116,7 @@ all:
 
         # SMELL:  this will likely only work where the prometheus grafana servers are colocated
         pifarm_grafana_server: true
- 
+
         # TODO  save the mounts as vault items?
         # TODO  separate the shares and options from the authorized IPs
         pifarm_export_nfs_share: true
@@ -123,7 +141,7 @@ all:
       vars:
         ansible_user: lavender
 
-        # SMELL   track local_ down
+        # SMELL... track all "local_" variables down
         local_user: lavender
         local_group: lavender
         home_dir: /home/lavender
@@ -133,16 +151,3 @@ all:
 
         export_nfs_share: false
         # router_ip: 192.168.2.1
-
-# test:
-#   hosts:
-#     pi-102:
-#       ansible_host: 192.168.2.102
-#       ansible_fqdn: pi-102.pifarm.lab
-#   vars:
-#     home_dir: /home/farmer
-#     remote_user_ssh: "/rhome/farmer/.ssh/id_rsa.pub" 
-#     # ....this is the "user" to be created a a worker
-#     worker_user: farmer
-#     worker_group: admin
-

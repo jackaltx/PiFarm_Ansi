@@ -13,8 +13,7 @@ prometheus_monitor_ip:  '127.0.0.1'
 # By default don't install the server
 pifarm_prometheus_collector: False
 
-# This is solely configured to use my Ubiquiti EdgeRouter X
+# Only tested for Ubiquiti EdgeRouter X
 prometheus_install_snmp: False
 
-# SMELL ????
-prometheus_router_ip: 192.168.1.1
+prometheus_monitor_name: PiFarm

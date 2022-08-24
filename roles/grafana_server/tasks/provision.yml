@@ -56,7 +56,7 @@
     - name: "Set/Update grafana dashboard provision"
       template:
         src:   provision_dashboard.yml.j2
-        dest:  "/etc/grafana/provision/dashboards/provision_dashboard.yml"
+        dest:  "/etc/grafana/provision/dashboards/pifarm.yml"
         owner: "{{ grafana_user }}"
         group: "{{ grafana_group }}"
         mode: 0644
@@ -64,7 +64,7 @@
     - name: "Set/Update grafana datasource provision"
       template:
         src:   "provision_datasource.yml.j2"
-        dest:  "/etc/grafana/provision/datasources/provision_datasource.yml"
+        dest:  "/etc/grafana/provision/datasources/pifarm.yml"
         owner: "{{ grafana_user }}"
         group: "{{ grafana_group }}"
         mode: 0644
