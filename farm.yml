@@ -78,8 +78,10 @@ all:
           location: "192.168.11.10:/u01/farmshare"
         - path: "/rhome"
           location: "192.168.11.10:/u01/rhome"
+        - path: "/clusterfs"
+          location: "192.168.40.14:/PiFarmCluster"
 
-        # SMELL testing only.  Am override defaults
+        # SMELL testing only.  Override defaults
         nfs_mount_opts: vers=4.1,tcp,sec=sys
         #nfs_mount_opts: rsize=8192,wsize=8192,timeo=14,intr
 
@@ -122,8 +124,13 @@ all:
         pifarm_export_nfs_share: true
         pifarm_nfs_exports:
           #- "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
-          - "/u01/rhome 192.168.11.0/24(rw,nohide,insecure,no_subtree_check,sync,no_root_squash)"
+          - "/u01/rhome 192.168.11.0/24(rw,sync,no_subtree_check)"
           - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
+
+        pifarm_nfs_share_mounts:
+        - path: "/clusterfs"
+          location: "192.168.40.14:/PiFarmCluster"
+
 
     # ................................................
     # this is an external box, usually centos or rocky
@@ -150,4 +157,4 @@ all:
         pifarm_set_timezone: True
 
         export_nfs_share: false
-        # router_ip: 192.168.2.1
+

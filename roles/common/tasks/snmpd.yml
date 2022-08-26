@@ -14,7 +14,7 @@
       state: stopped
 
 
-  - name: cofiguration 
+  - name: configuration 
     ansible.builtin.copy: 
       src: snmpd.conf
       dest: /etc/snmp/snmpd.conf

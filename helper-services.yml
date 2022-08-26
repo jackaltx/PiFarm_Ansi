@@ -1,3 +1,10 @@
+---
+
+# intended to have service focus.
+# configuration variables are in inventory: farm.yml
+#  - nginx
+# 
+
 - hosts:
     - helpers
   connection: ssh

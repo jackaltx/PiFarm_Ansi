@@ -26,10 +26,10 @@
       - ansible_os_family == "Debian"
       - pifarm_install_scipy
 
-  - include: mpi4py.yml
-    when:
-      - ansible_os_family == "Debian"
-      - pifarm_install_mpi
+#  - include: openmpi.yml
+#    when:
+#      - ansible_os_family == "Debian"
+#      - pifarm_install_mpi
 
   - include: tmux.yml
     when: pifarm_install_tmux

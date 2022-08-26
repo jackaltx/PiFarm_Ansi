@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--Phoronix Test Suite v10.8.4-->
+<PhoronixTestSuite>
+  <SuiteInformation>
+    <Title>PiFarmWorker</Title>
+    <Version>1.0.0</Version>
+    <TestType>System</TestType>
+    <Description>Test Worker</Description>
+    <Maintainer>Jack Lavender</Maintainer>
+  </SuiteInformation>
+  <Execute>
+    <Test>pts/numpy-1.2.1</Test>
+  </Execute>
+</PhoronixTestSuite>

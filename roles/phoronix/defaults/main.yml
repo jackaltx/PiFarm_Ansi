@@ -1,0 +1,4 @@
+---
+phoronix_working_dir: /tmp
+phoronix_config_root: "/var/lib/phoronix-test-suite/test-suites/local/pifarmworker"
+phoronix_ver: "10.8.4"

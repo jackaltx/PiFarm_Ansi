@@ -1,4 +1,8 @@
 ---
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!! no longer working. 
+# redo to the iozone way
+
 - hosts: workers
   connection: ssh
   gather_facts: no

@@ -8,7 +8,9 @@
   gather_facts: yes
   roles:
 
-    # configuration.  
+    # Create the shared user
+    - create_worker_user
+
     # Note we assume there is a proper user on all the PiFarm cluster nodes.
     - update
     - pi_configs

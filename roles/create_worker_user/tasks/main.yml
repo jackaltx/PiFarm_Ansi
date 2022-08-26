@@ -5,7 +5,6 @@
   ansible.builtin.group:
     name: "{{ worker_group }}"
     state: present
-  tags: create_user
 
 - name: 'Create the user'
   become: yes
@@ -15,7 +14,6 @@
     shell: /bin/bash
     # home: "{{ home_dir }}"
     generate_ssh_key: yes
-  tags: create_user
 
 - name: Set authorized key taken from file
   become: yes
@@ -23,7 +21,6 @@
     user: "{{ worker_user }}"
     state: present
     key: "{{ lookup('file', remote_ssh_access_key) }}"
-  tags: create_user
 
 # SMELL....no password sudoer!!!!!!
 
@@ -35,14 +32,15 @@
     line: "%{{ worker_group }} ALL=(ALL) NOPASSWD: ALL"
     validate: 'visudo -cf %s'
 
+# TODO:  vault not working 
+
 - block:
-  - name: Get the new pi password from secrets
+  - name: "Get the new {{ worker_user }} password from secrets"
     include_vars: vault.yml
   
-  - name: change the pi password
+  - name: "change/set the {{ worker_user }} password"
     ansible.builtin.user: 
-      name: pi
+      name: "{{ worker_user }}"
       update_password: always
       password: "{{ new_passwd|password_hash('sha512') }}"
-  when:  change_pi_password
-  tags:  reset_pi_password
+  when:  change_user_password

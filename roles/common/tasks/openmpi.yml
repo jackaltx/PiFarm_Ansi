@@ -1,11 +1,16 @@
 ---
-- name: Install mpi4py
+- name: Install openmpi packages
   ansible.builtin.package: 
     name: 
-      - python3-mpi4py
-      - libatlas-base-dev 
-      - mpich 
-      - gfortran
+      - openmpi-bin
+      - openmpi-common
+      - libopenmpi3
+      - libopenmpi-dev
+      #- python3-mpi4py
+      #- libatlas-base-dev 
+      - mpich
+      - mpi4py
+      #- gfortran
     state: present
     update_cache: true
   become: true

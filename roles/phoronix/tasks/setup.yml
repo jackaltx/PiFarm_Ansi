@@ -1,0 +1,72 @@
+---
+
+- name: phoronix suite prerequisites
+  ansible.builtin.package:
+    name:
+      - php-cli
+      - php-xml
+    state: latest
+  become: true
+
+- name: "Download phoronix tarball ({{ phoronix_ver }})"
+  ansible.builtin.get_url:
+    url: "https://www.phoronix-test-suite.com/releases/phoronix-test-suite-{{ phoronix_ver }}.tar.gz"
+    dest: "{{ phoronix_working_dir }}"
+    mode: '0644'
+  become: true
+
+- name: Extract phoronix tarball
+  ansible.builtin.unarchive:
+    src: "{{ phoronix_working_dir }}/phoronix-test-suite-{{ phoronix_ver }}.tar.gz"
+    dest: "{{ phoronix_working_dir }}"
+    remote_src: yes
+  #become: true
+
+# -----------------
+- name: Create the phoronix directories in /var/lib
+  ansible.builtin.command: 
+    cmd: "./phoronix-test-suite system-info"
+    chdir: "{{ phoronix_working_dir }}/phoronix-test-suite"
+  register: phoronix_cmd
+  become: true
+#- debug: msg="{{phoronix_cmd.stdout}}"
+
+- name: store locally phoronix system-info results
+  local_action: 
+    module: ansible.builtin.copy
+    content: "{{ phoronix_cmd.stdout_lines | join('\n') }}" 
+    dest: "{{ lookup('env', 'PWD') }}/benchmarks/phoronix_system-info_{{ inventory_hostname }}.log"
+
+# -----------------
+- name: Create the phoronix directories in /var/lib
+  ansible.builtin.command: 
+    cmd: "./phoronix-test-suite list-recommended-tests"
+    chdir: "{{ phoronix_working_dir }}/phoronix-test-suite"
+  register: phoronix_cmd
+  become: true
+#- debug: msg="{{phoronix_cmd.stdout}}"
+
+- name: store locally phoronix system-info results
+  local_action: 
+    module: ansible.builtin.copy
+    content: "{{ phoronix_cmd.stdout_lines | join('\n') }}" 
+    dest: "{{ lookup('env', 'PWD') }}/benchmarks/phoronix_recommended-tests_{{ inventory_hostname }}.log"
+
+# -----------------
+# SMELL
+# /var/lib/phoronix-test-suite/test-suites/local/pifarmworker
+- name: Create local phoronix test suites directory
+  ansible.builtin.file:
+    path: "{{ phoronix_config_root }}"  
+    state: directory
+  become: true
+
+
+- name: install raspberrypi test suites
+  ansible.builtin.copy:
+    src:  "site-definition.xml"
+    dest: "{{ phoronix_config_root }}/suite-definition.xml"
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  become: true
