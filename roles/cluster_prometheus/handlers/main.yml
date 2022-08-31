@@ -2,8 +2,13 @@
 # handlers file for cluster_prometheus
 
 - name: Restart prometheus service
-  service:
+  ansible.builtin.service:
     name: prometheus
     state: restarted
   become: true
 
+- name: Restart node exporter
+  ansible.builtin.service:
+    name: prometheus-node-exporter
+    state: restarted
+  become: true

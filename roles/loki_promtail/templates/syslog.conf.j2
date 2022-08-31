@@ -1,16 +1,23 @@
 # {{ ansible_managed }}
 
 #Enable sending system logs over UDP to rsyslog server
-# *.* @192.168.11.10:514
-
+# *.* @{{ loki_log_collector }}:{{ loki_log_port }}
 #Enable sending system logs over TCP to rsyslog server
-# *.* @@192.168.11.10:1514
-
-
-*.* @@(o){{ loki_log_collector }}:{{ loki_log_port }};RSYSLOG_SyslogProtocol23Format
-
+# *.* @@{{ loki_log_collector }}:{{ loki_log_port }}
 #$ActionQueueFileName queue
 #$ActionQueueMaxDiskSpace 1g
 #$ActionQueueSaveOnShutdown on
 #$ActionQueueType LinkedList
 #$ActionResumeRetryCount -1
+
+#*.* @@(o){{ loki_log_collector }}:{{ loki_log_port }};RSYSLOG_SyslogProtocol23Format
+
+# https://docs.graylog.org/docs/syslog
+
+*.* action(type="omfwd"
+queue.type="LinkedList"
+action.resumeRetryCount="-1"
+queue.size="10000"
+queue.saveonshutdown="on"
+template="RSYSLOG_SyslogProtocol23Format"
+target="{{ loki_log_collector }}" Port="{{ loki_log_port }}" Protocol="tcp")

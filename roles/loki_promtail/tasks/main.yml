@@ -5,8 +5,8 @@
   # workers will need to export logs
   - name: Install custom rsyslog config
     ansible.builtin.template:
-      src: syslog.j2
-      dest: "/ets/rsyslogd/pifarm-collector"
+      src: syslog.conf.j2
+      dest: "/etc/rsyslog.d/pifarm-collector.conf"
       owner: root
       group: root
       mode: 0644
@@ -14,8 +14,9 @@
 
   - name: restart log service
     ansible.builtin.service:
-      name: prometheus-node-exporter.service
+      name: rsyslog
       state: restarted
+    become: true
 
   when:  pifarm_export_logs
 
@@ -41,18 +42,18 @@
     become: true
 
   - name: Install custom promtail config
-      ansible.builtin.template:
-        src: promtail.yml.j2
-        dest: "/etc/promtail.yml"
-        owner: root
-        group: root
-        mode: 0644
-      become: true
+    ansible.builtin.template:
+      src: promtail.yml.j2
+      dest: "/etc/promtail.yml"
+      owner: root
+      group: root
+      mode: 0644
+    become: true
 
   - name: (re)start promtail service
     ansible.builtin.service:
-      name: promtail.service
+      name: promtail
       state: restarted
       daemon_reload: yes
   
-  when: pifarm_collect_logs:
+  when: pifarm_collect_logs

@@ -7,6 +7,16 @@
     update_cache: true
   become: true
 
+- name: Replace the default /etc/default/prometheus-node-exporter 
+  ansible.builtin.copy:
+    src: node_exporter_defaults.conf
+    dest: /etc/default/prometheus-node-exporter
+    owner: root
+    group: root
+    mode: '644'
+  notify: Restart node exporter
+  become: true
+
 - name: Create /etc/prometheus directory if it does not exist
   ansible.builtin.file:
     path: /etc/prometheus
@@ -28,6 +38,6 @@
 - name: Start node exporter
   ansible.builtin.service:
     name: prometheus-node-exporter
-    state: started
+    state: restarted
   become: true
 
