@@ -1,13 +1,5 @@
 ---
-- hosts: all
-  gather_facts: no
-  become: false
-  tasks:
-
-    - name: Check if connection is possible
-      ansible.builtin.command: id
-      changed_when: false
-      register: result
- 
-    - debug:
-        var: result
+- hosts: worker1
+  gather_facts: yes
+  roles:
+    - loki_promtail

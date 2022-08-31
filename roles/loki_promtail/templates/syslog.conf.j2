@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+
+#Enable sending system logs over UDP to rsyslog server
+# *.* @192.168.11.10:514
+
+#Enable sending system logs over TCP to rsyslog server
+# *.* @@192.168.11.10:1514
+
+
+*.* @@(o){{ loki_log_collector }}:{{ loki_log_port }};RSYSLOG_SyslogProtocol23Format
+
+#$ActionQueueFileName queue
+#$ActionQueueMaxDiskSpace 1g
+#$ActionQueueSaveOnShutdown on
+#$ActionQueueType LinkedList
+#$ActionResumeRetryCount -1

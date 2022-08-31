@@ -13,6 +13,9 @@ all:
     # BAD SMELL... Hardcoded IP used for prometheus.
     prometheus_monitor_ip: 192.168.11.10
 
+    # where to send the syslogs to for collection
+    loki_log_collector: 192.168.11.10
+
     # SMELL...  currently not testing VMs, which will be a mix of debian, arch and rocky
     # I will have a mix of workers and helpers.
     pifarm_update_centos: false
@@ -70,6 +73,10 @@ all:
 
         # this installs prometheus "node_exporters" on the farm
         pifarm_node_exporter: True
+
+        # this sends the logs to the loki collector
+        # SMELL currently only works on the helper .10
+        pifarm_export_logs: True
 
         # TODO  currently this only manages the client.  I like the
         # "cluster_nfs" role to handle both parts.

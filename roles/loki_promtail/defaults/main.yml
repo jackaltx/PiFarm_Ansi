@@ -1,0 +1,16 @@
+---
+# defaults file for loki_promtail
+
+loki_version: v2.6.1
+loki_working_dir: /tmp
+loki_exe_dir: /usr/local/bin
+
+promtail_config_file: /etc/promtail.yml
+
+loki_server_address: 127.0.0.1
+loki_log_collector: 192.168.11.10
+loki_log_port: 1514
+
+pifarm_export_logs: no
+pifarm_collect_logs: no
+pifarm_grafana_server: no

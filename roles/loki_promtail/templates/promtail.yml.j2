@@ -1,0 +1,47 @@
+# {{ ansible_managed }}
+
+# See:  https://grafana.com/docs/loki/latest/clients/promtail/configuration/
+#       https://grafana.com/docs/loki/latest/clients/promtail/scraping/
+
+
+## =======================
+# configure the server
+server:
+  http_listen_port: 9080
+  # http_listen_address: 127.0.0.1
+  http_listen_address: 0.0.0.0
+
+  # gRPC server listen port (0 means random port)
+  grpc_listen_port: 0
+
+  #... log_level: <string> | default = "info"]
+  log_level: warn
+
+
+# =======================
+# Where Promtail will save a file indicating how far it has read into a file.
+positions:
+  filename: "{{ loki_working_dir }}/promtail_positions.yaml"
+
+# =======================
+# The URL where Loki is listening
+clients:
+  - url: "http://{{ loki_server_address }}:3100/api/prom/push"
+
+# =======================
+# Configures how Promtail can scrape logs from a series of targets using a specified discovery method:
+scrape_configs:
+
+# -----------------------
+# IETF Syslog (RFC5424): https://tools.ietf.org/html/rfc5424
+- job_name: syslog
+  syslog:
+    listen_address: 0.0.0.0:1514
+    listen_protocol: tcp
+    idle_timeout: 60s
+    label_structured_data: yes
+    labels:
+      job: "syslog"
+  relabel_configs:
+    - source_labels: ['__syslog_message_hostname']
+      target_label: 'host'

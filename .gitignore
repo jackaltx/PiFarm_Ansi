@@ -25,3 +25,7 @@ roles/ansible-role-grafana/
 # my temporary testing scripts that I don't want released
 ./scratch_*
 
+
+#
+authorized_keys
+

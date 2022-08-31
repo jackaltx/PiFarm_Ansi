@@ -1,0 +1,58 @@
+---
+
+- block:
+
+  # workers will need to export logs
+  - name: Install custom rsyslog config
+    ansible.builtin.template:
+      src: syslog.j2
+      dest: "/ets/rsyslogd/pifarm-collector"
+      owner: root
+      group: root
+      mode: 0644
+    become: true
+
+  - name: restart log service
+    ansible.builtin.service:
+      name: prometheus-node-exporter.service
+      state: restarted
+
+  when:  pifarm_export_logs
+
+
+
+# tasks file for loki_promtail
+- block:
+  # create promtail user per: https://sbcode.net/grafana/install-promtail-service/
+  # flag -print-config-stderr
+
+  - name: "Download promtail tarball ({{ loki_version }})"
+    ansible.builtin.get_url:
+      url: "https://github.com/grafana/loki/releases/download/{{ loki_version }}/promtail-linux-arm64.zip"
+      dest: "{{ loki_working_dir }}"
+      mode: '0644'
+    become: true
+
+  - name: Extract promtail tarball
+    ansible.builtin.unarchive:
+      src: "{{ loki_working_dir }}/promtail-linux-arm64.zip"
+      dest: "{{ loki_exe_dir }}"
+      remote_src: yes
+    become: true
+
+  - name: Install custom promtail config
+      ansible.builtin.template:
+        src: promtail.yml.j2
+        dest: "/etc/promtail.yml"
+        owner: root
+        group: root
+        mode: 0644
+      become: true
+
+  - name: (re)start promtail service
+    ansible.builtin.service:
+      name: promtail.service
+      state: restarted
+      daemon_reload: yes
+  
+  when: pifarm_collect_logs:
