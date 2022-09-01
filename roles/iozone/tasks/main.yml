@@ -1,8 +1,8 @@
 ---
 
 - block:
-  - include: "download_build.yml"
-  - include: "run_benchmark.yml"
+  - include_tasks: "download_build.yml"
+  - include_tasks: "run_benchmark.yml"
   #- include: cleanup.yml
 
   when: 

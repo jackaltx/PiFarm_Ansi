@@ -6,7 +6,7 @@
 # SMELL  use pi facts????
 
 - name: "Update Debian (raspberry pi) JKLJKL"
-  include: "update_pi.yml"
+  include_tasks: "update_pi.yml"
   become: true
   when:
     - pifarm_connected_internet 
@@ -16,7 +16,7 @@
 
 
 - name: "Update Centos systems"
-  include: "update_centos.yml"
+  include_tasks: "update_centos.yml"
   become: true
   when:
     - pifarm_connected_internet 

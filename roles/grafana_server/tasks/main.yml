@@ -30,7 +30,7 @@
       port: "{{ grafana_http_port }}"
 
   #- name: "Install plugins"
-  #  include: "install-plugins.yml"
+  #  include_tasks: "install-plugins.yml"
 
   when: 
     - pifarm_grafana_server

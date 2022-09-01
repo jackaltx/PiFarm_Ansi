@@ -4,24 +4,24 @@
   include_vars: "{{ ansible_os_family }}.yml"
   tags: always
 
-- include: host_name.yml
+- include_tasks: host_name.yml
   when: pifarm_set_hostname
 
-- include: host_tz.yml
+- include_tasks: host_tz.yml
   when: pifarm_set_timezone
 
-- include: hosts_file.yml
+- include_tasks: hosts_file.yml
 
 - block:
 
-  - include: base_install.yml
+  - include_tasks: base_install.yml
 
-  - include: ruby.yml
+  - include_tasks: ruby.yml
     when:
       - ansible_os_family == "Debian"
       - pifarm_install_ruby
 
-  - include: scipy.yml
+  - include_tasks: scipy.yml
     when:
       - ansible_os_family == "Debian"
       - pifarm_install_scipy
@@ -31,10 +31,10 @@
 #      - ansible_os_family == "Debian"
 #      - pifarm_install_mpi
 
-  - include: tmux.yml
+  - include_tasks: tmux.yml
     when: pifarm_install_tmux
 
-  - include: vlans.yml
+  - include_tasks: vlans.yml
     when: 
       - pifarm_manage_vlans
 

@@ -1,5 +1,5 @@
 ---
 
-#- include: apache.yml
-#- include: node_and_npm.yml
-#- include: rabbitmq-server.yml
+#- include_tasks: apache.yml
+#- include_tasks: node_and_npm.yml
+#- include_tasks: rabbitmq-server.yml

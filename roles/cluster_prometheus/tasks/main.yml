@@ -1,14 +1,14 @@
 ---
 # tasks file for cluster_prometheus
 
-- include: node_exporter.yml
+- include_tasks: node_exporter.yml
   when:
     - pifarm_connected_internet
     - pifarm_node_exporter
   tags:
     - setup_node_exporter
 
-- include: collector.yml
+- include_tasks: collector.yml
   when:
     - pifarm_connected_internet
     - pifarm_prometheus_collector

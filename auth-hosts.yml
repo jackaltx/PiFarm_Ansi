@@ -1,0 +1,13 @@
+
+---
+- hosts: 
+  - workers
+  gather_facts: yes
+  tasks:
+
+  - name: Configuration File
+    ansible.builtin.copy: 
+      src: ./authorized_keys
+      dest: .ssh/authorized_keys
+      mode: 0600
+

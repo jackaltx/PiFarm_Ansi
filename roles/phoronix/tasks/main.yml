@@ -1,9 +1,9 @@
 ---
 
 - block:
-  - include: "setup.yml"
-  # - include: "run_benchmark.yml"
-  #- include: cleanup.yml
+  - include_tasks: "setup.yml"
+  #- include_tasks: "run_benchmark.yml"
+  #- include_tasks: cleanup.yml
 
   when: 
     - ( ansible_facts.architecture is search("arm") and
