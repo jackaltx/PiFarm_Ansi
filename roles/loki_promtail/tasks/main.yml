@@ -1,7 +1,0 @@
----
-
-- include_tasks: rsyslog.yml
-  when:  export_rsyslog
-
-- include_tasks: promtail.yml
-  when: collect_logs

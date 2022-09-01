@@ -1,0 +1,13 @@
+---
+- include_tasks: rsyslog.yml
+  when:  export_rsyslog
+
+# SMELL reusing promtail/loki user/group due to use common storage.  is this best way???
+- include_tasks: common.yml
+  when: collect_logs
+
+- include_tasks: promtail.yml
+  when: collect_logs
+
+- include_tasks: loki.yml
+  when: collect_logs

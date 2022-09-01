@@ -16,7 +16,7 @@ global:
 alerting:
   alertmanagers:
   - static_configs:
-    - targets: ['{{prometheus_server}}:9093']
+    - targets: ['{{prometheus_alert_server}}:9093']
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -35,9 +35,9 @@ scrape_configs:
 
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
-
     static_configs:
       - targets: ['{{prometheus_server}}:9090']
+      
 
   # ......................................
   - job_name: node
@@ -48,7 +48,8 @@ scrape_configs:
       {% for item in scraped_hosts %}- targets: ['{{item}}:9100']
       {% endfor %}
 
-{% if '{{ prometheus-install_snmp}}' %} 
+
+{% if prometheus_install_snmp is true %} 
   # ......................................
   - job_name: 'snmp'
     static_configs:

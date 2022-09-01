@@ -30,7 +30,7 @@
       dump: "{{ item.dump | default(omit) }}"
       passno: "{{ item.passno | default(omit) }}"
       state: "{{ item.state | default( 'mounted' ) }}"
-    with_items: "{{ pifarm_nfs_share_mounts }}"
+    with_items: "{{ nfs_share_mounts }}"
 
   when:
-    - pifarm_nfs_share_mounts is defined and (pifarm_nfs_share_mounts|length>0)
+    - nfs_share_mounts is defined and (nfs_share_mounts|length>0)

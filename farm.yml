@@ -72,7 +72,7 @@ all:
         pifarm_set_timezone: True
 
         # this installs prometheus "node_exporters" on the farm
-        pifarm_node_exporter: True
+        prometheus_node_exporter: True
 
         # this sends the logs to the loki collector
         # SMELL currently only works on the helper .10
@@ -116,7 +116,11 @@ all:
 
         # Setup the prometheus server for metrics collection
         # currently only one level deep
-        pifarm_prometheus_collector: true
+        prometheus_collector: true
+        prometheus_tsdb_path: /u01/prometheus/metrics2/
+
+        # Override the listening port for the "server", not the collector
+        prometheus_server: '127.0.0.1'
 
         # SMELL:  this will likely only work where the prometheus grafana servers are colocated
         pifarm_grafana_server: true

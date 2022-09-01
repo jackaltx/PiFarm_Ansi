@@ -1,11 +1,13 @@
+# {{ ansible_managed }}
 # /etc/systemd/system/promtail.service
+
 [Unit]
 Description=Promtail service
 After=network.target
 
 [Service]
 Type=simple
-User=promtail
+User={{ loki_user }}
 ExecStart=/usr/local/bin/promtail-linux-arm64 -config.file {{ promtail_config_file }}
 
 [Install]

@@ -4,5 +4,5 @@
   - helpers
   gather_facts: yes
   roles:
-    #- cluster_prometheus
-    - loki_promtail
+    - cluster_prometheus
+    #- cluster_loki

@@ -9,22 +9,35 @@
   roles:
 
     # Create the shared user
+    # SMELL  Currently creates the "farmer" admin user.  There is a pi user created on the OS.
+    #        Test making one ( and only one ) use on the pi's
     - create_worker_user
 
-    # Note we assume there is a proper user on all the PiFarm cluster nodes.
+    # SMELL we assume there is a common admin user on all the PiFarm cluster nodes.
+    # Update the OS, not the firmware
     - update
+
+    # sets up the boot modules, wifi, ...
     - pi_configs
+    
+    # install common packages
     - common
+
     - worker_config
+
+    # mount any usb drives
     - usb_hd_mount
 
-    # Note: this configures both node_exporters and collectors
+    # Configure node_exporters and collectors
     - cluster_prometheus
+
+    # configure a log collector
+    - cluster_loki
 
     # Services
     - nfs_server
     - nfs4_mount
 
-    # not sure what this one yet....investigate
+    # a rework that may be OBE ... investigate
     # - farm-tools/prometheus_server
     

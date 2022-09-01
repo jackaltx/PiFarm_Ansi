@@ -1,5 +1,10 @@
 ---
 # tasks file for pi_configs
+# indented to be called for "cluster initialize" on Rasberry Pi's
+
+
+# SMELL: used to turn off WiFI...needs a turn on
+# SMELL: adds cgroup, needs a "delete cgroup"
 
 - block:
 
@@ -12,9 +17,6 @@
       force: no
     # when: pi_image_setup_cgroup is defined and pi_image_setup_cgroup is True
     become: True
-    tags:
-      - configure
-      - cgroup
 
   - name: Enable cgroup on Pi
     ansible.builtin.command:
@@ -22,10 +24,6 @@
     # when: pi_image_setup_cgroup is defined and pi_image_setup_cgroup is True
     become: True
     
-    tags:
-      - configure
-      - cgroup
-
   # .............................................
   # - block: 
   #   - name: Get WiFi country
@@ -60,16 +58,7 @@
       changed_when: False
       ignore_errors: True
 
-    tags:
-      - wifi_off
-
-   
-
-
-
+  # SMELL:  find a "this is a pi I work on" conditional
   when:
     - ansible_os_family == "Debian" 
-    - vars['ansible_distribution_release'] == 'buster'
     - vars['ansible_machine'] == 'aarch64'
-  #tags:
-  #  - cgroup

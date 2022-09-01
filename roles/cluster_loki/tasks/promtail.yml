@@ -23,33 +23,6 @@
     mode: 0644
   become: true
 
-- name: Ensure group "promtail" exists
-  ansible.builtin.group:
-    name: promtail
-    state: present
-  become: true
-
-- name: Add user "promtail"  
-  user:
-    name: promtail
-    group: promtail
-    groups: adm
-    shell: /sbin/nologin
-    create_home: no
-    append: yes
-    comment: "Promtail nologin User"
-    state: present
-  become: true
-
-- name: Create storage
-  ansible.builtin.file:
-    path: /u01/loki
-    state: directory
-    owner: promtail
-    group: promtail
-    mode: '0755'
-  become: true
-
 - name: Install custom promtail service
   ansible.builtin.template:
     src: systemd-promtail.service.j2
@@ -59,9 +32,10 @@
     mode: '0644'
   become: true
 
-- name: (re)start promtail service
+- name: (Re)start and enable promtail service
   ansible.builtin.service:
     name: promtail
     state: restarted
+    enabled: yes
     daemon_reload: yes
   become: true

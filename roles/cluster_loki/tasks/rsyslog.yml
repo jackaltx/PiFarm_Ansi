@@ -4,7 +4,7 @@
 # SMELL  config
 - name: Install custom rsyslog config
   ansible.builtin.template:
-    src: syslog.conf.j2
+    src: syslog_defaults.conf.j2
     dest: "/etc/rsyslog.d/pifarm-collector.conf"
     owner: root
     group: root

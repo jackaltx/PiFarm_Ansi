@@ -1,0 +1,41 @@
+---
+
+- name: "Download loki tarball ({{ loki_version }})"
+  ansible.builtin.get_url:
+    url: "https://github.com/grafana/loki/releases/download/{{ loki_version }}/loki-linux-arm64.zip"
+    dest: "{{ loki_working_dir }}"
+    mode: '0644'
+  become: true
+
+- name: Extract loki tarball
+  ansible.builtin.unarchive:
+    src: "{{ loki_working_dir }}/loki-linux-arm64.zip"
+    dest: "{{ loki_exe_dir }}"
+    remote_src: yes
+  become: true
+
+- name: Install custom loki config
+  ansible.builtin.template:
+    src: loki.yml.j2
+    dest: "{{ loki_config_file }}"
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: Install custom loki service
+  ansible.builtin.template:
+    src: systemd-loki.service.j2
+    dest: "/etc/systemd/system/loki.service"
+    owner: "{{ loki_user }}"
+    group: "{{ loki_group }}"
+    mode: '0644'
+  become: true
+
+- name: (Re)start and enable loki service
+  ansible.builtin.service:
+    name: loki
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  become: true

@@ -3,7 +3,7 @@
 auth_enabled: false
 
 server:
-  http_listen_port: 3100
+  http_listen_port: {{ loki_port }}
 
 ingester:
   lifecycler:
@@ -15,6 +15,9 @@ ingester:
     final_sleep: 0s
   chunk_idle_period: 1m
   chunk_retain_period: 30s
+  wal:
+    enabled: true
+    dir: "{{ loki_working_dir }}/wal"
 
 schema_config:
   configs:

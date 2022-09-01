@@ -1,0 +1,27 @@
+---
+- name: "Ensure group {{ loki_group }} exists"
+  ansible.builtin.group:
+    name: "{{ loki_group }}"
+    state: present
+  become: true
+
+- name: Add nologin user "{{ loki_user }}"  
+  user:
+    name: "{{ loki_user }}"
+    group: "{{ loki_group }}"
+    groups: adm,prometheus
+    shell: /sbin/nologin
+    create_home: no
+    append: yes
+    comment: "Promtail nologin User"
+    state: present
+  become: true
+
+- name: Create storage
+  ansible.builtin.file:
+    path: "{{ loki_working_dir }}"
+    state: directory
+    owner: "{{ loki_user }}"
+    group: "{{ loki_group }}"
+    mode: '0755'
+  become: true

@@ -1,7 +1,4 @@
 ---
 
-# Assumes this machine is the collector.
-prometheus_server: "{{ ansible_eth0.ipv4.address }}"
-
 # Assumes the whole cluster is using prometheus (workers,helpers)
 scraped_hosts: "{{ hostvars[inventory_hostname]['groups']['workers']  }}"

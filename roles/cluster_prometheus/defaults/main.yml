@@ -2,18 +2,27 @@
 # defaults file for cluster_prometheus
 
 # By default we are connected to the internet, so we can get updates
+# SMELL set default and remove any "pifarm_connected" dependency
 pifarm_connected_internet: True
 
 # Don't put in the prometheus node exporter
-pifarm_node_exporter: False
+prometheus_node_exporter: False
 
-# The Prometheus monitor server
+# The Prometheus server addresses
 prometheus_monitor_ip:  '127.0.0.1'
+prometheus_alert_server: '127.0.0.1'
+
+# Assumes this machine is the collector.
+prometheus_server: "{{ ansible_eth0.ipv4.address }}"
 
 # By default don't install the server
-pifarm_prometheus_collector: False
+prometheus_collector: False
 
-# Only tested for Ubiquiti EdgeRouter X
+# True Only tested for Ubiquiti EdgeRouter X
 prometheus_install_snmp: False
 
 prometheus_monitor_name: PiFarm
+
+# this is the default time-series database path
+prometheus_tsdb_path: "/var/lib/prometheus/metrics2/"
+

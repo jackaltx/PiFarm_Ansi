@@ -1,12 +1,14 @@
+# {{ ansible_managed }}
 # /etc/systemd/system/loki.service
+
 [Unit]
 Description=Loki service
 After=network.target
 
 [Service]
 Type=simple
-User=root
-ExecStart=/usr/local/bin/loki-linux-arm64 -config.file /etc/loki-config.yml
+User={{ loki_user }}
+ExecStart=/usr/local/bin/loki-linux-arm64 -config.file "{{ loki_config_file }}"
 
 [Install]
 WantedBy=multi-user.target
