@@ -1,7 +1,8 @@
 ---
 - hosts: 
   - workers
+  - helpers
   gather_facts: yes
   roles:
-    - cluster_prometheus
-    #- loki_promtail
+    #- cluster_prometheus
+    - loki_promtail

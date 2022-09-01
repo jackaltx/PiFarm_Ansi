@@ -26,7 +26,7 @@ positions:
 # =======================
 # The URL where Loki is listening
 clients:
-  - url: "http://{{ loki_server_address }}:3100/api/prom/push"
+  - url: "http://{{ loki_server }}:{{ loki_port }}/api/prom/push"
 
 # =======================
 # Configures how Promtail can scrape logs from a series of targets using a specified discovery method:
@@ -43,5 +43,21 @@ scrape_configs:
     labels:
       job: "syslog"
   relabel_configs:
+    - source_labels: ["__syslog_connection_ip_address"]
+      target_label: "ip_address"
+    - source_labels: ["__syslog_message_severity"]
+      target_label: "severity"
+    - source_labels: ["__syslog_message_facility"]
+      target_label: "facility"
     - source_labels: ['__syslog_message_hostname']
       target_label: 'host'
+
+# -----------------------
+- job_name: helper1
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: varlogs
+      host: "pi-serv1"
+      __path__: /var/log/*.log

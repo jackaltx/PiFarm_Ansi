@@ -5,3 +5,4 @@
   notify:
     - Restart server
     - Wait for server to restart
+  become: true

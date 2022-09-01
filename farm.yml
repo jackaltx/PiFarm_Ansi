@@ -76,22 +76,17 @@ all:
 
         # this sends the logs to the loki collector
         # SMELL currently only works on the helper .10
-        pifarm_export_logs: True
+        export_rsyslog: True
 
         # TODO  currently this only manages the client.  I like the
         # "cluster_nfs" role to handle both parts.
-        pifarm_nfs_share_mounts:
+        mount_nfs_shares:
         - path: "/farmshare"
           location: "192.168.11.10:/u01/farmshare"
         - path: "/rhome"
           location: "192.168.11.10:/u01/rhome"
         - path: "/clusterfs"
           location: "192.168.40.14:/PiFarmCluster"
-
-        # SMELL testing only.  Override defaults
-        nfs_mount_opts: vers=4.1,tcp,sec=sys
-        #nfs_mount_opts: rsize=8192,wsize=8192,timeo=14,intr
-
 
 
     # ................................................
@@ -117,7 +112,7 @@ all:
         pifarm_set_timezone: True
 
         # SMELL do I need this....the prometheu collector changed the configuration file.
-        pifarm_node_exporter: True
+        pifarm_node_exporter: true
 
         # Setup the prometheus server for metrics collection
         # currently only one level deep
@@ -128,15 +123,19 @@ all:
 
         # TODO  save the mounts as vault items?
         # TODO  separate the shares and options from the authorized IPs
-        pifarm_export_nfs_share: true
-        pifarm_nfs_exports:
+        export_nfs_shares: true
+        nfs_exports:
           #- "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
           - "/u01/rhome 192.168.11.0/24(rw,sync,no_subtree_check)"
           - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
 
-        pifarm_nfs_share_mounts:
+        # mount from lab NAS
+        mount_nfs_shares:
         - path: "/clusterfs"
           location: "192.168.40.14:/PiFarmCluster"
+
+        # configure as  Promtail colletor for system logs
+        collect_logs: true
 
 
     # ................................................

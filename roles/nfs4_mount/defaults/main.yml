@@ -2,10 +2,11 @@
 # defaults file for roles/nfs-mount
 
 # List of NFS shares
-nfs_share_mounts: []
+mount_nfs_shares: []
 
 # NFS version, default 4
 nfs_version: 4
 
 # Default NFS4 mount options
-nfs_mount_opts: rsize=8192,wsize=8192,timeo=14,intr
+#nfs_mount_opts: rsize=8192,wsize=8192,timeo=14,intr
+nfs_mount_opts: vers=4.1,tcp,sec=sys

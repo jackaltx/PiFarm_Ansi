@@ -1,0 +1,18 @@
+---
+
+# workers will need to export logs to a promtail instance
+# SMELL  config
+- name: Install custom rsyslog config
+  ansible.builtin.template:
+    src: syslog.conf.j2
+    dest: "/etc/rsyslog.d/pifarm-collector.conf"
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: restart log service
+  ansible.builtin.service:
+    name: rsyslog
+    state: restarted
+  become: true
