@@ -1,0 +1,62 @@
+---
+
+# SMELL  all files in /etc/grafana owned by root.grafana ???
+- name: "Grafana - tailor grafana.ini"
+  template:
+    src: grafana.ini.j2
+    dest: "{{ CONF_FILE }}"
+    owner: "root"
+    group: "{{ GRAFANA_GROUP }}"
+    mode: 0640
+  notify: restart grafana
+  become: yes
+
+# Datasource block
+# SMELL  all files in /etc/grafana owned by root.grafana ???
+- block:
+    - name: "Grafana - dashboard provisioning"
+      ansible.builtin.template:
+        src:   provision_dashboard.yml.j2
+        dest:  "{{ PROVISIONING_CFG_DIR }}/dashboards/pifarm.yml"
+        owner: "root"
+        group: "{{ GRAFANA_GROUP }}"
+        mode: 0640
+      notify: restart grafana
+
+    - name: "Grafana - datasource provisioning"
+      ansible.builtin.template:
+        src:   "provision_datasource.yml.j2"
+        dest:  "{{ PROVISIONING_CFG_DIR }}/datasources/pifarm.yml"
+        owner: "root"
+        group: "{{ GRAFANA_GROUP }}"
+        mode: 0640
+      notify: restart grafana
+
+  become: true
+  when: grafana_provisioning
+
+# Dashboard block
+- block:
+
+    # SMELL  this feels wrong....it is a git clone.
+    #- name: "Remove {{ grafana_dir_dashboards }}"
+    #  ansible.builtin.file:
+    #    path: "{{ grafana_dir_dashboards }}"
+    #    state: absent
+
+    - name: "checkout dashboards from file dir to {{ grafana_dir_dashboards }}"
+      ansible.builtin.git:
+        repo: https://github.com/jackaltx/PiFarm_Dashboards.git
+        dest: "{{ grafana_dir_dashboards }}"
+
+    - name: "Changing dashboard fileownership {{ grafana_dir_dashboards }}"
+      ansible.builtin.file:
+        path: "{{ grafana_dir_dashboards }}"
+        state: directory
+        recurse: yes
+        owner: "{{ GRAFANA_USER }}"
+        group: "{{ GRAFANA_GROUP }}"
+        mode: 0750
+
+  become: true
+  when: grafana_install_dashboards

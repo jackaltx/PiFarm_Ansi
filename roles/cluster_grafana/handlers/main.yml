@@ -1,0 +1,20 @@
+---
+# handlers file for cluster_grafana
+
+- name: stop grafana
+  service:
+    name: grafana-server
+    state: stopped
+  become: yes
+
+- name: start grafana
+  service:
+    name: grafana-server
+    state: started
+  become: yes
+
+- name: restart grafana
+  service:
+    name: grafana-server
+    state: restarted
+  become: yes

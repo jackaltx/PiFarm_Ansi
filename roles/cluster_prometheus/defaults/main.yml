@@ -26,3 +26,6 @@ prometheus_monitor_name: PiFarm
 # this is the default time-series database path
 prometheus_tsdb_path: "/var/lib/prometheus/metrics2/"
 
+# TODO SMELL each end-point will have it's own mib and be in its own "prometheus job"
+mib_module: piswitch
+

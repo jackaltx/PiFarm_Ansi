@@ -1,0 +1,28 @@
+---
+# tasks file for cluster_grafana
+
+# https://grafana.com/tutorials/install-grafana-on-raspberry-pi/
+
+# grafana repository
+- block:
+
+  - include_tasks: install.yml
+
+  # BAD SMELL ... loki_user is a hard code shared variable betwen cluster_loki and here.
+  # it assumes and forces colocation of promtail and grafana services
+  - name: add grafana group to the loki user
+    user:
+      name: "{{ loki_user }}"
+      groups: "{{ GRAFANA_GROUP }}"
+      append: yes
+      state: present
+    become: true
+
+  - include_tasks: provision.yml
+  # - include_tasks: run.yml
+
+  become: true
+  when: 
+    - grafana_server
+    - ansible_os_family == 'Debian'
+

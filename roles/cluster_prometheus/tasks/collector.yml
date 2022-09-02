@@ -45,6 +45,14 @@
   become: true
 
 # ..........................................
+# https://bpg.id.au/2020/04/24/devices-with-different-communities-and-prometheuss-snmp-exporter/
+# https://nsrc.org/workshops/2021/apricot2021/nmm/netmgmt/en/prometheus/ex-snmp-exporter.htm
+# free iReasoning MIB Browser
+# ?????  https://labs.consol.de/omd/howtos/prometheus_snmp_exporter/index.html
+# https://brendonmatheson.com/2021/02/07/step-by-step-guide-to-connecting-prometheus-to-pfsense-via-snmp.html
+# 
+
+
 - block:
   - name: Install snmp with mibs and exporter for Ubiquiti
     apt: 
@@ -56,6 +64,7 @@
     become: yes
     notify:
       - Restart prometheus service
+      - Restart snmp exporter
 
   - name: Configure Prometheus snmp.yml
     copy:
@@ -66,6 +75,7 @@
       mode: '0644'
     become: yes
 
+  # SMELL  this needs to be a download !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   - name: Copy the Ubiquiti MIB file to the proper location
     copy:
       src: UBNT-MIB 

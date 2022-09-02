@@ -1,0 +1,18 @@
+---
+# vars file for cluster_grafana
+
+# SMELL these are set /etc/default/grafana, but ...
+#         I don't know how to load them.  
+#         I used to push them into the defaults, but that has it's own set of woes
+# TODO  prune these when done
+
+GRAFANA_USER: grafana
+GRAFANA_GROUP: grafana
+GRAFANA_HOME: /usr/share/grafana
+CONF_FILE: /etc/grafana/grafana.ini
+PLUGINS_DIR: /var/lib/grafana/plugins
+PROVISIONING_CFG_DIR: /etc/grafana/provisioning
+DATA_DIR: /var/lib/grafana
+
+# bad as that was, this is worse!!!!!
+loki_user: promtail

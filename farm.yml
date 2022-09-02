@@ -5,11 +5,6 @@ all:
   vars:
     pifarm_domainname: pifarm.lab
 
-    # BAD SMELL... This is used for SNMP only, which worked for UBNT edgerouter.
-    # the prometheus service configuration file uses this ONLY
-    # this needs to transform to a list of SNMP network devices used for prometheus.
-    pifarm_net_gw: 192.168.11.1
-
     # BAD SMELL... Hardcoded IP used for prometheus.
     prometheus_monitor_ip: 192.168.11.10
 
@@ -111,12 +106,15 @@ all:
         pifarm_set_hostname: True
         pifarm_set_timezone: True
 
-        # SMELL do I need this....the prometheu collector changed the configuration file.
+        # SMELL do I need this....the prometheus collector changed the configuration file.
         pifarm_node_exporter: true
 
         # Setup the prometheus server for metrics collection
         # currently only one level deep
-        prometheus_collector: true
+        # SMELL  single target only for now
+        prometheus_collector: True
+        prometheus_install_snmp: True
+        prometheus_snmp_target: 192.168.11.2
         prometheus_tsdb_path: /u01/prometheus/metrics2/
 
         # Override the listening port for the "server", not the collector
@@ -124,6 +122,7 @@ all:
 
         # SMELL:  this will likely only work where the prometheus grafana servers are colocated
         pifarm_grafana_server: true
+        grafana_server: true
 
         # TODO  save the mounts as vault items?
         # TODO  separate the shares and options from the authorized IPs
@@ -138,8 +137,11 @@ all:
         - path: "/clusterfs"
           location: "192.168.40.14:/PiFarmCluster"
 
-        # configure as  Promtail colletor for system logs
+        # configure as  Promtail collector for system logs
         collect_logs: true
+
+        # export the logs to myself...better than a scrap ?
+        export_rsyslog: True
 
 
     # ................................................

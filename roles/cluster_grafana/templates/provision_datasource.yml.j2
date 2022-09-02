@@ -1,0 +1,32 @@
+---
+
+# {{ ansible_managed }}
+
+# config file version
+apiVersion: 1
+
+# list of datasources that should be deleted from the database
+deleteDatasources:
+  - name: Prometheus
+  - name: Loki
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://{{ prometheus_server_host }}:{{ prometheus_server_port }}
+    jsonData:
+      graphiteVersion: "1.1"
+      tlsAuth: false
+      tlsAuthWithCACert: false
+    version: 1
+    editable: true
+
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://{{ prometheus_server_host }}:3100
+    jsonData:
+      manageAlerts: false
+    version: 1
+    editable: true

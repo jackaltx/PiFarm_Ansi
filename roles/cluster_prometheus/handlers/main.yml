@@ -12,3 +12,9 @@
     name: prometheus-node-exporter
     state: restarted
   become: true
+
+- name: "Restart snmp exporter"
+  ansible.builtin.service:
+    name: prometheus-snmp-exporter
+    state: restarted
+  become: true

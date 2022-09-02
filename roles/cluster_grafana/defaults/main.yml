@@ -1,0 +1,32 @@
+---
+# defaults file for cluster_grafana
+
+grafana_server: false
+
+# used for development only
+grafana_install_dashboards: true
+
+# used for development only
+grafana_provisioning: true
+
+# get files from the official grafana repo
+repo_key: "https://packages.grafana.com/gpg.key"
+repo: "deb https://packages.grafana.com/oss/deb stable main"
+
+# default is 3000 
+grafana_port: 3000
+
+# Assumes this machine is the collector.
+grafana_listen: "{{ ansible_eth0.ipv4.address }}"
+
+# SMELL  these variable names are not consistent with cluster_prometheus role
+prometheus_server_host: 192.168.11.10
+prometheus_server_port: 9090
+
+# SMELL  there must be a better way
+grafana_admin_user: admin
+grafana_admin_password: admin123
+
+# where to store the imported initial dashboards
+# TODO test exporting dashboards
+grafana_dir_dashboards: "{{ DATA_DIR }}/dashboards"

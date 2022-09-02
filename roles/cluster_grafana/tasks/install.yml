@@ -1,0 +1,20 @@
+---
+- block:
+  - name: Grafana - Import repository key
+    ansible.builtin.apt_key: 
+      url: "{{ repo_key }}" 
+      state: present
+    ignore_errors: yes
+
+  - name: Grafana - Add repository url
+    ansible.builtin.apt_repository: 
+      repo: "{{ repo }}" 
+      state: present
+      update_cache: yes
+
+  - name: Grafana - Install
+    apt: 
+      name: grafana
+      state: present
+
+  become: true

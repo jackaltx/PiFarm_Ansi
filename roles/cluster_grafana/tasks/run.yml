@@ -1,0 +1,14 @@
+---
+- block:
+  - name: "Grafana - Enable and (re)start"
+    service:
+      name: grafana-server
+      enabled: yes
+      state: restarted
+    become: yes
+
+  - name: "Wait for Grafana to start..."
+    wait_for:
+      port: "{{ grafana_port }}"
+
+  become: true

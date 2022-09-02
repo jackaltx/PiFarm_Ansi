@@ -1,4 +1,4 @@
-# Ansible configured Prometheus configuration.
+# {{ ansible_managed }}
 
 # ===================================================================
 global:
@@ -54,13 +54,13 @@ scrape_configs:
   - job_name: 'snmp'
     static_configs:
       - targets:
-        - "{{ pifarm_net_gw }}"  # SNMP device.
+        - "{{ prometheus_snmp_target }}"  # SNMP device.
     file_sd_configs:
         - files:
             - /etc/prometheus/snmp.yml
     metrics_path: /snmp
     params:
-      module: [if_mib_ifname]
+      module: [{{ mib_module }}]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target

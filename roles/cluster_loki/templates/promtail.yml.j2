@@ -53,11 +53,11 @@ scrape_configs:
       target_label: 'host'
 
 # -----------------------
-- job_name: helper1
+- job_name: local_grafana
   static_configs:
   - targets:
       - localhost
     labels:
-      job: varlogs
+      job: grafkig
       host: "pi-serv1"
-      __path__: /var/log/*.log
+      __path__: /var/log/grafana/*.log

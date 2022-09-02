@@ -8,5 +8,6 @@ action.resumeRetryCount="-1"
 queue.size="10000"
 queue.saveonshutdown="on"
 KeepAlive="on"
+TCP_Framing="octet-counted"
 template="RSYSLOG_SyslogProtocol23Format"
 target="{{ promtail_collector }}" Port="{{ promtail_port }}" Protocol="tcp")
