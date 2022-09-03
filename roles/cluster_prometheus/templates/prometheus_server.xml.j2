@@ -44,8 +44,9 @@ scrape_configs:
     # If prometheus-node-exporter is installed, grab stats about the local
     # machine by default.
     static_configs:
-      - targets: ['{{prometheus_server}}:9100']
-      {% for item in scraped_hosts %}- targets: ['{{item}}:9100']
+      {% for item in scraped_helpers %}- targets: ['{{item}}:9100']
+      {% endfor %}
+      {% for item in scraped_workers %}- targets: ['{{item}}:9100']
       {% endfor %}
 
 
@@ -67,6 +68,6 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: {{prometheus_server}}:9116  # The SNMP exporter's real hostname:port.
+        replacement: {{ prometheus_server }}:9116  # The SNMP exporter's real hostname:port.
 {% endif %}
 

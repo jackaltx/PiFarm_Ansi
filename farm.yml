@@ -117,8 +117,29 @@ all:
         prometheus_snmp_target: 192.168.11.2
         prometheus_tsdb_path: /u01/prometheus/metrics2/
 
+        # TODO 
+        # https://stackoverflow.com/questions/41908715/ansible-with-subelements
+        # https://stackoverflow.com/questions/55387719/how-to-correctly-define-subelements-in-ansible-jinja2-templatewith-subelements
+        # https://galaxy.ansible.com/jtyr/config_encoder_filters
+        # https://github.com/jtyr/ansible-config_encoder_filters#encode_nginx
+
+        snmp_groups:
+          children:
+            - job: snmp_switch
+              targets: [192.168.11.2]
+              modules: [piswitch]
+              community: pifarm
+            - job: snmp_router
+              targets: [192.168.11.1]
+              modules: [dream]
+              community: homee
+            - job: snmp_neverland
+              targets: [192.168.11.3,192.168.11.3]
+              modules: [piswitch,dream]
+              community: neverland
+
         # Override the listening port for the "server", not the collector
-        prometheus_server: '127.0.0.1'
+        # prometheus_server: '127.0.0.1'
 
         # SMELL:  this will likely only work where the prometheus grafana servers are colocated
         pifarm_grafana_server: true

@@ -46,8 +46,9 @@
 
     - name: "checkout dashboards from file dir to {{ grafana_dir_dashboards }}"
       ansible.builtin.git:
-        repo: https://github.com/jackaltx/PiFarm_Dashboards.git
+        repo: git@github.com:/jackaltx/PiFarm_Dashboards.git
         dest: "{{ grafana_dir_dashboards }}"
+        update: yes
 
     - name: "Changing dashboard fileownership {{ grafana_dir_dashboards }}"
       ansible.builtin.file:
@@ -56,7 +57,7 @@
         recurse: yes
         owner: "{{ GRAFANA_USER }}"
         group: "{{ GRAFANA_GROUP }}"
-        mode: 0750
+        mode: 0755
 
   become: true
   when: grafana_install_dashboards
