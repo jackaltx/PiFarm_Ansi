@@ -1,5 +1,5 @@
 ---
 
 # Assumes the whole cluster is using prometheus (workers,helpers)
-scraped_workers: "{{ hostvars[inventory_hostname]['groups']['workers']  }}"
-scraped_helpers: "{{ hostvars[inventory_hostname]['groups']['helpers']  }}"
+scraped_workers: "{{ hostvars[inventory_hostname]['groups']['workers'] }}"
+scraped_helpers: "{{ hostvars[inventory_hostname]['groups']['helpers'] }}"

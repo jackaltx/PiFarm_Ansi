@@ -1,0 +1,22 @@
+---
+- hosts: helper1
+  gather_facts: no
+  tasks:
+
+    - name: dump hostvars
+      debug:
+        var: hostvars[inventory_hostname]
+
+    - name: Collect only facts returned by facter
+      ansible.builtin.setup:
+        gather_subset:
+          #- '!all'
+          #- '!any'
+          - facter
+      register: facts_result
+    - debug:
+        var: facts_result
+
+    - name: dump hostvars
+      debug:
+        var: hostvars

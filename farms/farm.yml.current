@@ -5,57 +5,92 @@ all:
   vars:
     pifarm_domainname: pifarm.lab
 
-    # SMELL  hardcoded IP 
-    prometheus_monitor_ip: 192.168.2.110
+    # BAD SMELL... Hardcoded IP used for prometheus.
+    prometheus_monitor_ip: 192.168.11.10
+
+    # where to send the syslogs to for collection
+    loki_log_collector: 192.168.11.10
+
+    # SMELL...  currently not testing VMs, which will be a mix of debian, arch and rocky
+    # I will have a mix of workers and helpers.
+    pifarm_update_centos: false
+
+    # ... Is this lab connected to the internet so I can update?
+    # If there is no gateway to the internet, then set this to False.
+    # As my default boot image grow older, this is desired.
+    pifarm_connected_internet: True
+
 
   children:
 
     # ................................................
+    # First the worker hosts, then ...
     workers:
       hosts:
 
       #............................................
         worker1:
-          ansible_host: 192.168.2.100
+          ansible_host: 192.168.11.100
           pifarm_hostname: pi-100
         worker2:
-          ansible_host: 192.168.2.101
+          ansible_host: 192.168.11.101
           pifarm_hostname: pi-101
         worker3:
-          ansible_host: 192.168.2.102
+          ansible_host: 192.168.11.102
           pifarm_hostname: pi-102
         worker4:
-          ansible_host: 192.168.2.103
-          pifarm_hostname: pi-103
+          ansible_host: 192.168.11.114
+          pifarm_hostname: pi-114
         worker5:
-          ansible_host: 192.168.2.108
+          ansible_host: 192.168.11.108
           pifarm_hostname: pi-108
         worker6:
-          ansible_host: 192.168.2.113
+          ansible_host: 192.168.11.113
           pifarm_hostname: pi-113
         #..........................................
 
       vars:
+
+        # SMELL  rethink this
         ansible_user: farmer
 
-        ################### BAD SMELL
+        # BAD SMELL... both hardcoded and dependent on the users key.
         remote_ssh_access_key: "/home/lavender/.ssh/id_rsa.pub"
 
-        # ....this is the "user" to be created a a worker
+        # ....this is the "user" to be created on the worker node to manage it.
+        # SMELL  revaluate accounts.  Currently I have two:  worker and farmer.
+        # They both can manage the pi.
         worker_user: farmer
         worker_group: admin
 
         pifarm_set_hostname: True
         pifarm_set_timezone: True
-        pifarm_node_exporter: True
+
+        # this installs prometheus "node_exporters" on the farm
+        prometheus_node_exporter: True
+
+        # this sends the logs to the loki collector
+        # SMELL currently only works on the helper .10
+        export_rsyslog: True
+
+        # TODO  currently this only manages the client.  I like the
+        # "cluster_nfs" role to handle both parts.
+        mount_nfs_shares:
+        - path: "/farmshare"
+          location: "192.168.11.10:/u01/farmshare"
+        - path: "/rhome"
+          location: "192.168.11.10:/u01/rhome"
+        - path: "/clusterfs"
+          location: "192.168.40.14:/PiFarmCluster"
+
 
     # ................................................
     helpers:
       hosts:
         helper1:
-          ansible_host: 192.168.2.110
+          ansible_host: 192.168.11.10
           pifarm_hostname: pi-serv1
-          # pifarm_install_prometheus: true
+          pifarm_install_prometheus: true
           pifarm_mount_usb_drive: true
 
       vars:
@@ -70,20 +105,83 @@ all:
 
         pifarm_set_hostname: True
         pifarm_set_timezone: True
-        pifarm_node_exporter: True
 
-        export_nfs_share: false
+        # SMELL do I need this....the prometheus collector changed the configuration file.
+        pifarm_node_exporter: true
 
+        # Setup the prometheus server for metrics collection
+        # currently only one level deep
+        # SMELL  single target only for now
+        prometheus_collector: True
+        prometheus_install_snmp: True
+        prometheus_snmp_target: 192.168.11.2
+        prometheus_tsdb_path: /u01/prometheus/metrics2/
+
+        # TODO 
+        # https://stackoverflow.com/questions/41908715/ansible-with-subelements
+        # https://stackoverflow.com/questions/55387719/how-to-correctly-define-subelements-in-ansible-jinja2-templatewith-subelements
+        # https://galaxy.ansible.com/jtyr/config_encoder_filters
+        # https://github.com/jtyr/ansible-config_encoder_filters#encode_nginx
+
+        snmp_groups:
+          children:
+            - job: snmp_switch
+              targets: [192.168.11.2]
+              modules: [piswitch]
+              community: pifarm
+            - job: snmp_router
+              targets: [192.168.11.1]
+              modules: [dream]
+              community: homee
+            - job: snmp_neverland
+              targets: [192.168.11.3,192.168.11.3]
+              modules: [piswitch,dream]
+              community: neverland
+
+        # Override the listening port for the "server", not the collector
+        # prometheus_server: '127.0.0.1'
+
+        # SMELL:  this will likely only work where the prometheus grafana servers are colocated
+        pifarm_grafana_server: true
+        grafana_server: true
+
+        # TODO  save the mounts as vault items?
+        # TODO  separate the shares and options from the authorized IPs
+        export_nfs_shares: true
+        nfs_exports:
+          #- "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
+          - "/u01/rhome 192.168.11.0/24(rw,sync,no_subtree_check)"
+          - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
+
+        # mount from lab NAS
+        mount_nfs_shares:
+        - path: "/clusterfs"
+          location: "192.168.40.14:/PiFarmCluster"
+
+        # configure as  Promtail collector for system logs
+        collect_logs: true
+
+        # export the logs to myself...better than a scrap ?
+        export_rsyslog: True
+
+
+    # ................................................
+    # this is an external box, usually centos or rocky
+    # I am not ready for it
+    # ................................................
+    # ................................................
+    # ................................................
+    # ................................................
     # ................................................
     farmer:
       hosts:
         pi-farmer:
-          ansible_host: 192.168.210.128
+          ansible_host: 192.168.40.3
           pifarm_hostname: farmer
       vars:
         ansible_user: lavender
 
-        # SMELL   track local_ down
+        # SMELL... track all "local_" variables down
         local_user: lavender
         local_group: lavender
         home_dir: /home/lavender
@@ -92,17 +190,4 @@ all:
         pifarm_set_timezone: True
 
         export_nfs_share: false
-        router_ip: 192.168.2.1
-
-# test:
-#   hosts:
-#     pi-102:
-#       ansible_host: 192.168.2.102
-#       ansible_fqdn: pi-102.pifarm.lab
-#   vars:
-#     home_dir: /home/farmer
-#     remote_user_ssh: "/rhome/farmer/.ssh/id_rsa.pub" 
-#     # ....this is the "user" to be created a a worker
-#     worker_user: farmer
-#     worker_group: admin
 
