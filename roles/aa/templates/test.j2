@@ -1,0 +1,12 @@
+  # ......................................
+  - job_name: node
+    # If prometheus-node-exporter is installed, grab stats about the local
+    # machine by default.
+    static_configs:
+      {% for item in the_workers -%}
+      - targets: 
+        - '{{item.ip}}:9100'
+        labels:
+            hostname: {{item.hostname}}
+            farmname: {{ item.name }}
+      {% endfor -%}

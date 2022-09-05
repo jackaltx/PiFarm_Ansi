@@ -1,6 +1,0 @@
----
-
-pifarm_install_prometheus: False
-
-prometheus_install_snmp: False
-prometheus_snmp_target: 192.168.1.1

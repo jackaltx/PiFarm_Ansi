@@ -44,10 +44,20 @@ scrape_configs:
     # If prometheus-node-exporter is installed, grab stats about the local
     # machine by default.
     static_configs:
-      {% for item in scraped_helpers %}- targets: ['{{item}}:9100']
-      {% endfor %}
-      {% for item in scraped_workers %}- targets: ['{{item}}:9100']
-      {% endfor %}
+      {% for item in the_workers -%}
+      - targets: 
+        - '{{item.ip}}:9100'
+        labels:
+            hostname: {{item.hostname}}
+            farmname: {{ item.name }}
+      {% endfor -%}
+      {% for item in the_helpers -%}
+      - targets: 
+        - '{{item.ip}}:9100'
+        labels:
+            hostname: {{item.hostname}}
+            farmname: {{ item.name }}
+      {% endfor -%}
 
 
 {% if prometheus_install_snmp is true %} 

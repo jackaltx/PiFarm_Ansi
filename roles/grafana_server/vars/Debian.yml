@@ -1,7 +1,0 @@
----
-grafana_defaults_file: /etc/default/grafana-server
-grafana_service_name: grafana-server
-grafana_cli: grafana
-grafana_packages:
-  - grafana
-  - apt-transport-https

@@ -35,8 +35,8 @@
     - cluster_loki
 
     # Services
-    - nfs_server
-    - nfs4_mount
+    - nfs_services
+    - nfs_mounts
 
     # a rework that may be OBE ... investigate
     # - farm-tools/prometheus_server

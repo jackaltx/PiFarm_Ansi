@@ -1,8 +1,0 @@
----
-
-- name: Restart prometheus service
-  service:
-    name: prometheus
-    state: restarted
-  become: true
-

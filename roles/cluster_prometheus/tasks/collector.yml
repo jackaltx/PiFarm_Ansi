@@ -24,6 +24,14 @@
     mode: '0755'
   become: true
 
+- set_fact: 
+    the_workers: "{{ the_workers|default([]) + [ { 'name': item, 'ip': hostvars[item]['ansible_host'], 'hostname': hostvars[item]['pifarm_hostname']} ] }}"
+  with_items: "{{ hostvars[inventory_hostname]['groups']['workers'] }}"
+
+- set_fact: 
+    the_helpers: "{{ the_helpers|default([]) + [ { 'name': item, 'ip': hostvars[item]['ansible_host'], 'hostname': hostvars[item]['pifarm_hostname']} ] }}"
+  with_items: "{{ hostvars[inventory_hostname]['groups']['helpers'] }}"
+
 - name: Create tailored prometheus configuration file
   template:
     src: prometheus_server.xml.j2

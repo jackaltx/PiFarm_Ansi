@@ -1,0 +1,21 @@
+---
+
+- name: Dump - groups
+  debug:
+    msg:  "{{ groups }}"
+
+- name: Dump - environment
+  debug:
+    msg:  "{{ environment }}"
+
+- name: Dump - vars
+  debug:
+    msg:  "{{ environment }}"
+
+- name: Dump - group_names
+  debug:
+    msg:  "{{ group_names }}"
+
+- name: Dump - hostvars
+  debug:
+    msg:  "{{ hostvars }}"

@@ -1,0 +1,26 @@
+---
+# tasks file for roles/aa
+
+
+# builds up the facts into the variable "the_workers" looping over the works group
+- set_fact: 
+    the_workers: "{{ the_workers|default([]) + [ { 'name': item, 'ip': hostvars[item]['ansible_host'], 'hostname': hostvars[item]['pifarm_hostname']} ] }}"
+  with_items: "{{ groups['workers'] }}"
+
+
+# How to handle whitespace
+#   https://ttl255.com/jinja2-tutorial-part-3-whitespace-control/
+
+# https://www.middlewareinventory.com/blog/ansible-map/
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_vars_facts.html
+# 
+
+
+- name: Create prometheus configuration file
+  ansible.builtin.template:
+    src: test.j2 
+    dest: /tmp/test_file
+    owner: root
+    group: root
+    mode: '0666'
+  become: true

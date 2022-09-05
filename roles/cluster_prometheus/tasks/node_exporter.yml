@@ -1,11 +1,15 @@
 ---
+
+# ...  Install the current cached version  SMELL ?
+
 - name: Install prometheus node exporter
   ansible.builtin.apt: 
     pkg:
     - prometheus-node-exporter
     state: present
-    update_cache: true
   become: true
+
+# ....  default startup configuration  (pass args in command line) 
 
 - name: Replace the default /etc/default/prometheus-node-exporter 
   ansible.builtin.copy:
@@ -16,6 +20,8 @@
     mode: '644'
   notify: "Restart node exporter"
   become: true
+
+# ....  runtime configuration section
 
 - name: Create /etc/prometheus directory if it does not exist
   ansible.builtin.file:
@@ -33,11 +39,15 @@
     owner: root
     group: root
     mode: '0644'
+  notify: "Restart node exporter"
   become: true
 
-- name: Start node exporter
-  ansible.builtin.service:
-    name: prometheus-node-exporter
-    state: started
-  become: true
+# .... start it?
+# SMELL  moved to handler?
+
+# - name: Start node exporter
+#   ansible.builtin.service:
+#     name: prometheus-node-exporter
+#     state: started
+#   become: true
 

@@ -1,22 +1,52 @@
 ---
 - hosts: helper1
-  gather_facts: no
+  gather_facts: yes
   tasks:
 
-    - name: dump hostvars
-      debug:
-        var: hostvars[inventory_hostname]
+    # - name: dump hostvars
+    #   debug:
+    #     var: hostvars[inventory_hostname]
 
-    - name: Collect only facts returned by facter
-      ansible.builtin.setup:
-        gather_subset:
-          #- '!all'
-          #- '!any'
-          - facter
-      register: facts_result
+    # - name: Collect only facts returned by facter
+    #   ansible.builtin.setup:
+    #     gather_subset:
+    #       #- '!all'
+    #       #- '!any'
+    #       - facter
+    #   register: facts_result
+
+    # - debug:
+    #     var: facts_result
+
+    - name: dump hostvars[worker1]
+      debug:
+        var: hostvars['worker1']['pifarm_hostname']
+
+    - name: dump hostvars[worker1]
+      debug:
+        var: hostvars['worker1']['ansible_host']
+
+    # builds up the facts into the variable "the_workers" looping over the works group
+    - set_fact: 
+        the_workers: "{{ the_workers|default([]) + [ { 'name': item, 'ip': hostvars[item]['ansible_host'], 'hostname': hostvars[item]['pifarm_hostname']} ] }}"
+      with_items: "{{ hostvars[inventory_hostname]['groups']['workers'] }}"
+      # register: the_workers_results
+
+    - debug: 
+        var: the_workers
+ 
+  #  - debug: 
+  #       var: the_workers_results
+
+    - name: make a list
+      set_fact: test="{{ the_workers | map(attribute='name') | list }}"
+
+    - debug: 
+        var: test
+
     - debug:
-        var: facts_result
+        msg: "{{ item['name'] }} ->  {{ item.hostname }} ( {{ item.ip }} )"
+      with_items: "{{ the_workers }}"
 
-    - name: dump hostvars
-      debug:
-        var: hostvars
+
+  
