@@ -5,6 +5,7 @@
   gather_facts: no
   tasks:
 
+  # SMELL  this seems drastic, can "line_in_file" work??
   - name: "Remove the known_hosts file on {{ inventory_hostname }} ({{ ansible_host }}) "
     ansible.builtin.file: 
       path: ~/.ssh/known_hosts

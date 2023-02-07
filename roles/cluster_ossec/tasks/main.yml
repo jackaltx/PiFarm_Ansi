@@ -1,0 +1,44 @@
+---
+# tasks file for roles/cluster_ossec
+
+block:
+
+  # https://grafana.com/blog/2019/08/22/homelab-security-with-ossec-loki-prometheus-and-grafana-on-a-raspberry-pi/
+
+  - name: "checkout the ossec source"
+    ansible.builtin.git:
+      repo: git@github.com:ossec/ossec-hids.git
+      dest: "{{ ossec_dev_root }}"
+      update: yes
+
+  # https://www.ossec.net/docs/docs/manual/installation/index.html
+
+  - name: Install required packages
+    ansible.builtin.package: 
+      name: "{{ ossec_common_pkgs }}"
+      state: present
+      update_cache: true
+    become: True
+    register: package_out
+    
+
+  - name: Package Install Debug Output
+    ansible.builtin.debug:
+      var: package_out
+      verbosity: 1
+
+  #cd ossec-hids-*/src
+  #make TARGET=<server|local|agent>
+  #make install
+
+  - name: build iozone3
+    command: make agent
+    args:
+      chdir: "{{ ossec_dev_root }}/ossec-hids-*/src"
+      creates: iozone
+    become: true
+
+  # makes it so prometheus can scrape the agent.
+  # https://github.com/slim-bean/ossec-metrics/tree/master/cmd/ossec-metrics
+
+when: 

@@ -1,0 +1,14 @@
+---
+# defaults file for roles/cluster_ossec
+
+ossec_dev_root: /tmp
+
+# apt-get install build-essential make zlib1g-dev libpcre2-dev libevent-dev libssl-dev
+
+ossec_common_pkgs:
+  - build-essential
+  - make
+  - zlib1g-dev
+  - libevent-dev
+  - libssl-dev
+  
