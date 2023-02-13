@@ -26,20 +26,12 @@
       - ansible_os_family == "Debian"
       - pifarm_install_scipy
 
-#  - include: openmpi.yml
-#    when:
-#      - ansible_os_family == "Debian"
-#      - pifarm_install_mpi
-
   - include_tasks: tmux.yml
     when: pifarm_install_tmux
 
   - include_tasks: vlans.yml
     when: 
       - pifarm_manage_vlans
-
-  # - include: java.yml
-  # - include: pip.yml
 
   when:
     - pifarm_connected_internet

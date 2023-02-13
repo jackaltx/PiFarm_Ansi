@@ -1,5 +1,4 @@
 ---
 
 pifarm_connected_internet: False
-
-pifarm_update_centos: False
+pifarm_update_farmer: False

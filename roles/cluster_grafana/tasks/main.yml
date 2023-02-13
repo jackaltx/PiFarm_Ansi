@@ -6,7 +6,7 @@
 # grafana repository
 - block:
 
-  - include_tasks: install.yml
+  - include_tasks: install_repo.yml
 
   # BAD SMELL ... loki_user is a hard code shared variable betwen cluster_loki and here.
   # it assumes and forces colocation of promtail and grafana services
@@ -19,7 +19,8 @@
     become: true
 
   - include_tasks: provision.yml
-  # - include_tasks: run.yml
+  
+  - include_tasks: run.yml
 
   become: true
   when: 

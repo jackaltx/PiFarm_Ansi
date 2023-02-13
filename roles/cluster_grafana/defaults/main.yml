@@ -10,6 +10,7 @@ grafana_install_dashboards: true
 grafana_provisioning: true
 
 # get files from the official grafana repo
+# https://grafana.com/tutorials/install-grafana-on-raspberry-pi/
 repo_key: "https://packages.grafana.com/gpg.key"
 repo: "deb https://packages.grafana.com/oss/deb stable main"
 
@@ -17,6 +18,7 @@ repo: "deb https://packages.grafana.com/oss/deb stable main"
 grafana_port: 3000
 
 # Assumes this machine is the collector.
+# SMELL   this will not be true for other
 grafana_listen: "{{ ansible_eth0.ipv4.address }}"
 
 # SMELL  these variable names are not consistent with cluster_prometheus role

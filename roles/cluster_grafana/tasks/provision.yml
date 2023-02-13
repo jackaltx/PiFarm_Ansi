@@ -44,6 +44,18 @@
     #    path: "{{ grafana_dir_dashboards }}"
     #    state: absent
 
+    # - name: Set the permissions for grafana dashboards directory
+    #   ansible.builtin.file:
+    #     path: "{{ grafana_dir_dashboards }}"
+    #     state: directory
+    #     mode: '0777'
+    #     owner: "{{ GRAFANA_USER }}"
+    #     group: "{{ GRAFANA_GROUP }}"
+       
+    - name: git trick
+      ansible.builtin.command:
+        cmd: "git config --global --add safe.directory {{ grafana_dir_dashboards }}"
+
     - name: "checkout dashboards from file dir to {{ grafana_dir_dashboards }}"
       ansible.builtin.git:
         repo: git@github.com:/jackaltx/PiFarm_Dashboards.git

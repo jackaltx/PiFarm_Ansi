@@ -18,7 +18,7 @@
   include_tasks: "update_centos.yml"
   when:
     - pifarm_connected_internet 
-    - pifarm_update_centos
+    - pifarm_update_farmer
     - ansible_os_family == "RedHat"
     - ansible_distribution == "CentOS"
 #   - ansible_distribution_major_version == "8"

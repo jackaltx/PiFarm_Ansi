@@ -7,8 +7,8 @@
       state: restarted
     become: yes
 
-  - name: "Wait for Grafana to start..."
-    wait_for:
-      port: "{{ grafana_port }}"
+  # - name: "Wait for Grafana to start..."
+  #   wait_for:
+  #     port: "{{ grafana_port }}"
 
   become: true

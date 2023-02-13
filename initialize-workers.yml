@@ -1,8 +1,8 @@
 ---
 
 - hosts:
-  - helpers
-  - workers
+    - helpers
+    - workers
   connection: ssh
   become_method: sudo
   gather_facts: yes
@@ -21,23 +21,15 @@
     - pi_configs
     
     # install common packages
-    - common
+    - cluster_common
 
-    - worker_config
+    # this is bashi shell configuration stuff....not required
+    # - worker_config
 
-    # mount any usb drives
+    # mount any usb drives  ??? nvme
     - usb_hd_mount
-
-    # Configure node_exporters and collectors
-    - cluster_prometheus
-
-    # configure a log collector
-    - cluster_loki
 
     # Services
     - nfs_services
     - nfs_mounts
-
-    # a rework that may be OBE ... investigate
-    # - farm-tools/prometheus_server
     

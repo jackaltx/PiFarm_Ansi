@@ -3,8 +3,3 @@
 # By default we are connected to the internet, so we can get updates
 pifarm_connected_internet: True
 
-# Don't put in the prometheus node exporter
-pifarm_node_exporter: False
-
-# The Prometheus monitor server
-prometheus_monitor_ip:  '127.0.0.1'
