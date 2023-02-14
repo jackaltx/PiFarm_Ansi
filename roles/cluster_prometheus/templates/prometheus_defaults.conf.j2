@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 
 # Set the command-line arguments to pass to the server.
-ARGS="--storage.tsdb.path="{{ prometheus_tsdb_path }}"
+ARGS="--storage.tsdb.path="{{ prometheus_tsdb_path }}" --log.level=warn
 
 # Prometheus supports the following options:
 #  --config.file="/etc/prometheus/prometheus.yml"

@@ -66,9 +66,9 @@ scrape_configs:
     static_configs:
       - targets:
         - "{{ prometheus_snmp_target }}"  # SNMP device.
-    file_sd_configs:
-        - files:
-            - /etc/prometheus/snmp.yml
+#    file_sd_configs:
+#        - files:
+#            - /etc/prometheus/snmp.yml
     metrics_path: /snmp
     params:
       module: [{{ mib_module }}]

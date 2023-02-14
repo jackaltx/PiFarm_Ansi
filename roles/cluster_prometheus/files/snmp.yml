@@ -2,9 +2,11 @@
 piswitch:
   walk:
   - 1.3.6.1.2.1.2
-  - 1.3.6.1.2.1.31.1.1
+  - 1.3.6.1.2.1.31.1.1.1.1
+  - 1.3.6.1.2.1.31.1.1.1.18
   get:
   - 1.3.6.1.2.1.1.3.0
+  - 1.3.6.1.2.1.31.1.1.1.6.40
   metrics:
   - name: sysUpTime
     oid: 1.3.6.1.2.1.1.3
@@ -26,8 +28,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifType
     oid: 1.3.6.1.2.1.2.2.1.3
@@ -39,8 +51,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
     enum_values:
       1: other
@@ -332,8 +354,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifSpeed
     oid: 1.3.6.1.2.1.2.2.1.5
@@ -345,8 +377,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifPhysAddress
     oid: 1.3.6.1.2.1.2.2.1.6
@@ -358,8 +400,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifAdminStatus
     oid: 1.3.6.1.2.1.2.2.1.7
@@ -371,8 +423,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
     enum_values:
       1: up
@@ -388,8 +450,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
     enum_values:
       1: up
@@ -410,8 +482,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifInOctets
     oid: 1.3.6.1.2.1.2.2.1.10
@@ -424,8 +506,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifInUcastPkts
     oid: 1.3.6.1.2.1.2.2.1.11
@@ -439,8 +531,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifInNUcastPkts
     oid: 1.3.6.1.2.1.2.2.1.12
@@ -454,8 +556,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifInDiscards
     oid: 1.3.6.1.2.1.2.2.1.13
@@ -469,8 +581,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifInErrors
     oid: 1.3.6.1.2.1.2.2.1.14
@@ -483,8 +605,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifInUnknownProtos
     oid: 1.3.6.1.2.1.2.2.1.15
@@ -497,8 +629,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifOutOctets
     oid: 1.3.6.1.2.1.2.2.1.16
@@ -511,8 +653,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifOutUcastPkts
     oid: 1.3.6.1.2.1.2.2.1.17
@@ -526,8 +678,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifOutNUcastPkts
     oid: 1.3.6.1.2.1.2.2.1.18
@@ -541,8 +703,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifOutDiscards
     oid: 1.3.6.1.2.1.2.2.1.19
@@ -555,8 +727,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifOutErrors
     oid: 1.3.6.1.2.1.2.2.1.20
@@ -569,8 +751,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifOutQLen
     oid: 1.3.6.1.2.1.2.2.1.21
@@ -582,8 +774,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
+      type: DisplayString
+    - labels:
+      - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+    - labels:
+      - ifIndex
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifSpecific
     oid: 1.3.6.1.2.1.2.2.1.22
@@ -596,66 +798,18 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
       type: DisplayString
-  - name: ifInMulticastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.2
-    type: counter
-    help: The number of packets, delivered by this sub-layer to a higher (sub-)layer,
-      which were addressed to a multicast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.2
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
     - labels:
       - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
       type: DisplayString
-  - name: ifInBroadcastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.3
-    type: counter
-    help: The number of packets, delivered by this sub-layer to a higher (sub-)layer,
-      which were addressed to a broadcast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.3
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
     - labels:
       - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifOutMulticastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.4
-    type: counter
-    help: The total number of packets that higher-level protocols requested be transmitted,
-      and which were addressed to a multicast address at this sub-layer, including
-      those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.4
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifOutBroadcastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.5
-    type: counter
-    help: The total number of packets that higher-level protocols requested be transmitted,
-      and which were addressed to a broadcast address at this sub-layer, including
-      those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.5
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
   - name: ifHCInOctets
     oid: 1.3.6.1.2.1.31.1.1.1.6
@@ -668,204 +822,19 @@ piswitch:
     lookups:
     - labels:
       - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
+      labelname: ifAlias
+      oid: 1.3.6.1.2.1.31.1.1.1.18
       type: DisplayString
-  - name: ifHCInUcastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.7
-    type: counter
-    help: The number of packets, delivered by this sub-layer to a higher (sub-)layer,
-      which were not addressed to a multicast or broadcast address at this sub-layer
-      - 1.3.6.1.2.1.31.1.1.1.7
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
     - labels:
       - ifIndex
       labelname: ifDescr
       oid: 1.3.6.1.2.1.2.2.1.2
       type: DisplayString
-  - name: ifHCInMulticastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.8
-    type: counter
-    help: The number of packets, delivered by this sub-layer to a higher (sub-)layer,
-      which were addressed to a multicast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.8
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
     - labels:
       - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
+      labelname: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
       type: DisplayString
-  - name: ifHCInBroadcastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.9
-    type: counter
-    help: The number of packets, delivered by this sub-layer to a higher (sub-)layer,
-      which were addressed to a broadcast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.9
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifHCOutOctets
-    oid: 1.3.6.1.2.1.31.1.1.1.10
-    type: counter
-    help: The total number of octets transmitted out of the interface, including framing
-      characters - 1.3.6.1.2.1.31.1.1.1.10
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifHCOutUcastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.11
-    type: counter
-    help: The total number of packets that higher-level protocols requested be transmitted,
-      and which were not addressed to a multicast or broadcast address at this sub-layer,
-      including those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.11
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifHCOutMulticastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.12
-    type: counter
-    help: The total number of packets that higher-level protocols requested be transmitted,
-      and which were addressed to a multicast address at this sub-layer, including
-      those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.12
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifHCOutBroadcastPkts
-    oid: 1.3.6.1.2.1.31.1.1.1.13
-    type: counter
-    help: The total number of packets that higher-level protocols requested be transmitted,
-      and which were addressed to a broadcast address at this sub-layer, including
-      those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.13
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifLinkUpDownTrapEnable
-    oid: 1.3.6.1.2.1.31.1.1.1.14
-    type: gauge
-    help: Indicates whether linkUp/linkDown traps should be generated for this interface
-      - 1.3.6.1.2.1.31.1.1.1.14
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-    enum_values:
-      1: enabled
-      2: disabled
-  - name: ifHighSpeed
-    oid: 1.3.6.1.2.1.31.1.1.1.15
-    type: gauge
-    help: An estimate of the interface's current bandwidth in units of 1,000,000 bits
-      per second - 1.3.6.1.2.1.31.1.1.1.15
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifPromiscuousMode
-    oid: 1.3.6.1.2.1.31.1.1.1.16
-    type: gauge
-    help: This object has a value of false(2) if this interface only accepts packets/frames
-      that are addressed to this station - 1.3.6.1.2.1.31.1.1.1.16
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-    enum_values:
-      1: "true"
-      2: "false"
-  - name: ifConnectorPresent
-    oid: 1.3.6.1.2.1.31.1.1.1.17
-    type: gauge
-    help: This object has the value 'true(1)' if the interface sublayer has a physical
-      connector and the value 'false(2)' otherwise. - 1.3.6.1.2.1.31.1.1.1.17
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-    enum_values:
-      1: "true"
-      2: "false"
-  - name: ifAlias
-    oid: 1.3.6.1.2.1.31.1.1.1.18
-    type: DisplayString
-    help: This object is an 'alias' name for the interface as specified by a network
-      manager, and provides a non-volatile 'handle' for the interface - 1.3.6.1.2.1.31.1.1.1.18
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  - name: ifCounterDiscontinuityTime
-    oid: 1.3.6.1.2.1.31.1.1.1.19
-    type: gauge
-    help: The value of sysUpTime on the most recent occasion at which any one or more
-      of this interface's counters suffered a discontinuity - 1.3.6.1.2.1.31.1.1.1.19
-    indexes:
-    - labelname: ifIndex
-      type: gauge
-    lookups:
-    - labels:
-      - ifIndex
-      labelname: ifDescr
-      oid: 1.3.6.1.2.1.2.2.1.2
-      type: DisplayString
-  version: 1
+  version: 2
   auth:
     community: pifarm

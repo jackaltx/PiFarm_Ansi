@@ -5,6 +5,7 @@ auth_enabled: false
 server:
   http_listen_port: {{ loki_port }}
   grpc_listen_port: {{  grpc_port }}
+  log_level: warn
 
 common:
   instance_addr: {{ loki_server }}

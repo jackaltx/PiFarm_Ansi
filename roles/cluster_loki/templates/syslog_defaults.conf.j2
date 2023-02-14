@@ -10,4 +10,4 @@ queue.saveonshutdown="on"
 KeepAlive="on"
 TCP_Framing="octet-counted"
 template="RSYSLOG_SyslogProtocol23Format"
-target="{{ promtail_collector }}" Port="{{ promtail_port }}" Protocol="tcp")
+target="{{ promtail_collector }}" Port="{{ promtail_port }}" Protocol="tcp" KeepAlive="yes")

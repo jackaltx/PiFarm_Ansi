@@ -74,14 +74,34 @@
       - Restart prometheus service
       - Restart snmp exporter
 
-  - name: Configure Prometheus snmp.yml
-    copy:
-      src: snmp.yml
-      dest: /etc/prometheus/snmp.yml
+  - name: Create prometheus configuration file
+    ansible.builtin.template:
+      src: mib_piswitch.j2 
+      dest: /etc/prometheus/generator.yml
       owner: root
       group: root
       mode: '0644'
-    become: yes
+    become: true
+
+  - name: Download mibs
+    ansible.builtin.command: /usr/bin/download-mibs
+    become: true
+
+  - name: Generate the snmp.yml
+    ansible.builtin.command: 
+      cmd: /usr/bin/prometheus-snmp-generator generate
+      chdir: /etc/prometheus/
+    become: true
+
+  # TODO  this needs to generates with "prometheus-snmp-generator generate"
+  - name: Configure Prometheus snmp.yml
+    copy:
+      src: snmp.yml
+      dest: /etc/prometheus/snmp_save.yml
+      owner: root
+      group: root
+      mode: '0644'
+    become: true
 
   # SMELL  this needs to be a download !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   - name: Copy the Ubiquiti MIB file to the proper location
