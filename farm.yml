@@ -78,17 +78,17 @@ all:
         mount_nfs_shares:
         - path: "/farmshare"
           location: "192.168.11.10:/u01/farmshare"
-        - path: "/rhome"
-          location: "192.168.11.10:/u01/rhome"
+        #- path: "/rhome"
+        #  location: "192.168.11.10:/u01/rhome"
         - path: "/clusterfs"
           location: "192.168.40.14:/PiFarmCluster"
 
 
     # ................................................
     helpers:
-
-      #............................................
+      #...............................................
       hosts:
+        #.............................................
         helper1:
           ansible_host: 192.168.11.10
           pifarm_hostname: pi-serv1
@@ -132,14 +132,24 @@ all:
           - path: "/clusterfs"
             location: "192.168.40.14:/PiFarmCluster"
 
+        #............................................
         helper2:
           ansible_host: 192.168.11.211
           pifarm_hostname: pi-helper2
-          ansible_user: lavender
+          #ansible_user: lavender
+          #ansible_become_pass: xxx
 
+          # mount from lab NAS
+          mount_nfs_shares:
+          - path: "/clusterfs"
+            location: "192.168.40.14:/PiFarmCluster"
+          - path: "/farmshare"
+            location: "192.168.11.10:/u01/farmshare"
         
 
       #............................................
+      # Common vars for all helpers
+      #
       vars:
         ansible_user: farmer
 

@@ -1,15 +1,14 @@
 ---
 
 - block:
-  - name: update the cache (Debian)
+  - name: Update the cache
     ansible.builtin.apt: 
       update_cache: true
       autoremove: yes
       autoclean: yes
     register: upd_cache_out
 
-  - name: update cache results
-    ansible.builtin.debug:
+  - ansible.builtin.debug:
       var: upd_cache_out
       verbosity: 1
 
@@ -18,8 +17,7 @@
       upgrade: dist
     register: upd_out
 
-  - name: Package update results
-    ansible.builtin.debug:
+  - ansible.builtin.debug:
       var: upd_out
       verbosity: 1
 
@@ -27,8 +25,7 @@
     register: reboot_is_required
     stat: path=/var/run/reboot-required get_md5=no
 
-  - name: reboot required results
-    ansible.builtin.debug:
+  - ansible.builtin.debug:
       var: reboot_is_required
       verbosity: 1
 

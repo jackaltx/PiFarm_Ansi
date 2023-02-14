@@ -16,13 +16,13 @@
 
     # SMELL we assume there is a common admin user on all the PiFarm cluster nodes.
     # Update the OS, not the firmware
-    #- update
+    - update
 
     # sets up the boot modules, wifi, ...
     - pi_configs
     
     # install common packages
-    #- cluster_common
+    - cluster_common
 
     # this is bashi shell configuration stuff....not required
     # - worker_config
@@ -32,5 +32,5 @@
 
     # Services
     #- nfs_services
-    #- nfs_mounts
+    - nfs_mounts
     

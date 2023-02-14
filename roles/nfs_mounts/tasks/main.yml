@@ -6,14 +6,14 @@
 
 - block:
 
-  - name: Install NFS mount utility
+  - name: Install NFS mount utility (Redhat)
     become: true
     yum:
       name: nfs-utils
       state: present
     when: ansible_os_family == "RedHat"
 
-  - name: Install NFS mount utility
+  - name: Install NFS mount utility (Debian)
     become: true
     apt:
       pkg: nfs-common
@@ -30,7 +30,7 @@
       dump: "{{ item.dump | default(omit) }}"
       passno: "{{ item.passno | default(omit) }}"
       state: "{{ item.state | default( 'mounted' ) }}"
-    with_items: "{{ nfs_share_mounts }}"
+    with_items: "{{ mount_nfs_shares }}"
 
   when:
-    - nfs_share_mounts is defined and (nfs_share_mounts|length>0)
+    - mount_nfs_shares is defined and (mount_nfs_shares|length>0)

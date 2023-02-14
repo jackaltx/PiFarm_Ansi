@@ -5,13 +5,11 @@
 
 # SMELL  use pi facts????
 
-- name: "Update Debian (raspberry pi) JKLJKL"
+- name: "Update Debian OS"
   include_tasks: "update_pi.yml"
   when:
     - pifarm_connected_internet 
     - ansible_os_family == "Debian" 
-    #- vars['ansible_distribution_release'] == 'buster'
-    #- vars['ansible_machine'] == 'aarch64'
 
 
 - name: "Update Centos systems"
