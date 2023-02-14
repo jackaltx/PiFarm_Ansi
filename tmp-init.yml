@@ -1,8 +1,9 @@
 ---
 
 - hosts:
-    - helpers
-    - workers
+    - helper2
+  #- helpers
+  #- workers
   connection: ssh
   become_method: sudo
   gather_facts: yes

@@ -42,5 +42,7 @@
     ansible.builtin.user: 
       name: "{{ worker_user }}"
       update_password: always
-      password: "{{ new_passwd|password_hash('sha512') }}"
+      password: "{{ worker_password|password_hash('sha512') }}"
+    become: true
+
   when:  change_user_password
