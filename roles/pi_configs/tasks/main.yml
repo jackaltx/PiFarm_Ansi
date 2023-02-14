@@ -1,7 +1,4 @@
 ---
-# tasks file for pi_configs
-# indented to be called for "cluster initialize" on Rasberry Pi's
-
 
 # SMELL: used to turn off WiFI...needs a turn on
 # SMELL: adds cgroup, needs a "delete cgroup"
@@ -15,50 +12,29 @@
       mode: '0440'
       remote_src: yes
       force: no
-    # when: pi_image_setup_cgroup is defined and pi_image_setup_cgroup is True
     become: True
+    # when: pi_image_setup_cgroup is defined and pi_image_setup_cgroup is True
 
   - name: Enable cgroup on Pi
     ansible.builtin.command:
       cmd: sed  's/$/ cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1/'  /boot/cmdline.txt
-    # when: pi_image_setup_cgroup is defined and pi_image_setup_cgroup is True
     become: True
-    
-  # .............................................
-  # - block: 
-  #   - name: Get WiFi country
-  #     become: true
-  #     ansible.builtin.command: 
-  #       cmd: "raspi-config nonint get_wifi_country || UNK "
-  #     register: current_wifi_country
-  #     changed_when: False
-  #     ignore_errors: True
+    when: pi_image_setup_cgroup is defined and pi_image_setup_cgroup is True
+      
+  # Set wifi country to "{{ wifi_country }}"
+  - name: set wifi country
+    ansible.builtin.command: 
+      cmd: "raspi-config nonint do_wifi_country {{ wifi_country }}"
+    become: True
+    when: "wifi_country|default(false)"
 
-  #   - debug:
-  #       var: current_wifi_country
- 
-  #   - name: set WiFi country
-  #     become: true
-  #     ansible.builtin.command: 
-  #       cmd: "raspi-config nonint do_wifi_country {{ wifi_country }}"
-  #     changed_when: False
-  #     ignore_errors: True
-  #     when:  current_wifi_country.stdout not in wifi_country  or current_wifi_country.rc == 1
+  - name: Turn off WiFi
+    ansible.builtin.command: 
+      cmd: "rfkill block wifi"
+    become: True
+    changed_when: False
+    ignore_errors: True
 
-  #   tags:
-  #     - wifi_country
-
-  # .............................................
-  - block: 
-  
-    - name: Turn off WiFi
-      become: true
-      ansible.builtin.command: 
-        cmd: "rfkill block wifi"
-      changed_when: False
-      ignore_errors: True
-
-  # SMELL:  find a "this is a pi I work on" conditional
   when:
     - ansible_os_family == "Debian" 
     - vars['ansible_machine'] == 'aarch64'

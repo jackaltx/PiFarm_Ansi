@@ -23,8 +23,7 @@ roles/ansible-role-grafana/
 # group_vars/workers
 
 # my temporary testing scripts that I don't want released
-./scratch_*
-./tmp_*
+./tmp-*
 
 #
 authorized_keys

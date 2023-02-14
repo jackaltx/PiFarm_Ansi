@@ -1,0 +1,35 @@
+---
+
+- hosts:
+    - helpers
+    - workers
+  connection: ssh
+  become_method: sudo
+  gather_facts: yes
+  roles:
+
+    # Create the shared user
+    # SMELL  Currently creates the "farmer" admin user.  There is a pi user created on the OS.
+    #        Test making one ( and only one ) use on the pi's
+    - create_worker_user
+
+    # SMELL we assume there is a common admin user on all the PiFarm cluster nodes.
+    # Update the OS, not the firmware
+    #- update
+
+    # sets up the boot modules, wifi, ...
+    - pi_configs
+    
+    # install common packages
+    #- cluster_common
+
+    # this is bashi shell configuration stuff....not required
+    # - worker_config
+
+    # mount any usb drives  ??? nvme
+    #- usb_hd_mount
+
+    # Services
+    #- nfs_services
+    #- nfs_mounts
+    
