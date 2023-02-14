@@ -95,6 +95,44 @@ all:
           pifarm_install_prometheus: true
           pifarm_mount_usb_drive: true
 
+          # SMELL do I need this....the prometheus collector changed the configuration file.
+          pifarm_node_exporter: true
+
+          # Setup the prometheus server for metrics collection
+          # currently only one level deep
+          # SMELL  single target only for now
+          prometheus_collector: True
+          prometheus_install_snmp: True
+          prometheus_snmp_target: 192.168.11.2
+          prometheus_tsdb_path: /u01/prometheus/metrics2/
+
+          # configure as  Promtail collector for system logs
+          collect_logs: true
+
+          # export the logs to myself...better than a scrape ?
+          export_rsyslog: True
+
+          # Override the listening port for the "server", not the collector
+          # prometheus_server: '127.0.0.1'
+
+          # SMELL:  this will likely only work where the prometheus grafana servers are colocated
+          pifarm_grafana_server: true
+          grafana_server: true
+
+          # TODO  save the mounts as vault items?
+          # TODO  separate the shares and options from the authorized IPs
+          export_nfs_shares: true
+          nfs_exports:
+            #- "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
+            - "/u01/rhome 192.168.11.0/24(rw,sync,no_subtree_check)"
+            - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
+
+          # mount from lab NAS
+          mount_nfs_shares:
+          - path: "/clusterfs"
+            location: "192.168.40.14:/PiFarmCluster"
+
+
       #............................................
       vars:
         ansible_user: farmer
@@ -109,16 +147,6 @@ all:
         pifarm_set_hostname: True
         pifarm_set_timezone: True
 
-        # SMELL do I need this....the prometheus collector changed the configuration file.
-        pifarm_node_exporter: true
-
-        # # Setup the prometheus server for metrics collection
-        # # currently only one level deep
-        # # SMELL  single target only for now
-        # prometheus_collector: True
-        # prometheus_install_snmp: True
-        # prometheus_snmp_target: 192.168.11.2
-        # prometheus_tsdb_path: /u01/prometheus/metrics2/
 
         # TODO 
         # https://stackoverflow.com/questions/41908715/ansible-with-subelements
@@ -141,50 +169,10 @@ all:
               modules: [piswitch,dream]
               community: neverland
 
-        # Override the listening port for the "server", not the collector
-        # prometheus_server: '127.0.0.1'
-
-        # SMELL:  this will likely only work where the prometheus grafana servers are colocated
-        pifarm_grafana_server: true
-        grafana_server: true
-
-        # TODO  save the mounts as vault items?
-        # TODO  separate the shares and options from the authorized IPs
-        export_nfs_shares: true
-        nfs_exports:
-          #- "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
-          - "/u01/rhome 192.168.11.0/24(rw,sync,no_subtree_check)"
-          - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
-
-        # mount from lab NAS
-        mount_nfs_shares:
-        - path: "/clusterfs"
-          location: "192.168.40.14:/PiFarmCluster"
-
-        # # configure as  Promtail collector for system logs
-        # collect_logs: true
-
-        # # export the logs to myself...better than a scrape ?
-        # export_rsyslog: True
 
 
-    hosts:
-      helper1:
-      
-      vars:
-          # Setup the prometheus server for metrics collection
-          # currently only one level deep
-          # SMELL  single target only for now
-          prometheus_collector: True
-          prometheus_install_snmp: True
-          prometheus_snmp_target: 192.168.11.2
-          prometheus_tsdb_path: /u01/prometheus/metrics2/
 
-          # configure as  Promtail collector for system logs
-          collect_logs: true
-
-          # export the logs to myself...better than a scrape ?
-          export_rsyslog: True
+    
 
 
 

@@ -1,7 +1,7 @@
 ---
 # defaults file for loki_promtail
 
-loki_version: v2.6.1
+loki_version: v2.7.3
 loki_working_dir: /u01/loki
 loki_exe_dir: /usr/local/bin
 loki_config_file: /etc/loki-config.yml
@@ -13,6 +13,7 @@ promtail_port: 1514
 
 loki_server: 127.0.0.1
 loki_port: 3100
+grpc_port: 9096
 
 # SMELL 
 export_rsyslog: no

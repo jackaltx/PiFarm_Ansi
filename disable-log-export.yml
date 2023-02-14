@@ -1,0 +1,24 @@
+---
+
+- hosts:
+    - helpers
+    - workers
+  connection: ssh
+  become_method: sudo
+  gather_facts: yes
+  tasks:
+
+  - name: Remove rsyslog exporter
+    ansible.builtin.file:
+      path: "/etc/rsyslog.d/pifarm-collector.conf"
+      state: absent
+    become: true
+    when: export_rsyslog 
+
+  - name: restart rsyslog service
+    ansible.builtin.service:
+      name: rsyslog
+      state: restarted
+    become: true
+    when: export_rsyslog
+ 
