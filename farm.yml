@@ -89,6 +89,8 @@ all:
       #...............................................
       hosts:
         #.............................................
+        #  This is a Pi with a NVME HD attached via USB and board.
+        #
         helper1:
           ansible_host: 192.168.11.10
           pifarm_hostname: pi-serv1
@@ -133,6 +135,8 @@ all:
             location: "192.168.40.14:/PiFarmCluster"
 
         #............................................
+        #  This is a Debian 11 x64 Vmware VM that I am going to use for reNgine.
+        #
         helper2:
           ansible_host: 192.168.11.211
           pifarm_hostname: pi-helper2
@@ -164,7 +168,7 @@ all:
         pifarm_set_timezone: True
 
 
-        # TODO 
+        # TODO snmp_groups not working yet
         # https://stackoverflow.com/questions/41908715/ansible-with-subelements
         # https://stackoverflow.com/questions/55387719/how-to-correctly-define-subelements-in-ansible-jinja2-templatewith-subelements
         # https://galaxy.ansible.com/jtyr/config_encoder_filters

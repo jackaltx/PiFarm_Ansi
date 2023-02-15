@@ -1,0 +1,85 @@
+---
+# https://docs.docker.com/engine/install/debian/
+
+- hosts: 
+    - helper2
+  connection: ssh
+  gather_facts: true
+  become: true
+  vars:
+    helper_packages:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    repo_key: "https://download.docker.com/linux/debian/gpg"
+    repo: "deb https://download.docker.com/linux/debian bullseye stable"
+    docker_packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
+  tasks:
+
+  - name: Install packages
+    ansible.builtin.package:
+      name: "{{ helper_packages }}"
+      state: present
+      update_cache: true
+    become: true
+    register: package_out
+
+  - name: Docker - Import repository key
+    ansible.builtin.apt_key:
+      url: "{{ repo_key }}"
+      state: present
+    ignore_errors: true
+
+  - name: Docker - Add repository url
+    ansible.builtin.apt_repository:
+      repo: "{{ repo }}"
+      state: present
+      update_cache: true
+
+  - name: Install Docker
+    ansible.builtin.package:
+      name: "{{ docker_packages }}"
+      state: present
+      update_cache: true
+    become: true
+    register: package_out
+
+  - name: "Add {{ worker_user }} to the docker group"
+    ansible.builtin.user:
+      name: "{{ worker_user }}"
+      groups: admin,docker
+      append: true
+    become: true
+
+# https://github.com/yogeshojha/rengine
+# git clone https://github.com/yogeshojha/rengine && cd rengine
+
+  - name: Git clone rengine
+    ansible.builtin.git:
+      repo: https://github.com/yogeshojha/rengine
+      dest: "/home/{{ worker_user }}/rengine"
+      update: false
+
+  - name: Change postgress password
+    ansible.builtin.lineinfile:
+      path: "/home/{{ worker_user }}/rengine/.env"
+      regexp: '^POSTGRES_PASSWORD='
+      line: 'POSTGRES_PASSWORD=N0tHardP@ssword'
+
+  # - name: install
+  #   ansible.builtin.command:
+  #     cmd: install.sh
+  #     chdir: "/home/{{ worker_user }}/rengine"
+  #   become: true
+  #   register: install_output
+
+  # - name: install result
+  #   ansible.builtin.debug:
+  #     var: install_output
