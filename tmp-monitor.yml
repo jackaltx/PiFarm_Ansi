@@ -1,0 +1,18 @@
+---
+
+- hosts: 
+    - workers
+    - helpers
+  connection: ssh
+  roles:
+
+    # Configure node_exporters and collectors
+    #- cluster_prometheus
+
+    # Configure grafana to read from prometheus
+    #- cluster_grafana
+
+    # configure a log collector and setup grafana
+    - cluster_loki
+
+
