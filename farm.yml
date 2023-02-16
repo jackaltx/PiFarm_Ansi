@@ -73,17 +73,6 @@ all:
         # SMELL currently only works on the helper .10
         export_rsyslog: True
 
-        # TODO  currently this only manages the client.  I like the
-        # "cluster_nfs" role to handle both parts.
-        mount_nfs_shares:
-        - path: "/farmshare"
-          location: "192.168.11.10:/u01/farmshare"
-        #- path: "/rhome"
-        #  location: "192.168.11.10:/u01/rhome"
-        - path: "/clusterfs"
-          location: "192.168.40.14:/PiFarmCluster"
-
-
     # ................................................
     helpers:
       #...............................................
@@ -128,11 +117,6 @@ all:
             #- "/u01/srv/nfs4/share 192.168.11.0/24(rw,sync,no_subtree_check)"
             - "/u01/rhome 192.168.11.0/24(rw,sync,no_subtree_check)"
             - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
-
-          # mount from lab NAS
-          mount_nfs_shares:
-          - path: "/clusterfs"
-            location: "192.168.40.14:/PiFarmCluster"
 
         #............................................
         #  This is a Debian 11 x64 Vmware VM that I am going to use for reNgine.
