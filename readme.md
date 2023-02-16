@@ -14,30 +14,49 @@ This project hosts my experiments of building a Pi Cluster into a working Comput
 
 ### The network appliance
 
-Any old switch and or firewall.
+Any old switch and/or firewall will do.  I have tested with a Dlink [DGS-1100-8](https://www.dlink.com/en/products/dgs-1100-08-8-port-gigabit-smart-managed-switch) smart managed switch and a [Ubiquiti EdgeRouter X](https://store.ui.com/collections/operator-edgemax-routers/products/edgerouter-x).
+
+The farm can use snmp for monitoring the network appliance
 
 ### Farm types
 
-External Services (ansible, dhcp, [dns)], with or without a gateway.  Then a cluster of rasperry pi workers.
-Current I am using dnsmasq to do DHCP.
+I have tested the cluster with and without DNS services. Some small labs will not want the burden of DNS, so I use ansible to create a farm-wide '/etc/hosts' file. 
+
+The farm can connect ot the internet or not. Of late I am not working in isolation so I do not need to setup a repository for updating.
+
+The farm is a rasberry pi cluster, but I am currently adding in x86 VMs for other services.
+
+I view the farm to be either a system to be the "unit under test" or the tool to do the testing of other units.  
 
 ### Reference Network Diagram
 
-The Farmer is multi-homed.  Do not put a gateway on the internal one or you will get a network loop.
+The Farmer can be multi-homed.  Do not put a gateway on the local farm network one or you will likely get a network loop.  Currently I the Farmer is node on my network which is allowed into the farm network.
 
 The Pi's only know their private nework and have the router internal address as their gateway.
 
 ![Reference image]( docs/images/ReferenceNetwork.png )
 
-## Steps
+# Installation 
 
-Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
+```
+git checkout https://github.com/jackaltx/PiFarm_Ansi.git
+```
 
-In the root directory the 'ansible.cfg' is the glue that makes this tool work. Review it and change as required.
+# Configuration
 
-The farm uses a "yaml" file to set the structure.  This is convenient because it is meant to be reconfigured often. The current confguration being run is in the farm.yml file.
+In the root directory the 'ansible.cfg' file is the glue that makes this tool work. Review it and change as required.
+
+The farm uses a "yaml" file to set the structure.  This is convenient because is meant to be reconfigured often. The current confguration being run is in the 'farm.yml' file.
+
+## Secrets Management
 
 Secrets are stored in the structre, to keep them secret ansible_vault is being used.  Create the password environment variable in your ~/.bash_profile, like ``export PIFARM_VAULT_PASSWORD=test``.  Review the file '.vault_pass to see how this environment variable is used.
+
+Create the vault secrets file '
+
+## Create SSH Keys
+
+Ansible uses SSH has the transport, so ....
 
 [BEING REWORKED]
 
@@ -54,21 +73,30 @@ Setup the ssh known_hosts on the farmer for the ip address:
 
 [BEING TRANSITIONED]  This is a chicken/egg issue.  The pi's default user/passwors is worker/raspberry.  It will change. It has changed. Also I need to account for non Rasberry Pi installs, such as VMs or other single board computer types.   The inventory is currenly seperated into workers, helpers and farmer(s).  The farmer is generally a non-integrating manager.  Other helpers will be need to be used as-is.  So this area will change as I get smarter.
 
-
 [NON-WORKING] Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at your pi's user/password  (default images: worker/raspberry)
   - ``` ansible-playbook -e ansible_user=worker -k initialize-cluster-workers.yml```
 
 ## Get the facts
 
-(Optional) Gather all the ansible facts into a folder
+All of this is optional. Ansible variables are clear as mud.  I like to gather all the ansible facts into a folder to help me debug.
+
   - ``` ansible-playbook -K tools/get-facts.yml```
+
+Use the following to get the local hostvars
+
   - ``` ansible -m debug -a "var=hostvars"  localhost > facts/hostvars.json ```
+
+
+```
+ansible helper2 -m ansible.builtin.setup | less
+ansible -m debug -a 'var=hostvars[inventory_hostname]' helper2 | less
+```
 
 ## Initialize the cluster
 
 Then initialize the farmer and workers:
   - ``` ansible-playbook initialize-workers.yml```
-  - ``` ansible-playbook -K initialize-farmer.yml```
+  - (not working!)``` ansible-playbook -K initialize-farmer.yml```
 
 ## Monitoring
 
@@ -129,8 +157,3 @@ This is continually under development  lookin the farms directory for samples
 ## Future work
 
 More later, this is starting the documention off.
-
-```
-ansible helper2 -m ansible.builtin.setup | less
-ansible -m debug -a 'var=hostvars[inventory_hostname]' helper2 | less
-```
