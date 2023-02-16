@@ -33,9 +33,19 @@ The Pi's only know their private nework and have the router internal address as 
 
 Prior to pulling this file on Centos8 install git  "dnf install git-all -y"
 
-- Edit the farm.yml to set infrastructure variables.
-- Create the environment variable:   ``export PIFARM_VAULT_PASSWORD=test``
-- (Optional) On the Farmer node download ansible and create the ssh keys  (./bin/init_ssh)
+In the root directory the 'ansible.cfg' is the glue that makes this tool work. Review it and change as required.
+
+The farm uses a "yaml" file to set the structure.  This is convenient because it is meant to be reconfigured often. The current confguration being run is in the farm.yml file.
+
+Secrets are stored in the structre, to keep them secret ansible_vault is being used.  Create the password environment variable in your ~/.bash_profile, like ``export PIFARM_VAULT_PASSWORD=test``.  Review the file '.vault_pass to see how this environment variable is used.
+
+[BEING REWORKED]
+
+On the the management node, a.k.a. Farmer, download ansible and create the ssh keys  (./bin/init_ssh).
+
+
+
+
 - Setup the ssh known_hosts on the farmer for the ip address:
   - ``` ansible-playbook initialize-known-hosts.yml```
 - Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at your pi's user/password  (default images: worker/raspberry)
