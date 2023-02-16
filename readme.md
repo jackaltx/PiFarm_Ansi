@@ -44,20 +44,41 @@ Secrets are stored in the structre, to keep them secret ansible_vault is being u
 On the the management node, a.k.a. Farmer, download ansible and create the ssh keys  (./bin/init_ssh).
 
 
+## SSH discovery setup on the farmer
 
+Setup the ssh known_hosts on the farmer for the ip address:
 
-- Setup the ssh known_hosts on the farmer for the ip address:
   - ``` ansible-playbook initialize-known-hosts.yml```
-- Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at your pi's user/password  (default images: worker/raspberry)
+
+## Initialize the farm
+
+[BEING TRANSITIONED]  This is a chicken/egg issue.  The pi's default user/passwors is worker/raspberry.  It will change. It has changed. Also I need to account for non Rasberry Pi installs, such as VMs or other single board computer types.   The inventory is currenly seperated into workers, helpers and farmer(s).  The farmer is generally a non-integrating manager.  Other helpers will be need to be used as-is.  So this area will change as I get smarter.
+
+
+[NON-WORKING] Create the Lab Users and push the Farmer key to all the Pi Worker nodes. You will need to do this at your pi's user/password  (default images: worker/raspberry)
   - ``` ansible-playbook -e ansible_user=worker -k initialize-cluster-workers.yml```
-- (Optional) Gather all the ansible facts into a folder
+
+## Get the facts
+
+(Optional) Gather all the ansible facts into a folder
   - ``` ansible-playbook -K tools/get-facts.yml```
   - ``` ansible -m debug -a "var=hostvars"  localhost > facts/hostvars.json ```
-- Then initialize the farmer and workers:
+
+## Initialize the cluster
+
+Then initialize the farmer and workers:
   - ``` ansible-playbook initialize-workers.yml```
   - ``` ansible-playbook -K initialize-farmer.yml```
-- (Optional) Setup a grafana monitor on the farmer:
+
+## Monitoring
+
+(Optional) Setup a grafana/loki/promtail/prometheus monitor on the farm:
   - ``` ansible-playbook monitor-cluster.yml```
+
+## Benchmarking 
+
+[NOT WORKING]
+
 - (Optional) test the cluster using sysbench:
   - ``` ansible-playbook run-sysbench.yml```
 
@@ -108,3 +129,8 @@ This is continually under development  lookin the farms directory for samples
 ## Future work
 
 More later, this is starting the documention off.
+
+```
+ansible helper2 -m ansible.builtin.setup | less
+ansible -m debug -a 'var=hostvars[inventory_hostname]' helper2 | less
+```

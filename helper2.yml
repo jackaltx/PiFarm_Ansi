@@ -14,6 +14,8 @@
       - lsb-release
     repo_key: "https://download.docker.com/linux/debian/gpg"
     repo: "deb https://download.docker.com/linux/debian bullseye stable"
+    #rengine_repo: yogeshojha
+    rengine_repo: jackaltx
     docker_packages:
       - docker-ce
       - docker-ce-cli
@@ -58,12 +60,29 @@
       append: true
     become: true
 
-# https://github.com/yogeshojha/rengine
-# git clone https://github.com/yogeshojha/rengine && cd rengine
 
+
+  # ===================================================================
+  # get specifix version of docker compose
+
+  - name: Download docker-compose
+    ansible.builtin.get_url:
+      url: "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+      dest: /usr/local/bin/docker-compose
+      mode: '755'
+    become: true
+
+  - name: Create a symbolic link
+    ansible.builtin.file:
+      src: /usr/local/bin/docker-compose
+      dest: /usr/bin/docker-compose
+      state: link
+    become: true
+
+  # ===================================================================
   - name: Git clone rengine
     ansible.builtin.git:
-      repo: https://github.com/yogeshojha/rengine
+      repo: "https://github.com/{{ rengine_repo }}/rengine"
       dest: "/home/{{ worker_user }}/rengine"
       update: false
 
@@ -73,13 +92,55 @@
       regexp: '^POSTGRES_PASSWORD='
       line: 'POSTGRES_PASSWORD=N0tHardP@ssword'
 
-  # - name: install
-  #   ansible.builtin.command:
-  #     cmd: install.sh
-  #     chdir: "/home/{{ worker_user }}/rengine"
-  #   become: true
-  #   register: install_output
+  - name: Install make
+    ansible.builtin.package:
+      name: make
+      state: present
 
-  # - name: install result
-  #   ansible.builtin.debug:
-  #     var: install_output
+  - name: Stop service, Remove images, and clean data
+    ansible.builtin.command:
+      cmd: make prune
+      chdir: "/home/{{ worker_user }}/rengine"
+    become: true
+    register: install_output
+
+  - name: result
+    ansible.builtin.debug:
+      var: install_output
+
+  - name: make the certs
+    ansible.builtin.command:
+      cmd: make certs
+      chdir: "/home/{{ worker_user }}/rengine"
+    become: true
+    register: install_output
+
+  - name: result
+    ansible.builtin.debug:
+      var: install_output
+
+  - name: Compose the docker images
+    ansible.builtin.command:
+      cmd: make build_clean
+      chdir: "/home/{{ worker_user }}/rengine"
+    become: true
+    register: install_output
+
+  - name: result
+    ansible.builtin.debug:
+      var: install_output
+
+  - name: Bring up the docker images
+    ansible.builtin.command:
+      cmd: make up
+      chdir: "/home/{{ worker_user }}/rengine"
+    become: true
+    register: install_output
+
+  - name: result
+    ansible.builtin.debug:
+      var: install_output
+
+  - name: result
+    ansible.builtin.debug:
+      msg: "go to the server to create user with 'make username'"
