@@ -28,7 +28,7 @@ all:
     workers:
       hosts:
 
-      #............................................
+        #............................................
         worker1:
           ansible_host: 192.168.11.100
           pifarm_hostname: pi-100
@@ -49,7 +49,14 @@ all:
           pifarm_hostname: pi-113
         #..........................................
 
+      #............................................
+      # Common vars for all workers
+      #
       vars:
+
+        # SMELL  this should be deduced
+        is_pi: true
+        power_control: true
 
         # SMELL  rethink this
         ansible_user: farmer
@@ -74,6 +81,7 @@ all:
         export_rsyslog: True
 
     # ................................................
+    #  ... then the Helpers which provide services
     helpers:
       #...............................................
       hosts:
@@ -118,22 +126,26 @@ all:
             - "/u01/rhome 192.168.11.0/24(rw,sync,no_subtree_check)"
             - "/u01/farmshare 192.168.11.0/24(rw,sync,no_subtree_check)"
 
+          # SMELL  this should be deduced
+          is_pi: true
+          power_control: true
+
         #............................................
         #  This is a Debian 11 x64 Vmware VM that I am going to use for reNgine.
         #
-        helper2:
-          ansible_host: 192.168.11.211
-          pifarm_hostname: pi-helper2
-          #ansible_user: lavender
-          #ansible_become_pass: xxx
 
-          # mount from lab NAS
-          mount_nfs_shares:
-          - path: "/clusterfs"
-            location: "192.168.40.14:/PiFarmCluster"
-          - path: "/farmshare"
-            location: "192.168.11.10:/u01/farmshare"
-        
+        # helper2:
+        #   ansible_host: 192.168.11.211
+        #   pifarm_hostname: pi-helper2
+        #   #ansible_user: lavender
+        #   #ansible_become_pass: xxx
+
+        #   # mount from lab NAS
+        #   mount_nfs_shares:
+        #   - path: "/clusterfs"
+        #     location: "192.168.40.14:/PiFarmCluster"
+        #   - path: "/farmshare"
+        #     location: "192.168.11.10:/u01/farmshare"
 
       #............................................
       # Common vars for all helpers
@@ -150,6 +162,10 @@ all:
 
         pifarm_set_hostname: True
         pifarm_set_timezone: True
+
+        # SMELL  this should be deduced
+        is_pi: false
+        power_control: false
 
 
         # TODO snmp_groups not working yet
@@ -182,8 +198,9 @@ all:
 
 
     # ................................................
-    # this is an external box, usually centos or rocky
-    # I am not ready for it
+    # Lastly is the farmer. While I don't manage this
+    # external box, it is useful for the cluster to
+    # knows it's address.
     # ................................................
     # ................................................
     # ................................................
@@ -194,16 +211,17 @@ all:
         pi-farmer:
           ansible_host: 192.168.40.3
           pifarm_hostname: farmer
+      
+      # common vars???
       vars:
-        ansible_user: lavender
 
-        # SMELL... track all "local_" variables down
-        local_user: lavender
-        local_group: lavender
-        home_dir: /home/lavender
-
-        pifarm_set_hostname: True
-        pifarm_set_timezone: True
+        pifarm_set_hostname: false
+        pifarm_set_timezone: false
 
         export_nfs_share: false
+
+        # SMELL  this should be deduced
+        is_pi: false
+        power_control: false
+
 
