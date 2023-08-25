@@ -1,7 +1,3 @@
-[submodule "roles/headless-pi-setup"]
-	path = roles/headless-pi-setup
-	url = git@github.com:jackaltx/headless-pi-setup-on-rhel.git
-	branch = main
 [submodule "roles/k3s_ansible"]
 	path = roles/k3s_ansible
 	url = git@github.com:jackaltx/k3s-ansible.git
