@@ -28,3 +28,5 @@ roles/ansible-role-grafana/
 #
 authorized_keys
 
+# 
+.vscode/
